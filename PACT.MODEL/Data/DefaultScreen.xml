@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ScreenXML  TableName="Mast000" PrimaryColumn="NodeNo" ExtendedPrimaryColumn="">
+  <Section Name="" Type="Static">
+    <Tab Name="" TabType="Panel">
+      <Row>
+        <Field>
+          <ID>txtCode</ID>
+          <Name>txtCode</Name>
+          <FType>Static</FType>
+          <Control>TextBox</Control>
+          <Label>Code</Label>
+          <IsMandatory>0</IsMandatory>
+          <IsReadOnly>0</IsReadOnly>
+          <DataType></DataType>
+          <Db>Code</Db>
+        </Field>
+        <Field>
+          <ID>txtName</ID>
+          <Name>txtName</Name>
+          <FType>Static</FType>
+          <Control>TextBox</Control>
+          <Label>Name</Label>
+          <IsMandatory>1</IsMandatory>
+          <IsReadOnly>0</IsReadOnly>
+          <DataType></DataType>
+          <Db>Name</Db>
+        </Field>
+      </Row>
+    </Tab>
+  </Section>
+</ScreenXML>

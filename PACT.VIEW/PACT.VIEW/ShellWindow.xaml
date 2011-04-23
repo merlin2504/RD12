@@ -1,0 +1,33 @@
+﻿<ribbon:RibbonWindow x:Class="PACT.VIEW.ShellWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ribbon="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon"
+        xmlns:l="clr-namespace:PACT.VIEWMODEL;assembly=PACT.VIEWMODEL"
+        xmlns:local="clr-namespace:PACT.VIEW"
+        Title="BindRibbon"  Width="1000" Name="ME">
+    <Window.Resources>
+        <ResourceDictionary Source="../Resources/MainWindowResources.xaml" />
+    </Window.Resources>
+
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <local:RibbonControl x:Name="Ribbon"/>
+
+        <Grid Grid.Row="1">
+            <Border Style="{StaticResource MainBorderStyle}">
+                <HeaderedContentControl 
+              Content="{Binding Path=Workspaces}"
+              ContentTemplate="{StaticResource WorkspacesTemplate}"
+              Header="Work Area"
+              Style="{StaticResource MainHCCStyle}"
+              />
+            </Border>
+        </Grid>
+
+    </Grid>
+</ribbon:RibbonWindow>
