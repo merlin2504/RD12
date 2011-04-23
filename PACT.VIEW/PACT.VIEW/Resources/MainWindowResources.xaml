@@ -7,20 +7,7 @@ This resource dictionary is used by the MainWindow.
   xmlns:vm="clr-namespace:PACT.VIEWMODEL;assembly=PACT.VIEWMODEL"
   xmlns:vw="clr-namespace:PACT.VIEW"
   >
-<!--xmlns:vm="clr-namespace:DemoApp.ViewModel"
-  xmlns:vw="clr-namespace:DemoApp.View"-->
-  <!-- 
-  This template applies an AllCustomersView to an instance 
-  of the AllCustomersViewModel class shown in the main window.
-  -->
-  <!--<DataTemplate DataType="{x:Type vm:AllCustomersViewModel}">
-    <vw:AllCustomersView />
-  </DataTemplate>-->
 
-  <!-- 
-  This template applies a customozed View to an instance  
-  of the ScreenViewModel class shown in the main window.
-  -->
   <DataTemplate DataType="{x:Type vm:ScreenViewModel}">
         <vw:DefaultScreen />
   </DataTemplate>
