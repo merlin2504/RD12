@@ -18,6 +18,21 @@ namespace PACT.VIEWMODEL
 
         #region Constructor
 
+        public string PactScreenID
+        {
+            get { return _PactScreenID; }
+            set
+            {
+                if (value == _PactScreenID)
+                    return;
+
+                _PactScreenID = value;
+
+                base.OnPropertyChanged("PactScreenID");
+            }
+        }
+        private string _PactScreenID;
+
         protected WorkspaceViewModel()
         {
         }
