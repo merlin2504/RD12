@@ -7,6 +7,9 @@ using System.Xml;
 using Microsoft.Practices.Prism.Commands;
 using PACT.COMMON;
 using System.Windows.Input;
+using System.ServiceModel;
+using System.Data;
+using System.IO;
 
 namespace PACT.MODEL
 {
@@ -14,70 +17,47 @@ namespace PACT.MODEL
     {
         private ObservableCollection<PactControlData> _PactControlData;
 
-        public ObservableCollection<PactControlData> GetControls(string ScreenID)
+        private XmlDocument GetScreenInfo(int _ScreenID,string _CompanyIndex,string _ServiceUrl)
         {
-            if (ScreenID == "123")
-            {
-                if (_PactControlData == null)
+            XmlDocument xDoc = new XmlDocument();
+            CommonService.CommonClient wcfService = null ;
+            try{
+                var endpoint = new EndpointAddress(new Uri(_ServiceUrl+"Common.svc"));
+                var binding = new WSHttpBinding();
+                wcfService= new CommonService.CommonClient(binding, endpoint);
+                wcfService.Open();
+                DataSet ds = wcfService.GetScreenInfoByID(_ScreenID,_CompanyIndex);
+                if(ds!=null && ds.Tables.Count>0)
                 {
-                    _PactControlData = new ObservableCollection<PactControlData>();
 
-                    _PactControlData.Add(new PactTextBoxData()
-                    {
-                        Label = "ABC",
-                    });
-
-                    _PactControlData.Add(new PactTextBoxData()
-                    {
-                        Label = "123",
-                    });
-
-                    _PactControlData.Add(new PactTextBoxData()
-                    {
-                        Label = "RED",
-                    });
-
-                    _PactControlData.Add(new PactTextBoxData()
-                    {
-                        Label = "Green",
-                    });
-
-                    PactComboBoxData CMB = new PactComboBoxData();
-                    CMB.ComboItems.Add("Majeed");
-                    CMB.ComboItems.Add("Majeed1");
-                    CMB.ComboItems.Add("Majeed2");
-
-                    _PactControlData.Add(CMB);
-
+                    xDoc.LoadXml(ds.Tables[0].Rows[0]["ScreenXML"].ToString());
                 }
+                return xDoc;
             }
-            else
+            catch(Exception ex)
             {
+                throw new Exception("Error in ControlGenerator::GetScreenInfo::-->"+ex.StackTrace);
+            }
+            finally
+            {
+                if(wcfService!=null)
+                {
+                    wcfService.Close();
+                }
+            
+            }
+        }
+
+        public ObservableCollection<PactControlData> GetControls(string ScreenID,string CompanyIndex,string ServiceUrl)
+        {
                 if (_PactControlData == null)
                 {
                     string strID = "";
                     string strLable = "";
                     string strVal = "";
                     string strNm = "";
-                    XmlDocument xDoc = new XmlDocument();
+                    XmlDocument xDoc = GetScreenInfo(Convert.ToInt32(ScreenID),CompanyIndex,ServiceUrl);
                     _PactControlData = new ObservableCollection<PactControlData>();
-                    //DisplayName = TempScreenID;
-                    switch (ScreenID)
-                    {
-                        case "1000":
-                            //DisplayName = "New Accounts";
-                            xDoc.Load("AccountsScreen.xml");
-                            break;
-                        case "2000":
-                            //DisplayName = "New Product";
-                            xDoc.Load("ProductsScreen.xml");
-                            break;
-                        default:
-                            //DisplayName = "Un-Mapped Screen";
-                            xDoc.Load("DefaultScreen.xml");
-                            break;
-                    }
-                      
                     for (int iRow = 0; iRow < xDoc.DocumentElement.ChildNodes.Count; iRow++)
                     {
                         XmlNode xSec = xDoc.DocumentElement.ChildNodes[iRow];
@@ -127,9 +107,7 @@ namespace PACT.MODEL
                         }
                     }
                 }   
-            }
             return _PactControlData;
-           
         }
     }
 }

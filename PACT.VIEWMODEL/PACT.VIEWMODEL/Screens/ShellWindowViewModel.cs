@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -6,6 +7,8 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Data;
+
+
 //using DemoApp.DataAccess;
 //using DemoApp.Model;
 //using DemoApp.Properties;
@@ -21,13 +24,24 @@ namespace PACT.VIEWMODEL
         private static volatile object mLock = new object(); 
         private static ShellWindowViewModel _Instance = null;       
         private static ObservableCollection<WorkspaceViewModel> _workspaces;
+        public static string ServiceURL, CompanyIndex;
 
         #endregion // Fields
 
         #region Constructor
 
+        private static void LoadApplicationConfig()
+        {
+            if (ServiceURL == null)
+            {
+                ServiceURL = System.Configuration.ConfigurationManager.AppSettings["SERVICEURL"].ToString();
+                CompanyIndex = "1";
+            }
+        }
+
         public ShellWindowViewModel()
         {
+            LoadApplicationConfig();
             //base.DisplayName = Strings.MainWindowViewModel_DisplayName;
         }
 

@@ -31,7 +31,19 @@ namespace PACT.VIEWMODEL
         public ScreenViewModel(string ScreenID)
         {
             _ScreenID = ScreenID;
-            _DisplayName = ScreenID;
+            switch (_ScreenID)
+            {
+                case "1000":
+                    _DisplayName = "Create Account";
+                    break;
+                case "2000":
+                    _DisplayName = "Create Product";;
+                    break;
+                default:
+                     _DisplayName = ScreenID;
+                     break; 
+            }
+          
             DynamicCommand = new DelegateCommand<string>(CommandController);
         }
 
@@ -42,6 +54,7 @@ namespace PACT.VIEWMODEL
             string temp;
             if ((string)sender == "OnSave")
             {
+               
                 temp = PACTControlData.Count.ToString();           
             }
         }
@@ -51,8 +64,8 @@ namespace PACT.VIEWMODEL
         {
             get
             {
-                _PACTControlData = objControlGenerator.GetControls(_ScreenID);
-                
+
+                _PACTControlData = objControlGenerator.GetControls(_ScreenID, ShellWindowViewModel.CompanyIndex, ShellWindowViewModel.ServiceURL);
                 
                 return _PACTControlData;
 

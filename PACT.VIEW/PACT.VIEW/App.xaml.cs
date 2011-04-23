@@ -13,7 +13,6 @@ namespace PACT.VIEW
     /// </summary>
     public partial class App : Application
     {
-
       
     }
 }
