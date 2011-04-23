@@ -66,15 +66,15 @@ namespace PACT.MODEL
                     {
                         case "1000":
                             //DisplayName = "New Accounts";
-                            xDoc.Load("D:\\code\\NEWPACT_After_Commanding\\NEWPACT\\PACT.MODEL\\Data\\AccountsScreen.xml");
+                            xDoc.Load("C:\\Users\\admin\\Documents\\Projects\\Pact\\RD12\\PACT.MODEL\\Data\\AccountsScreen.xml");
                             break;
                         case "2000":
                             //DisplayName = "New Product";
-                            xDoc.Load("D:\\code\\NEWPACT_After_Commanding\\NEWPACT\\PACT.MODEL\\Data\\ProductsScreen.xml");
+                            xDoc.Load("C:\\Users\\admin\\Documents\\Projects\\Pact\\RD12\\PACT.MODEL\\Data\\ProductsScreen.xml");
                             break;
                         default:
                             //DisplayName = "Un-Mapped Screen";
-                            xDoc.Load("D:\\code\\NEWPACT_After_Commanding\\NEWPACT\\PACT.MODEL\\Data\\DefaultScreen.xml");
+                            xDoc.Load("C:\\Users\\admin\\Documents\\Projects\\Pact\\RD12\\PACT.MODEL\\Data\\DefaultScreen.xml");
                             break;
                     }
                       
