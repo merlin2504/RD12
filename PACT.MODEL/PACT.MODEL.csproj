@@ -74,7 +74,11 @@
     <Content Include="Data\DefaultScreen.xml" />
     <Content Include="Data\ProductsScreen.xml" />
     <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
+    <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
     <None Include="Service References\CommonService\Common2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CommonService\Common3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\CommonService\Reference.svcmap">

@@ -10,6 +10,7 @@ using System.Data;
 using PACT.MODEL;
 using PACT.COMMON;
 using Microsoft.Practices.Prism.Commands;
+using System.Collections.Specialized;
 
 namespace PACT.VIEWMODEL
 {
@@ -52,12 +53,29 @@ namespace PACT.VIEWMODEL
 
         public void CommandController(object sender)
         {
-            string temp;
-            if ((string)sender == "OnSave")
-            {
-               
-                temp = PACTControlData.Count.ToString();           
-            }
+                BusinessRules objUIRules = new BusinessRules();
+                Util objCommonUtil = new Util();
+                switch ((string)sender)
+                {
+                    case "AccountCreate":
+                    //UI Validation
+                    string strMsg = objUIRules.ValidateUIInfo(PACTControlData);
+                    if (strMsg != null && !strMsg.Equals(""))
+                    {
+                        objCommonUtil.InfoMessageBox(strMsg, "Validations");
+                    }
+                    //Building collection to post values to DB
+                    DataTable dt = objCommonUtil.GetDBValues(PACTControlData);
+                    if (dt != null)
+                    {
+                        System.IO.StringWriter writer = new System.IO.StringWriter();
+                        dt.WriteXml(writer);
+                        int retVal=objControlGenerator.PostData(writer.ToString(), _ScreenID, ShellWindowViewModel.CompanyIndex);
+                        if(retVal>0)
+                            objCommonUtil.InfoMessageBox("Record added sucessfully.", "Validations");
+                    }
+                    break;
+                }
         }
 
 

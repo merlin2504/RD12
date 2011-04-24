@@ -9,6 +9,60 @@ namespace PACT.COMMON
 {
     public class PactControlData : INotifyPropertyChanged
     {
+        public string DBColumnName
+        {
+            get
+            {
+                return _dbcolNm;
+            }
+
+            set
+            {
+                if (_dbcolNm != value)
+                {
+                    _dbcolNm = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("DBColumnName"));
+                }
+            }
+        }
+        private string _dbcolNm;
+
+        public string DataType
+        {
+            get
+            {
+                return _datatype;
+            }
+
+            set
+            {
+                if (_datatype != value)
+                {
+                    _datatype = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("DataType"));
+                }
+            }
+        }
+        private string _datatype;
+
+        public string Mandatory
+        {
+            get
+            {
+                return _mandatory;
+            }
+
+            set
+            {
+                if (_mandatory != value)
+                {
+                    _mandatory = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("Mandatory"));
+                }
+            }
+        }
+        private string _mandatory;
+
         public string Align
         {
             get

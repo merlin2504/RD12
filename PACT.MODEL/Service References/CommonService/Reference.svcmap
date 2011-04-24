@@ -22,10 +22,11 @@
   </MetadataSources>
   <Metadata>
     <MetadataFile FileName="Common2.xsd" MetadataType="Schema" ID="1e22b658-d0f7-4630-a92a-aa3578f0e51d" SourceId="1" SourceUrl="http://localhost/PactNxg/Common.svc?xsd=xsd2" />
-    <MetadataFile FileName="Common.xsd" MetadataType="Schema" ID="5dbfa57b-41b6-4500-bc8a-6010b898bdc3" SourceId="1" SourceUrl="http://localhost/PactNxg/Common.svc?xsd=xsd0" />
-    <MetadataFile FileName="Common.disco" MetadataType="Disco" ID="c57c2221-d387-4dd1-a057-a73e126d328a" SourceId="1" SourceUrl="http://localhost/PactNxg/Common.svc?disco" />
-    <MetadataFile FileName="Common1.xsd" MetadataType="Schema" ID="82991337-0668-4a67-9b2f-21c270b520c9" SourceId="1" SourceUrl="http://localhost/PactNxg/Common.svc?xsd=xsd1" />
+    <MetadataFile FileName="Common3.xsd" MetadataType="Schema" ID="870c54bd-eaa6-4ae8-b2c3-fd7fd33150ed" SourceId="1" SourceUrl="http://localhost/PactNxg/Common.svc?xsd=xsd3" />
     <MetadataFile FileName="Common.wsdl" MetadataType="Wsdl" ID="181b47a4-d884-4dd8-ba15-ef0f581d872d" SourceId="1" SourceUrl="http://localhost/PactNxg/Common.svc?wsdl" />
+    <MetadataFile FileName="Common1.xsd" MetadataType="Schema" ID="82991337-0668-4a67-9b2f-21c270b520c9" SourceId="1" SourceUrl="http://localhost/PactNxg/Common.svc?xsd=xsd1" />
+    <MetadataFile FileName="Common.disco" MetadataType="Disco" ID="c57c2221-d387-4dd1-a057-a73e126d328a" SourceId="1" SourceUrl="http://localhost/PactNxg/Common.svc?disco" />
+    <MetadataFile FileName="Common.xsd" MetadataType="Schema" ID="5dbfa57b-41b6-4500-bc8a-6010b898bdc3" SourceId="1" SourceUrl="http://localhost/PactNxg/Common.svc?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

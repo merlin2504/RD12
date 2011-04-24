@@ -10,6 +10,8 @@ using System.Windows.Input;
 using System.ServiceModel;
 using System.Data;
 using System.IO;
+using System.Collections.Specialized;
+using System.Collections;
 
 namespace PACT.MODEL
 {
@@ -45,18 +47,65 @@ namespace PACT.MODEL
                 {
                     wcfService.Close();
                 }
-            
             }
         }
-
+        private PactComboBoxData GetLookupData(PactComboBoxData _pcb,string LookupName, string CompanyIndex)
+        {
+            _pcb.ComboItems.Clear();
+            string sqlQuery = "";
+            switch (LookupName)
+            {
+                case "drpAccountType":
+                    sqlQuery = "Select ID,AccountType from AccountTypes WITH(NOLOCK) order by ID";
+                    break;
+                case "drpAccountStatus":
+                    sqlQuery = "Select ID,AccountStatus from AccountStatus WITH(NOLOCK) order by ID";
+                    break;
+                    
+            }
+            if (!sqlQuery.Equals(""))
+            {
+                CommonService.CommonClient wcfService = null;
+                try
+                {
+                    wcfService = new CommonService.CommonClient();
+                    wcfService.Open();
+                    DataTable dt = wcfService.ExecuteQuery(sqlQuery, CompanyIndex);
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            _pcb.ComboItems.Add(new ComboBoxItemData(dt.Rows[i][1].ToString(),dt.Rows[i][0].ToString()));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error in ControlGenerator::GetLookupData::-->" + ex.StackTrace);
+                }
+                finally
+                {
+                    if (wcfService != null)
+                    {
+                        wcfService.Close();
+                    }
+                }
+            }
+            return _pcb;
+        }
         public ObservableCollection<PactControlData> GetControls(string ScreenID,string CompanyIndex)
         {
                 if (_PactControlData == null)
                 {
                     string strID = "";
                     string strLable = "";
-                    string strVal = "";
+                    string strCommand = "";
                     string strNm = "";
+                    string IsMandatory = "";
+                    string IsReadOnly = "";                    
+                    string DataType = "";
+                    string ColumnName = "";                    
+                    
                     XmlDocument xDoc = GetScreenInfo(Convert.ToInt32(ScreenID),CompanyIndex);
                     _PactControlData = new ObservableCollection<PactControlData>();
                     for (int iRow = 0; iRow < xDoc.DocumentElement.ChildNodes.Count; iRow++)
@@ -68,9 +117,30 @@ namespace PACT.MODEL
                             {
                                 foreach (XmlNode xRowInfo in xTemp.ChildNodes)
                                 {
-                                    strID = xRowInfo.SelectSingleNode("ID").InnerText.ToString();
-                                    strLable = xRowInfo.SelectSingleNode("Label").InnerText.ToString();
+                                    IsReadOnly="True";
+                                    IsMandatory = "0";
+                                    DataType = "NA";
+                                    ColumnName = "NA";
+                                    if(xRowInfo.SelectSingleNode("ID")!=null)
+                                        strID = xRowInfo.SelectSingleNode("ID").InnerText.ToString();
+                                    if (xRowInfo.SelectSingleNode("Label") != null)
+                                        strLable = xRowInfo.SelectSingleNode("Label").InnerText.ToString();
+                                    if (xRowInfo.SelectSingleNode("Control") != null)
                                     strNm = xRowInfo.SelectSingleNode("Control").InnerText.ToString();
+                                    if (xRowInfo.SelectSingleNode("IsMandatory") != null)
+                                        IsMandatory = xRowInfo.SelectSingleNode("IsMandatory").InnerText.ToString();
+                                    if (xRowInfo.SelectSingleNode("DataType") != null)
+                                        DataType = xRowInfo.SelectSingleNode("DataType").InnerText.ToString();
+                                    if (xRowInfo.SelectSingleNode("Db") != null)
+                                        ColumnName = xRowInfo.SelectSingleNode("Db").InnerText.ToString();
+                                    if (xRowInfo.SelectSingleNode("IsReadOnly") != null)
+                                    {
+                                        IsReadOnly = xRowInfo.SelectSingleNode("IsReadOnly").InnerText.ToString();
+                                        if (IsReadOnly.Equals("0"))
+                                            IsReadOnly = "True";
+                                        else
+                                            IsReadOnly = "False";
+                                    }
                                     switch (strNm)
                                     {
                                         case "TextBox":
@@ -81,7 +151,12 @@ namespace PACT.MODEL
                                             });
                                             _PactControlData.Add(new PactTextBoxData()
                                             {
+                                                Label=strLable,
                                                 Text = strID,
+                                                Mandatory = IsMandatory,
+                                                DataType = DataType,
+                                                DBColumnName = ColumnName,
+                                                Enable = IsReadOnly,
                                             });
                                             break;
 
@@ -90,16 +165,32 @@ namespace PACT.MODEL
                                             {
                                                 Text = strLable,
                                             });
-                                            PactComboBoxData CMB = new PactComboBoxData();
-                                            CMB.ComboItems.Add(strID);
+
+                                            PactComboBoxData CMB = new PactComboBoxData()
+                                            {
+                                                Label = strLable,
+                                                Mandatory = IsMandatory,
+                                                DataType = DataType,
+                                                DBColumnName = ColumnName,
+                                                Enable = IsReadOnly,
+                                            };
+                                  
+
+                                            if(strID!=null)
+                                                CMB = GetLookupData(CMB, strID, CompanyIndex);
+                                            
+                                            if(CMB.ComboItems.Count==0)
+                                                CMB.ComboItems.Add(new ComboBoxItemData("0",strID));
+
                                             _PactControlData.Add(CMB);
                                             break;
 
                                         case "Button":
+                                            strCommand = xRowInfo.SelectSingleNode("Command").InnerText.ToString();
                                             _PactControlData.Add(new PactButtonData()
                                             {
                                                 Label = strLable,
-                                                DynamicCommand = "OnSave",
+                                                DynamicCommand = strCommand,
                                             });
                                             break;
                                     }
@@ -110,5 +201,38 @@ namespace PACT.MODEL
                 }   
             return _PactControlData;
         }
+        public int PostData(string XMLControlData, string ScreenID, string CompanyIndex)
+        {
+            int ReturnDBVal = -1;
+            CommonService.CommonClient wcfService = null;
+            try
+            {
+                wcfService = new CommonService.CommonClient();
+                wcfService.Open();
+                 switch (ScreenID)
+                {
+                    case "1000":
+                        ReturnDBVal = wcfService.CreateAccount(XMLControlData, CompanyIndex);
+                        break;
+                    case "2000":
+                        ReturnDBVal = wcfService.CreateProduct(XMLControlData, CompanyIndex);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error in ControlGenerator::GetLookupData::-->" + ex.StackTrace);
+            }
+            finally
+            {
+                if (wcfService != null)
+                {
+                    wcfService.Close();
+                }
+            }
+            return ReturnDBVal;
+        }
+       
+    
     }
 }
