@@ -24,7 +24,7 @@ namespace PACT.VIEWMODEL
         private static volatile object mLock = new object(); 
         private static ShellWindowViewModel _Instance = null;       
         private static ObservableCollection<WorkspaceViewModel> _workspaces;
-        public static string ServiceURL, CompanyIndex;
+        public static string CompanyIndex;
 
         #endregion // Fields
 
@@ -32,11 +32,9 @@ namespace PACT.VIEWMODEL
 
         private static void LoadApplicationConfig()
         {
-            if (ServiceURL == null)
-            {
-                ServiceURL = System.Configuration.ConfigurationManager.AppSettings["SERVICEURL"].ToString();
+            
                 CompanyIndex = "1";
-            }
+            
         }
 
         public ShellWindowViewModel()
@@ -76,7 +74,6 @@ namespace PACT.VIEWMODEL
                 {
                     _workspaces = new ObservableCollection<WorkspaceViewModel>();
                     _workspaces.CollectionChanged += this.OnWorkspacesChanged;
-
                     ScreenViewModel HomeScreen = new ScreenViewModel("1000");
                     _workspaces.Add(HomeScreen);
                 }

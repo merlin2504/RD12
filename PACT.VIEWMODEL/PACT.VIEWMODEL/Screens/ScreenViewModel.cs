@@ -34,6 +34,7 @@ namespace PACT.VIEWMODEL
             switch (_ScreenID)
             {
                 case "1000":
+                    PactScreenID = "1000";
                     _DisplayName = "Create Account";
                     break;
                 case "2000":
@@ -65,7 +66,7 @@ namespace PACT.VIEWMODEL
             get
             {
 
-                _PACTControlData = objControlGenerator.GetControls(_ScreenID, ShellWindowViewModel.CompanyIndex, ShellWindowViewModel.ServiceURL);
+                _PACTControlData = objControlGenerator.GetControls(_ScreenID, ShellWindowViewModel.CompanyIndex);
                 
                 return _PACTControlData;
 

@@ -17,14 +17,15 @@ namespace PACT.MODEL
     {
         private ObservableCollection<PactControlData> _PactControlData;
 
-        private XmlDocument GetScreenInfo(int _ScreenID,string _CompanyIndex,string _ServiceUrl)
+        private XmlDocument GetScreenInfo(int _ScreenID,string _CompanyIndex)
         {
             XmlDocument xDoc = new XmlDocument();
             CommonService.CommonClient wcfService = null ;
             try{
-                var endpoint = new EndpointAddress(new Uri(_ServiceUrl+"Common.svc"));
-                var binding = new WSHttpBinding();
-                wcfService= new CommonService.CommonClient(binding, endpoint);
+                //var endpoint = new EndpointAddress(new Uri(_ServiceUrl+"Common.svc"));
+                //var binding = new WSHttpBinding();
+                //wcfService= new CommonService.CommonClient(binding, endpoint);
+                wcfService= new CommonService.CommonClient();
                 wcfService.Open();
                 DataSet ds = wcfService.GetScreenInfoByID(_ScreenID,_CompanyIndex);
                 if(ds!=null && ds.Tables.Count>0)
@@ -48,7 +49,7 @@ namespace PACT.MODEL
             }
         }
 
-        public ObservableCollection<PactControlData> GetControls(string ScreenID,string CompanyIndex,string ServiceUrl)
+        public ObservableCollection<PactControlData> GetControls(string ScreenID,string CompanyIndex)
         {
                 if (_PactControlData == null)
                 {
@@ -56,7 +57,7 @@ namespace PACT.MODEL
                     string strLable = "";
                     string strVal = "";
                     string strNm = "";
-                    XmlDocument xDoc = GetScreenInfo(Convert.ToInt32(ScreenID),CompanyIndex,ServiceUrl);
+                    XmlDocument xDoc = GetScreenInfo(Convert.ToInt32(ScreenID),CompanyIndex);
                     _PactControlData = new ObservableCollection<PactControlData>();
                     for (int iRow = 0; iRow < xDoc.DocumentElement.ChildNodes.Count; iRow++)
                     {
