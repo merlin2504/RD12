@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              xmlns:data="clr-namespace:PACT.COMMON;assembly=PACT.COMMON"
-             xmlns:local="clr-namespace:PACT.VIEW;assembly=PACT.VIEW"
+             xmlns:local="clr-namespace:PACT.VIEW"
+             x:Name="mainWin"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Margin="10,10,10,10" x:Name="LayoutGrid">
         <Grid.Resources>
@@ -22,8 +23,12 @@
                 <Button Margin="10,10,10,10" Width="100" CommandParameter="{Binding DynamicCommand}" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=Tag}" Content="{Binding Path=Label}"/>
             </DataTemplate>
         </Grid.Resources>
-
-        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <!--<TextBlock>Type any of the letters of the alphabet 'a' through 'z' (lowercase).</TextBlock>
+            <TextBlock>This example demonstrates a provider that returns a single-column results list of a built in type.</TextBlock>-->
+            <local:BasicSearchResultCtrl Provider="{Binding ElementName=mainWin, Path=SingleColumnResults}" />
+        </StackPanel>
+        <!--<ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ItemsControl x:Name="PACTContainer" ItemsSource="{Binding PACTControlData}"  Width="800"  HorizontalAlignment="Left" Tag="{Binding DynamicCommand}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -31,6 +36,6 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-        </ScrollViewer>
+        </ScrollViewer>-->
     </Grid>
 </UserControl>

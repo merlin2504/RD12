@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Intellibox">
+      <HintPath>..\..\..\..\WPF\Intellibox\source\IntelliBox\obj\Debug\Intellibox.dll</HintPath>
+    </Reference>
     <Reference Include="RibbonControlsLibrary">
       <HintPath>..\..\Dlls\RibbonControlsLibrary.dll</HintPath>
     </Reference>
@@ -56,6 +59,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="BasicSearchResultCtrl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Ribbon\RibbonControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -71,6 +78,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicSearchResultCtrl.xaml.cs">
+      <DependentUpon>BasicSearchResultCtrl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ribbon\RibbonControl.xaml.cs">
       <DependentUpon>RibbonControl.xaml</DependentUpon>

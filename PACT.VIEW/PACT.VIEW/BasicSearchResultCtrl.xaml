@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="PACT.VIEW.BasicSearchResultCtrl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:auto="clr-namespace:FeserWard.Controls;assembly=IntelliBox"
+             mc:Ignorable="d" 
+             >
+    <StackPanel>
+        <TextBlock />
+
+        <StackPanel Orientation="Horizontal">
+            <TextBlock>Selected Value:</TextBlock>
+            <TextBlock Text="{Binding ElementName=autoBox, Path=SelectedValue}" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <TextBlock>Selected Item:</TextBlock>
+            <TextBlock Text="{Binding ElementName=autoBox, Path=SelectedItem}" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <TextBlock>Highlighted Value:</TextBlock>
+            <TextBlock Text="{Binding ElementName=autoBox, Path=DisplayTextFromHighlightedItem}" />
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center" Margin="0,0,6,0">Search:</TextBlock>
+            <auto:Intellibox Width="200" Name="autoBox" SelectAllOnFocus="True"
+            DataProvider="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=Provider}" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>
