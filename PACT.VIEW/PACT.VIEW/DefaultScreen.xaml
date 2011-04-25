@@ -22,20 +22,20 @@
             <DataTemplate DataType="{x:Type data:PactButtonData}">
                 <Button Margin="10,10,10,10" Width="100" CommandParameter="{Binding DynamicCommand}" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=Tag}" Content="{Binding Path=Label}"/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type data:PactIntelliBoxData}">
+                <local:BasicSearchResultCtrl Margin="10,10,10,10" Provider="{Binding Path=ListDropColumnResults}" />
+            </DataTemplate>
+            
         </Grid.Resources>
-        <StackPanel>
-            <!--<TextBlock>Type any of the letters of the alphabet 'a' through 'z' (lowercase).</TextBlock>
-            <TextBlock>This example demonstrates a provider that returns a single-column results list of a built in type.</TextBlock>-->
-            <local:BasicSearchResultCtrl Provider="{Binding ElementName=mainWin, Path=SingleColumnResults}" />
-        </StackPanel>
-        <!--<ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
-            <ItemsControl x:Name="PACTContainer" ItemsSource="{Binding PACTControlData}"  Width="800"  HorizontalAlignment="Left" Tag="{Binding DynamicCommand}">
+        
+        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="PACTContainer"  ItemsSource="{Binding PACTControlData}"  Width="800"  HorizontalAlignment="Left" Tag="{Binding DynamicCommand}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-        </ScrollViewer>-->
+        </ScrollViewer>
     </Grid>
 </UserControl>

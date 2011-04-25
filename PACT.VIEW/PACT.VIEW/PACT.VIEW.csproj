@@ -37,7 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Intellibox">
-      <HintPath>..\..\..\..\WPF\Intellibox\source\IntelliBox\obj\Debug\Intellibox.dll</HintPath>
+      <HintPath>..\..\Dlls\Intellibox.dll</HintPath>
     </Reference>
     <Reference Include="RibbonControlsLibrary">
       <HintPath>..\..\Dlls\RibbonControlsLibrary.dll</HintPath>

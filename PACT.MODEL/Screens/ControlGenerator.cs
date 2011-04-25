@@ -105,6 +105,18 @@ namespace PACT.MODEL
                                             DynamicCommand = "OnSave",
                                         });
                                         break;
+                                    case "ListDrop":
+                                        _PactControlData.Add(new PactTextBlockData()
+                                        {
+                                            Text = strLable,
+                                            Style = "PACTTextBlockStyle"
+                                        });
+                                        _PactControlData.Add(new PactIntelliBoxData()
+                                        {
+                                            Text = strID,
+                                            ListDropColumnResults = new ListDropResultsProvider()
+                                        });
+                                        break;
                                 }
                             }
                         }

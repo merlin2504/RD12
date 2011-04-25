@@ -19,11 +19,11 @@ namespace PACT.VIEWMODEL
     public class ScreenViewModel : WorkspaceViewModel
     {
         #region Fields
-        
+
         private string _ScreenID;
         ControlGenerator objControlGenerator = new ControlGenerator();
         public DelegateCommand<string> DynamicCommand { get; set; }
-        
+
         #endregion // Fields
 
         #region Constructor
@@ -38,13 +38,13 @@ namespace PACT.VIEWMODEL
                     _DisplayName = "Create Account";
                     break;
                 case "2000":
-                    _DisplayName = "Create Product";;
+                    _DisplayName = "Create Product"; ;
                     break;
                 default:
-                     _DisplayName = ScreenID;
-                     break; 
+                    _DisplayName = ScreenID;
+                    break;
             }
-          
+
             DynamicCommand = new DelegateCommand<string>(CommandController);
         }
 
@@ -55,8 +55,8 @@ namespace PACT.VIEWMODEL
             string temp;
             if ((string)sender == "OnSave")
             {
-               
-                temp = PACTControlData.Count.ToString();           
+
+                temp = PACTControlData.Count.ToString();
             }
         }
 
@@ -67,14 +67,14 @@ namespace PACT.VIEWMODEL
             {
 
                 _PACTControlData = objControlGenerator.GetControls(_ScreenID, ShellWindowViewModel.CompanyIndex);
-                
+
                 return _PACTControlData;
 
             }
         }
 
         private ObservableCollection<PactControlData> _PACTControlData;
-        
+
         public string DisplayName
         {
             get { return _DisplayName; }
@@ -105,8 +105,8 @@ namespace PACT.VIEWMODEL
 
         #endregion
 
-       
-        
+
+
         #region Public Methods
 
         /// <summary>
@@ -118,6 +118,6 @@ namespace PACT.VIEWMODEL
         }
 
         #endregion // Public Methods
-     
+
     }
 }
