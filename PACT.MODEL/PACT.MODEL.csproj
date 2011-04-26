@@ -73,10 +73,6 @@
     <Content Include="Data\AccountsScreen.xml" />
     <Content Include="Data\DefaultScreen.xml" />
     <Content Include="Data\ProductsScreen.xml" />
-    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
-    <None Include="Service References\CommonService\Common2.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\CommonService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -84,8 +80,15 @@
     <None Include="Service References\CommonService\configuration.svcinfo" />
     <None Include="Service References\CommonService\configuration91.svcinfo" />
     <None Include="Service References\CommonService\Common.disco" />
+    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <None Include="Service References\CommonService\Common.wsdl" />
+    <None Include="Service References\CommonService\Common.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\CommonService\Common1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CommonService\Common2.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -93,8 +96,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Service References\CommonService\Common.xsd">
+    <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

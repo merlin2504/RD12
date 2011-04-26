@@ -21,7 +21,9 @@ namespace PACT.MODEL
         {
             XmlDocument xDoc = new XmlDocument();
             CommonService.CommonClient wcfService = null ;
-            try{
+            
+            try
+            {
                 var endpoint = new EndpointAddress(new Uri(_ServiceUrl+"Common.svc"));
                 var binding = new WSHttpBinding();
                 wcfService= new CommonService.CommonClient(binding, endpoint);
