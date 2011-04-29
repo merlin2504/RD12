@@ -77,10 +77,17 @@
     <Content Include="Data\AccountsScreen.xml" />
     <Content Include="Data\DefaultScreen.xml" />
     <Content Include="Data\ProductsScreen.xml" />
+<<<<<<< HEAD
+    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
+    <None Include="Service References\CommonService\Common2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\CommonService\Common3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+=======
+>>>>>>> 9d75c0ba5f8085ba71266aa3d7c4be021e1c165d
     <None Include="Service References\CommonService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

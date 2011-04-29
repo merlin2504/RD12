@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
+   
     <system.serviceModel>
         <bindings>
             <wsHttpBinding>
@@ -23,11 +24,11 @@
             </wsHttpBinding>
         </bindings>
         <client>
-            <endpoint address="http://localhost/PactNxg/Common.svc" binding="wsHttpBinding"
+            <endpoint address="http://localhost:1088/Common.svc" binding="wsHttpBinding"
                 bindingConfiguration="WSHttpBinding_ICommon" contract="CommonService.ICommon"
                 name="WSHttpBinding_ICommon">
                 <identity>
-                    <servicePrincipalName value="host/Admin-PC" />
+                    <userPrincipalName value="MUKDEV\mukaram" />
                 </identity>
             </endpoint>
         </client>

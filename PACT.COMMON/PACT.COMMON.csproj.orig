@@ -51,7 +51,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="BusinessRules.cs" />
+=======
+    <Compile Include="Controls\PactIntelliBoxData.cs" />
+>>>>>>> 9d75c0ba5f8085ba71266aa3d7c4be021e1c165d
     <Compile Include="Controls\PactButtonData.cs" />
     <Compile Include="Controls\PactCheckBoxData.cs" />
     <Compile Include="Controls\PactComboBoxData.cs" />

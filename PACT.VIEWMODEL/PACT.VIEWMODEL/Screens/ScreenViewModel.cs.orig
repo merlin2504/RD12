@@ -53,6 +53,7 @@ namespace PACT.VIEWMODEL
 
         public void CommandController(object sender)
         {
+<<<<<<< HEAD
                 BusinessRules objUIRules = new BusinessRules();
                 Util objCommonUtil = new Util();
                 switch ((string)sender)
@@ -76,6 +77,14 @@ namespace PACT.VIEWMODEL
                     }
                     break;
                 }
+=======
+            string temp;
+            if ((string)sender == "OnSave")
+            {
+
+                temp = PACTControlData.Count.ToString();
+            }
+>>>>>>> 9d75c0ba5f8085ba71266aa3d7c4be021e1c165d
         }
 
 
