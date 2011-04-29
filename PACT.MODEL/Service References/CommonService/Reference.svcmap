@@ -21,12 +21,12 @@
     <MetadataSource Address="http://localhost:1088/Common.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Common.wsdl" MetadataType="Wsdl" ID="9bf1d221-1f98-4a3b-ba26-28a27f9c22a7" SourceId="1" SourceUrl="http://localhost:1088/Common.svc?wsdl" />
-    <MetadataFile FileName="Common3.xsd" MetadataType="Schema" ID="870c54bd-eaa6-4ae8-b2c3-fd7fd33150ed" SourceId="1" SourceUrl="http://localhost/PactNxg/Common.svc?xsd=xsd3" />
+    <MetadataFile FileName="Common4.xsd" MetadataType="Schema" ID="3e5353fa-b37b-49cf-aabc-6b87c839ed5c" SourceId="1" SourceUrl="http://localhost:1088/Common.svc?xsd=xsd2" />
+    <MetadataFile FileName="Common41.xsd" MetadataType="Schema" ID="544b7563-6a72-4aab-b9a2-42a83ba5eada" SourceId="1" SourceUrl="http://localhost:1088/Common.svc?xsd=xsd3" />
+    <MetadataFile FileName="Common42.xsd" MetadataType="Schema" ID="c7585e30-b689-4dad-91bc-f590e47be870" SourceId="1" SourceUrl="http://localhost:1088/Common.svc?xsd=xsd0" />
     <MetadataFile FileName="Common2.xsd" MetadataType="Schema" ID="d1a5fa0f-b1f9-42aa-b9a0-e07cba94dbb4" SourceId="1" SourceUrl="http://localhost:1088/Common.svc?xsd=xsd1" />
-    <MetadataFile FileName="Common1.xsd" MetadataType="Schema" ID="82991337-0668-4a67-9b2f-21c270b520c9" SourceId="1" SourceUrl="http://localhost/PactNxg/Common.svc?xsd=xsd1" />
-    <MetadataFile FileName="Common.disco" MetadataType="Disco" ID="c57c2221-d387-4dd1-a057-a73e126d328a" SourceId="1" SourceUrl="http://localhost/PactNxg/Common.svc?disco" />
-    <MetadataFile FileName="Common.xsd" MetadataType="Schema" ID="5dbfa57b-41b6-4500-bc8a-6010b898bdc3" SourceId="1" SourceUrl="http://localhost/PactNxg/Common.svc?xsd=xsd0" />
+    <MetadataFile FileName="Common.wsdl" MetadataType="Wsdl" ID="9bf1d221-1f98-4a3b-ba26-28a27f9c22a7" SourceId="1" SourceUrl="http://localhost:1088/Common.svc?wsdl" />
+    <MetadataFile FileName="Common1.disco" MetadataType="Disco" ID="846eb7d6-8898-4375-9202-3bffd2bb78ce" SourceId="1" SourceUrl="http://localhost:1088/Common.svc?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -291,7 +291,7 @@
       <xsd:import schemaLocation="http://localhost:1088/Common.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:1088/Common.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:1088/Common.svc?xsd=xsd2" />
-      <xsd:import schemaLocation="http://localhost/PactNxg/Common.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+      <xsd:import schemaLocation="http://localhost:1088/Common.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ICommon_GetCommonData_InputMessage">
@@ -411,7 +411,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>http://localhost:1088/Common.svc</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>MUKDEV\mukaram</Upn>
+          <Upn>Admin-PC\Admin</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

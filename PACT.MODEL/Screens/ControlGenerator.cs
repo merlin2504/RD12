@@ -12,6 +12,7 @@ using System.Data;
 using System.IO;
 using System.Collections.Specialized;
 using System.Collections;
+using System.Configuration;
 
 namespace PACT.MODEL
 {
@@ -201,11 +202,11 @@ namespace PACT.MODEL
                                             Text = strLable,
                                             Style = "PACTTextBlockStyle"
                                         });
-                                        _PactControlData.Add(new PactIntelliBoxData()
-                                        {
-                                            Text = strID,
-                                            ListDropColumnResults = new ListDropResultsProvider()
-                                        });
+                                        //_PactControlData.Add(new PactIntelliBoxData()
+                                        //{
+                                        //    Text = strID,
+                                        //    ListDropColumnResults = new ListDropResultsProvider()
+                                        //});
                                         break;
                                 }
                             }
