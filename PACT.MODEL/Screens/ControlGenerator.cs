@@ -21,13 +21,13 @@ namespace PACT.MODEL
         private XmlDocument GetScreenInfo(int _ScreenID, string _CompanyIndex)
         {
             XmlDocument xDoc = new XmlDocument();
-            CommonService.CommonClient wcfService = null;
+            //CommonService.CommonClient wcfService = null;
             try
             {
 
                 var endpoint = new EndpointAddress(new Uri(ConfigurationManager.AppSettings["SERVICEURL"].ToString()));
                 var binding = new WSHttpBinding();
-                wcfService = new CommonService.CommonClient(binding, endpoint);
+                CommonService.CommonClient wcfService = new CommonService.CommonClient(binding, endpoint);
                 //wcfService= new CommonService.CommonClient();
                 wcfService.Open();
                 DataSet ds = wcfService.GetScreenInfoByID(_ScreenID, _CompanyIndex);
@@ -42,14 +42,14 @@ namespace PACT.MODEL
             {
                 throw new Exception("Error in ControlGenerator::GetScreenInfo::-->" + ex.StackTrace);
             }
-            finally
-            {
-                if (wcfService != null)
-                {
-                    wcfService.Close();
-                }
+            //finally
+            //{
+            //    if (wcfService != null)
+            //    {
+            //        wcfService.Close();
+            //    }
 
-            }
+            //}
         }
 
         public ObservableCollection<PactControlData> GetControls(string ScreenID, string CompanyIndex)
