@@ -20,6 +20,15 @@ namespace PACT.MODEL.CommonService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommon/GetScreenInfoByID", ReplyAction="http://tempuri.org/ICommon/GetScreenInfoByIDResponse")]
         System.Data.DataSet GetScreenInfoByID(int ScreenID, string CompanyIndex);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommon/ExecuteQuery", ReplyAction="http://tempuri.org/ICommon/ExecuteQueryResponse")]
+        System.Data.DataTable ExecuteQuery(string Query, string CompanyIndex);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommon/CreateAccount", ReplyAction="http://tempuri.org/ICommon/CreateAccountResponse")]
+        int CreateAccount(string XMLControlData, string CompanyIndex);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommon/CreateProduct", ReplyAction="http://tempuri.org/ICommon/CreateProductResponse")]
+        int CreateProduct(string XMLControlData, string CompanyIndex);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,6 +64,18 @@ namespace PACT.MODEL.CommonService {
         
         public System.Data.DataSet GetScreenInfoByID(int ScreenID, string CompanyIndex) {
             return base.Channel.GetScreenInfoByID(ScreenID, CompanyIndex);
+        }
+        
+        public System.Data.DataTable ExecuteQuery(string Query, string CompanyIndex) {
+            return base.Channel.ExecuteQuery(Query, CompanyIndex);
+        }
+        
+        public int CreateAccount(string XMLControlData, string CompanyIndex) {
+            return base.Channel.CreateAccount(XMLControlData, CompanyIndex);
+        }
+        
+        public int CreateProduct(string XMLControlData, string CompanyIndex) {
+            return base.Channel.CreateProduct(XMLControlData, CompanyIndex);
         }
     }
 }

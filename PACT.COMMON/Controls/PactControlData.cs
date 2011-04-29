@@ -7,8 +7,191 @@ using System.Windows.Input;
 
 namespace PACT.COMMON
 {
-    public class PactControlData : INotifyPropertyChanged
+    public class PactControlData : INotifyPropertyChanged,IDataErrorInfo
     {
+        string IDataErrorInfo.Error { get { return null; } }
+
+        string IDataErrorInfo.this[string propertyName]
+        {
+            get { return this.GetValidationError(propertyName); }
+        }
+
+        public string[] ValidatedProperties { get; set; }
+
+        string GetValidationError(string propertyName)
+        {
+            BusinessRules br = new BusinessRules();
+            string error = null;
+            switch (propertyName)
+            {
+                case "Text":
+                    Foreground = "Black";
+                    if (this.Mandatory.Equals("1"))
+                    {
+                        if (this.Text != null && br.IsStringMissing(this.Text))
+                            BorderBrush = "Red";
+                        else
+                            BorderBrush = "Black";
+                    }
+                    else 
+                    {
+                        BorderBrush = "Black";
+                    }
+                    if (this.DataType.Equals("INT"))
+                    {
+                        if (!br.ValidateInt(this.Text))
+                        {
+                            Foreground = "Red";
+                        }
+                        else 
+                        {
+                            Foreground = "Black";
+                        }
+                    }
+                    break;
+                case "Background":
+                    if (this.Mandatory.Equals("1"))
+                    {
+                        Background = "Cyan";
+                    }
+                    else
+                    {
+                        Background = "White";
+                    }
+                    break;
+            
+
+            }
+            return error;
+        }
+
+        public string Text
+        {
+            get
+            {
+                return _text;
+            }
+
+            set
+            {
+                if (_text != value)
+                {
+                    _text = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("Text"));
+                }
+            }
+        }
+        private string _text;
+
+        
+        public string Foreground
+        {
+            get
+            {
+                return _foreground;
+            }
+
+            set
+            {
+                if (_foreground != value)
+                {
+                    _foreground = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("Foreground"));
+                }
+            }
+        }
+        private string _foreground;
+
+        public string Background
+        {
+            get
+            {
+                return _background;
+            }
+
+            set
+            {
+                if (_background != value)
+                {
+                    _background = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("Background"));
+                }
+            }
+        }
+        private string _background;
+
+        public string BorderBrush
+        {
+            get
+            {
+                return _borderbrush;
+            }
+
+            set
+            {
+                if (_borderbrush != value)
+                {
+                    _borderbrush = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("BorderBrush"));
+                }
+            }
+        }
+        private string _borderbrush;
+
+        public string DBColumnName
+        {
+            get
+            {
+                return _dbcolNm;
+            }
+
+            set
+            {
+                if (_dbcolNm != value)
+                {
+                    _dbcolNm = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("DBColumnName"));
+                }
+            }
+        }
+        private string _dbcolNm;
+
+        public string DataType
+        {
+            get
+            {
+                return _datatype;
+            }
+
+            set
+            {
+                if (_datatype != value)
+                {
+                    _datatype = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("DataType"));
+                }
+            }
+        }
+        private string _datatype;
+
+        public string Mandatory
+        {
+            get
+            {
+                return _mandatory;
+            }
+
+            set
+            {
+                if (_mandatory != value)
+                {
+                    _mandatory = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("Mandatory"));
+                }
+            }
+        }
+        private string _mandatory;
+
         public string Align
         {
             get
