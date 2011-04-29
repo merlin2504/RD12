@@ -5,6 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using PACT.COMMON;
 
 namespace PACT.MODEL
 {
@@ -68,9 +69,9 @@ namespace PACT.MODEL
                     });
 
                     PactComboBoxData CMB = new PactComboBoxData();
-                    CMB.ComboItems.Add("Majeed");
-                    CMB.ComboItems.Add("Majeed1");
-                    CMB.ComboItems.Add("Majeed2");
+                    //CMB.ComboItems.Add("Majeed");
+                    //CMB.ComboItems.Add("Majeed1");
+                    //CMB.ComboItems.Add("Majeed2");
                     CMB.Left = "100";
                     CMB.Top = "60";
                     CMB.Width = "200";

@@ -17,8 +17,31 @@ namespace PACT.VIEWMODEL
     /// <summary>
     /// A UI-friendly wrapper for a Customer object.
     /// </summary>
-    public class ScreenViewModel : WorkspaceViewModel
+    public class ScreenViewModel : WorkspaceViewModel,IDataErrorInfo
     {
+        string IDataErrorInfo.Error
+        {
+            get { return (_PACTControlData as IDataErrorInfo).Error; }
+        }
+
+        string IDataErrorInfo.this[string propertyName]
+        {
+            get
+            {
+                string error = null;
+
+                error = (_PACTControlData as IDataErrorInfo)[propertyName];
+
+                // Dirty the commands registered with CommandManager,
+                // such as our Save command, so that they are queried
+                // to see if they can execute now.
+                CommandManager.InvalidateRequerySuggested();
+
+                return error;
+            }
+        }
+
+
         #region Fields
 
         private string _ScreenID;
@@ -63,6 +86,7 @@ namespace PACT.VIEWMODEL
                     if (strMsg != null && !strMsg.Equals(""))
                     {
                         objCommonUtil.InfoMessageBox(strMsg, "Validations");
+                        break;
                     }
                     //Building collection to post values to DB
                     DataTable dt = objCommonUtil.GetDBValues(PACTControlData);

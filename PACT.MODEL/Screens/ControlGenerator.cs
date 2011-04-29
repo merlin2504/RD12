@@ -202,11 +202,11 @@ namespace PACT.MODEL
                                             Text = strLable,
                                             Style = "PACTTextBlockStyle"
                                         });
-                                        //_PactControlData.Add(new PactIntelliBoxData()
-                                        //{
-                                        //    Text = strID,
-                                        //    ListDropColumnResults = new ListDropResultsProvider()
-                                        //});
+                                        _PactControlData.Add(new PactIntelliBoxData()
+                                        {
+                                            Text = strID,
+                                            ListDropColumnResults = new ListDropResultsProvider()
+                                        });
                                         break;
                                 }
                             }

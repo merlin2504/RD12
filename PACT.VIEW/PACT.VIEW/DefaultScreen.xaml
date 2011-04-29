@@ -14,7 +14,12 @@
                 <TextBlock Margin="10,10,10,10" Width="100" Text="{Binding Path=Text}"/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type data:PactTextBoxData}">
-                <TextBox Margin="10,10,10,10" Width="250" Text="{Binding Path=Text}" IsEnabled="{Binding Path=Enable}" />
+                <TextBox Margin="10,10,10,10" Width="250" Text="{Binding Path=Text,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+             Validation.ErrorTemplate="{x:Null}" IsEnabled="{Binding Path=Enable}" 
+             BorderBrush="{Binding Path=BorderBrush,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+             Background="{Binding Path=Background,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+             Foreground="{Binding Path=Foreground,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+               />
             </DataTemplate>
             <DataTemplate DataType="{x:Type data:PactComboBoxData}">
                 <ComboBox Margin="10,10,10,10" Width="250" ItemsSource="{Binding Path=ComboItems}" DisplayMemberPath="ItemDisplayName" SelectedValuePath="ItemValue" SelectedValue="{Binding IsSelected, Mode=TwoWay}"/>
@@ -22,9 +27,9 @@
             <DataTemplate DataType="{x:Type data:PactButtonData}">
                 <Button Margin="10,10,10,10" Width="100" CommandParameter="{Binding DynamicCommand}" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=Tag}" Content="{Binding Path=Label}"/>
             </DataTemplate>
-            <!--<DataTemplate DataType="{x:Type data:PactIntelliBoxData}">
+            <DataTemplate DataType="{x:Type data:PactIntelliBoxData}">
                 <local:BasicSearchResultCtrl Margin="10,10,10,10" Provider="{Binding Path=ListDropColumnResults}" />
-            </DataTemplate>-->
+            </DataTemplate>
             
         </Grid.Resources>
         

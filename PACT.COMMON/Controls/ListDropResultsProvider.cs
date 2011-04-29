@@ -17,7 +17,7 @@ namespace PACT.COMMON
             if (_results == null)
             {
 
-                var temp = Enumerable.Range(0, 26 * _numEach).Select(i =>
+                var temp = Enumerable.Range(0, 250 * _numEach).Select(i =>
                 {
                     //var count = i % _numEach + 1;
                     //var charNum = (i / _numEach) % 26;
@@ -26,7 +26,7 @@ namespace PACT.COMMON
                     var r = new Random(i);
                     return new Person()
                     {
-                        PersonID = i,
+                        PersonID = i.ToString(),
                         FirstName = r.Next().ToString() + "'s firstname",
                         LastName = r.Next().ToString() + "'s lastname",
                         Age = r.Next(10, 200),
@@ -48,14 +48,14 @@ namespace PACT.COMMON
         public IEnumerable<object> DoSearch(string searchTerm, int maxResults, object tag)
         {
             ConstructDataSource();
-            return _results.Where(term => term.FirstName.Contains(searchTerm)).Take(10).Cast<object>();
+            return _results.Where(term => term.PersonID.Contains(searchTerm)).Take(10).Cast<object>();
             //return _results.Cast<object>();
         }
     }
 
     public class Person
     {
-        public int PersonID
+        public string PersonID
         {
             get;
             set;
