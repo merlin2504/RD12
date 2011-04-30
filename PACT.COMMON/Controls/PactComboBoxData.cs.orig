@@ -8,6 +8,8 @@ namespace PACT.COMMON
 {
     public class PactComboBoxData : PactControlData,IDataErrorInfo
     {
+<<<<<<< HEAD
+=======
         string IDataErrorInfo.Error { get { return null; } }
 
         string IDataErrorInfo.this[string propertyName]
@@ -62,6 +64,7 @@ namespace PACT.COMMON
             return error;
         }
 
+>>>>>>> github/master
         public List<ComboBoxItemData> ComboItems
         {
             get

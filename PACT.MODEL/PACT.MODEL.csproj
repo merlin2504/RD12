@@ -77,7 +77,10 @@
     <Content Include="Data\AccountsScreen.xml" />
     <Content Include="Data\DefaultScreen.xml" />
     <Content Include="Data\ProductsScreen.xml" />
+<<<<<<< HEAD
     <None Include="app.config" />
+=======
+>>>>>>> github/master
     <None Include="Service References\CommonService\Common1.disco" />
     <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
@@ -105,6 +108,12 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+=======
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+>>>>>>> github/master
     <WCFMetadataStorage Include="Service References\CommonService\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

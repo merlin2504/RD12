@@ -6,8 +6,30 @@ using System.ComponentModel;
 
 namespace PACT.COMMON
 {
-    public class PactComboBoxData : PactControlData,IDataErrorInfo
+    public class PactTextBoxData : PactControlData, IDataErrorInfo
     {
+<<<<<<< HEAD
+       
+=======
+
+        public string Text
+        {
+            get
+            {
+                return _text;
+            }
+
+            set
+            {
+                if (_text != value)
+                {
+                    _text = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("Text"));
+                }
+            }
+        }
+        private string _text;
+
         string IDataErrorInfo.Error { get { return null; } }
 
         string IDataErrorInfo.this[string propertyName]
@@ -23,17 +45,17 @@ namespace PACT.COMMON
             string error = null;
             switch (propertyName)
             {
-                case "IsSelected":
+                case "Text":
                     Foreground = "Black";
-                    BorderThickness = "5";
+                    BorderThickness = "1";
                     BorderBrush = "Black";
                     if (this.Mandatory.Equals("1"))
                     {
-                        if (br.IsStringMissing(this.IsSelected))
+                        if (this.Text != null && br.IsStringMissing(this.Text))
                         {
                             BorderBrush = "Red";
                             ToolTip = "Cannot be blank";
-                            BorderThickness = "10";
+                            BorderThickness = "3";
                         }
                         else
                         {
@@ -45,6 +67,22 @@ namespace PACT.COMMON
                     {
                         ToolTip = this.Label;
                         BorderBrush = "Black";
+                    }
+
+                    if (this.DataType.Equals("INT"))
+                    {
+                        if (!br.ValidateInt(this.Text))
+                        {
+                            Foreground = "Red";
+                            BorderBrush = "Red";
+                            BorderThickness = "3";
+                            ToolTip = "Invalid data, accepts integers only";
+                        }
+                        else
+                        {
+                            Foreground = "Black";
+                            ToolTip = this.Label;
+                        }
                     }
                     break;
                 case "Background":
@@ -61,59 +99,6 @@ namespace PACT.COMMON
 
             return error;
         }
-
-        public List<ComboBoxItemData> ComboItems
-        {
-            get
-            {
-
-                if (_items == null)
-                {
-                    _items = new List<ComboBoxItemData>();
-                }
-               return _items;
-
-            }
-
-            set
-            {
-                if (_items != value)
-                {
-                    _items = value;
-                    OnPropertyChanged(new PropertyChangedEventArgs("ComboItems"));
-                }
-            }
-        }
-        private List<ComboBoxItemData> _items;
-
-        public string IsSelected
-        {
-            get
-            {
-                return _isSelected;
-            }
-
-            set
-            {
-                if (_isSelected != value)
-                {
-                    _isSelected = value;
-                    OnPropertyChanged(new PropertyChangedEventArgs("IsSelected"));
-                }
-            }
-        }
-        private string _isSelected;
-
-    }
-
-    public class ComboBoxItemData
-    {
-        public string ItemDisplayName { get; set; }
-        public string ItemValue { get; set; }
-        public ComboBoxItemData(string itemNm, string itemVal)
-        {
-            ItemDisplayName = itemNm;
-            ItemValue=itemVal;
-        }
+>>>>>>> github/master
     }
 }
