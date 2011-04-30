@@ -17,7 +17,7 @@ namespace PACT.COMMON
             if (_results == null)
             {
 
-                var temp = Enumerable.Range(0, 250 * _numEach).Select(i =>
+                var temp = Enumerable.Range(0, 2500 * _numEach).Select(i =>
                 {
                     //var count = i % _numEach + 1;
                     //var charNum = (i / _numEach) % 26;

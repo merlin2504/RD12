@@ -6,8 +6,62 @@ using System.ComponentModel;
 
 namespace PACT.COMMON
 {
-    public class PactComboBoxData : PactControlData
+    public class PactComboBoxData : PactControlData,IDataErrorInfo
     {
+        string IDataErrorInfo.Error { get { return null; } }
+
+        string IDataErrorInfo.this[string propertyName]
+        {
+            get { return this.GetValidationError(propertyName); }
+        }
+
+        public string[] ValidatedProperties { get; set; }
+
+        string GetValidationError(string propertyName)
+        {
+            BusinessRules br = new BusinessRules();
+            string error = null;
+            switch (propertyName)
+            {
+                case "IsSelected":
+                    Foreground = "Black";
+                    BorderThickness = "5";
+                    BorderBrush = "Black";
+                    if (this.Mandatory.Equals("1"))
+                    {
+                        if (br.IsStringMissing(this.IsSelected))
+                        {
+                            BorderBrush = "Red";
+                            ToolTip = "Cannot be blank";
+                            BorderThickness = "10";
+                        }
+                        else
+                        {
+                            BorderBrush = "Black";
+                            ToolTip = this.Label;
+                        }
+                    }
+                    else
+                    {
+                        ToolTip = this.Label;
+                        BorderBrush = "Black";
+                    }
+                    break;
+                case "Background":
+                    if (this.Mandatory.Equals("1"))
+                    {
+                        Background = "Cyan";
+                    }
+                    else
+                    {
+                        Background = "White";
+                    }
+                    break;
+            }
+
+            return error;
+        }
+
         public List<ComboBoxItemData> ComboItems
         {
             get

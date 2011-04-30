@@ -7,81 +7,27 @@ using System.Windows.Input;
 
 namespace PACT.COMMON
 {
-    public class PactControlData : INotifyPropertyChanged,IDataErrorInfo
+    public class PactControlData : INotifyPropertyChanged
     {
-        string IDataErrorInfo.Error { get { return null; } }
-
-        string IDataErrorInfo.this[string propertyName]
-        {
-            get { return this.GetValidationError(propertyName); }
-        }
-
-        public string[] ValidatedProperties { get; set; }
-
-        string GetValidationError(string propertyName)
-        {
-            BusinessRules br = new BusinessRules();
-            string error = null;
-            switch (propertyName)
-            {
-                case "Text":
-                    Foreground = "Black";
-                    if (this.Mandatory.Equals("1"))
-                    {
-                        if (this.Text != null && br.IsStringMissing(this.Text))
-                            BorderBrush = "Red";
-                        else
-                            BorderBrush = "Black";
-                    }
-                    else 
-                    {
-                        BorderBrush = "Black";
-                    }
-                    if (this.DataType.Equals("INT"))
-                    {
-                        if (!br.ValidateInt(this.Text))
-                        {
-                            Foreground = "Red";
-                        }
-                        else 
-                        {
-                            Foreground = "Black";
-                        }
-                    }
-                    break;
-                case "Background":
-                    if (this.Mandatory.Equals("1"))
-                    {
-                        Background = "Cyan";
-                    }
-                    else
-                    {
-                        Background = "White";
-                    }
-                    break;
-            
-
-            }
-            return error;
-        }
-
-        public string Text
+       
+        public string ToolTip
         {
             get
             {
-                return _text;
+                return _tooltip;
             }
 
             set
             {
-                if (_text != value)
+                if (_tooltip != value)
                 {
-                    _text = value;
-                    OnPropertyChanged(new PropertyChangedEventArgs("Text"));
+                    _tooltip = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("ToolTip"));
                 }
             }
         }
-        private string _text;
+        private string _tooltip;
+
 
         
         public string Foreground
@@ -137,6 +83,25 @@ namespace PACT.COMMON
             }
         }
         private string _borderbrush;
+
+        public string BorderThickness
+        {
+            get
+            {
+                return _borderthickness;
+            }
+
+            set
+            {
+                if (_borderthickness != value)
+                {
+                    _borderthickness = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("BorderThickness"));
+                }
+            }
+        }
+        private string _borderthickness;      
+
 
         public string DBColumnName
         {
