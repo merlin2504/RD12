@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PACT.VIEWMODEL;
+using FeserWard.Controls;
 
 namespace PACT.VIEW
 {
@@ -20,22 +21,17 @@ namespace PACT.VIEW
     /// </summary>
     public partial class DefaultScreen : UserControl
     {
+
+        //public IIntelliboxResultsProvider SingleColumnResults
+        //{
+        //    get;
+        //    private set;
+        //}
+
         public DefaultScreen()
         {
+            //SingleColumnResults = new SingleColumnResultsProvider();
             this.InitializeComponent();
         }
-
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void button2_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void comboBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-        }
-
     }
 }

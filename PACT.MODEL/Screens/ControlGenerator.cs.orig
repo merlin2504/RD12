@@ -10,9 +10,12 @@ using System.Windows.Input;
 using System.ServiceModel;
 using System.Data;
 using System.IO;
+<<<<<<< HEAD
 using System.Collections.Specialized;
 using System.Collections;
+=======
 using System.Configuration;
+>>>>>>> 9d75c0ba5f8085ba71266aa3d7c4be021e1c165d
 
 namespace PACT.MODEL
 {
@@ -50,6 +53,7 @@ namespace PACT.MODEL
                 {
                     wcfService.Close();
                 }
+<<<<<<< HEAD
             }
         }
         private PactComboBoxData GetLookupData(PactComboBoxData _pcb,string LookupName, string CompanyIndex)
@@ -96,30 +100,53 @@ namespace PACT.MODEL
             }
             return _pcb;
         }
+        public ObservableCollection<PactControlData> GetControls(string ScreenID,string CompanyIndex)
+=======
+
+            }
+        }
+
         public ObservableCollection<PactControlData> GetControls(string ScreenID, string CompanyIndex)
+>>>>>>> 9d75c0ba5f8085ba71266aa3d7c4be021e1c165d
         {
             if (_PactControlData == null)
             {
                 string strID = "";
                 string strLable = "";
-                    string strCommand = "";
+                string strVal = "";
                 string strNm = "";
+                XmlDocument xDoc = GetScreenInfo(Convert.ToInt32(ScreenID), CompanyIndex);
+                _PactControlData = new ObservableCollection<PactControlData>();
+                for (int iRow = 0; iRow < xDoc.DocumentElement.ChildNodes.Count; iRow++)
+                {
+<<<<<<< HEAD
+                    string strID = "";
+                    string strLable = "";
+                    string strCommand = "";
+                    string strNm = "";
                     string IsMandatory = "";
                     string IsReadOnly = "";                    
                     string DataType = "";
                     string ColumnName = "";                    
                     
-                XmlDocument xDoc = GetScreenInfo(Convert.ToInt32(ScreenID), CompanyIndex);
-                _PactControlData = new ObservableCollection<PactControlData>();
-                for (int iRow = 0; iRow < xDoc.DocumentElement.ChildNodes.Count; iRow++)
-                {
+                    XmlDocument xDoc = GetScreenInfo(Convert.ToInt32(ScreenID),CompanyIndex);
+                    _PactControlData = new ObservableCollection<PactControlData>();
+                    for (int iRow = 0; iRow < xDoc.DocumentElement.ChildNodes.Count; iRow++)
+=======
                     XmlNode xSec = xDoc.DocumentElement.ChildNodes[iRow];
                     foreach (XmlNode xRow in xSec.ChildNodes)
+>>>>>>> 9d75c0ba5f8085ba71266aa3d7c4be021e1c165d
                     {
                         foreach (XmlNode xTemp in xRow.ChildNodes)
                         {
                             foreach (XmlNode xRowInfo in xTemp.ChildNodes)
                             {
+                                strID = xRowInfo.SelectSingleNode("ID").InnerText.ToString();
+                                strLable = xRowInfo.SelectSingleNode("Label").InnerText.ToString();
+                                strNm = xRowInfo.SelectSingleNode("Control").InnerText.ToString();
+                                switch (strNm)
+                                {
+<<<<<<< HEAD
                                     IsReadOnly="True";
                                     IsMandatory = "0";
                                     DataType = "NA";
@@ -129,7 +156,7 @@ namespace PACT.MODEL
                                     if (xRowInfo.SelectSingleNode("Label") != null)
                                         strLable = xRowInfo.SelectSingleNode("Label").InnerText.ToString();
                                     if (xRowInfo.SelectSingleNode("Control") != null)
-                                strNm = xRowInfo.SelectSingleNode("Control").InnerText.ToString();
+                                    strNm = xRowInfo.SelectSingleNode("Control").InnerText.ToString();
                                     if (xRowInfo.SelectSingleNode("IsMandatory") != null)
                                         IsMandatory = xRowInfo.SelectSingleNode("IsMandatory").InnerText.ToString();
                                     if (xRowInfo.SelectSingleNode("DataType") != null)
@@ -144,30 +171,30 @@ namespace PACT.MODEL
                                         else
                                             IsReadOnly = "False";
                                     }
-                                switch (strNm)
-                                {
-                                    case "TextBox":
-                                        _PactControlData.Add(new PactTextBlockData()
-                                        {
-                                            Text = strLable,
-                                            Style = "PACTTextBlockStyle"
-                                        });
-                                        _PactControlData.Add(new PactTextBoxData()
-                                        {
+                                    switch (strNm)
+                                    {
+                                        case "TextBox":
+                                            _PactControlData.Add(new PactTextBlockData()
+                                            {
+                                                Text = strLable,
+                                                Style = "PACTTextBlockStyle"
+                                            });
+                                            _PactControlData.Add(new PactTextBoxData()
+                                            {
                                                 Label=strLable,
-                                            Text = strID,
+                                                Text = strID,
                                                 Mandatory = IsMandatory,
                                                 DataType = DataType,
                                                 DBColumnName = ColumnName,
                                                 Enable = IsReadOnly,
-                                        });
-                                        break;
+                                            });
+                                            break;
 
-                                    case "ComboBox":
-                                        _PactControlData.Add(new PactTextBlockData()
-                                        {
-                                            Text = strLable,
-                                        });
+                                        case "ComboBox":
+                                            _PactControlData.Add(new PactTextBlockData()
+                                            {
+                                                Text = strLable,
+                                            });
 
                                             PactComboBoxData CMB = new PactComboBoxData()
                                             {
@@ -185,15 +212,46 @@ namespace PACT.MODEL
                                             if(CMB.ComboItems.Count==0)
                                                 CMB.ComboItems.Add(new ComboBoxItemData("0",strID));
 
+                                            _PactControlData.Add(CMB);
+                                            break;
+
+                                        case "Button":
+                                            strCommand = xRowInfo.SelectSingleNode("Command").InnerText.ToString();
+                                            _PactControlData.Add(new PactButtonData()
+                                            {
+                                                Label = strLable,
+                                                DynamicCommand = strCommand,
+                                            });
+                                            break;
+                                    }
+=======
+                                    case "TextBox":
+                                        _PactControlData.Add(new PactTextBlockData()
+                                        {
+                                            Text = strLable,
+                                            Style = "PACTTextBlockStyle"
+                                        });
+                                        _PactControlData.Add(new PactTextBoxData()
+                                        {
+                                            Text = strID,
+                                        });
+                                        break;
+
+                                    case "ComboBox":
+                                        _PactControlData.Add(new PactTextBlockData()
+                                        {
+                                            Text = strLable,
+                                        });
+                                        PactComboBoxData CMB = new PactComboBoxData();
+                                        CMB.ComboItems.Add(strID);
                                         _PactControlData.Add(CMB);
                                         break;
 
                                     case "Button":
-                                            strCommand = xRowInfo.SelectSingleNode("Command").InnerText.ToString();
                                         _PactControlData.Add(new PactButtonData()
                                         {
                                             Label = strLable,
-                                                DynamicCommand = strCommand,
+                                            DynamicCommand = "OnSave",
                                         });
                                         break;
                                     case "ListDrop":
@@ -208,6 +266,7 @@ namespace PACT.MODEL
                                             ListDropColumnResults = new ListDropResultsProvider()
                                         });
                                         break;
+>>>>>>> 9d75c0ba5f8085ba71266aa3d7c4be021e1c165d
                                 }
                             }
                         }

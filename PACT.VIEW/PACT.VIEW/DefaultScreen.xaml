@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              xmlns:data="clr-namespace:PACT.COMMON;assembly=PACT.COMMON"
-             xmlns:local="clr-namespace:PACT.VIEW;assembly=PACT.VIEW"
+             xmlns:local="clr-namespace:PACT.VIEW"
+             x:Name="mainWin"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Margin="10,10,10,10" x:Name="LayoutGrid">
         <Grid.Resources>
@@ -13,18 +14,27 @@
                 <TextBlock Margin="10,10,10,10" Width="100" Text="{Binding Path=Text}"/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type data:PactTextBoxData}">
-                <TextBox Margin="10,10,10,10" Width="250" Text="{Binding Path=Text}" />
+                <TextBox Margin="10,10,10,10" Width="250" Text="{Binding Path=Text,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+             Validation.ErrorTemplate="{x:Null}" IsEnabled="{Binding Path=Enable}" 
+             BorderBrush="{Binding Path=BorderBrush,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+             Background="{Binding Path=Background,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+             Foreground="{Binding Path=Foreground,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+               />
             </DataTemplate>
             <DataTemplate DataType="{x:Type data:PactComboBoxData}">
-                <ComboBox Margin="10,10,10,10" Width="250" ItemsSource="{Binding Path=ComboItems}" Text="{Binding IsSelected, Mode=TwoWay}"/>
+                <ComboBox Margin="10,10,10,10" Width="250" ItemsSource="{Binding Path=ComboItems}" DisplayMemberPath="ItemDisplayName" SelectedValuePath="ItemValue" SelectedValue="{Binding IsSelected, Mode=TwoWay}"/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type data:PactButtonData}">
                 <Button Margin="10,10,10,10" Width="100" CommandParameter="{Binding DynamicCommand}" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=Tag}" Content="{Binding Path=Label}"/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type data:PactIntelliBoxData}">
+                <local:BasicSearchResultCtrl Margin="10,10,10,10" Provider="{Binding Path=ListDropColumnResults}" />
+            </DataTemplate>
+            
         </Grid.Resources>
-
+        
         <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
-            <ItemsControl x:Name="PACTContainer" ItemsSource="{Binding PACTControlData}"  Width="800"  HorizontalAlignment="Left" Tag="{Binding DynamicCommand}">
+            <ItemsControl x:Name="PACTContainer"  ItemsSource="{Binding PACTControlData}"  Width="800"  HorizontalAlignment="Left" Tag="{Binding DynamicCommand}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Horizontal"/>

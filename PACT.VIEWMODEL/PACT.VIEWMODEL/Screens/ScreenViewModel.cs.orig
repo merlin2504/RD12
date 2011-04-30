@@ -17,31 +17,8 @@ namespace PACT.VIEWMODEL
     /// <summary>
     /// A UI-friendly wrapper for a Customer object.
     /// </summary>
-    public class ScreenViewModel : WorkspaceViewModel,IDataErrorInfo
+    public class ScreenViewModel : WorkspaceViewModel
     {
-        string IDataErrorInfo.Error
-        {
-            get { return (_PACTControlData as IDataErrorInfo).Error; }
-        }
-
-        string IDataErrorInfo.this[string propertyName]
-        {
-            get
-            {
-                string error = null;
-
-                error = (_PACTControlData as IDataErrorInfo)[propertyName];
-
-                // Dirty the commands registered with CommandManager,
-                // such as our Save command, so that they are queried
-                // to see if they can execute now.
-                CommandManager.InvalidateRequerySuggested();
-
-                return error;
-            }
-        }
-
-
         #region Fields
 
         private string _ScreenID;
@@ -76,6 +53,7 @@ namespace PACT.VIEWMODEL
 
         public void CommandController(object sender)
         {
+<<<<<<< HEAD
                 BusinessRules objUIRules = new BusinessRules();
                 Util objCommonUtil = new Util();
                 switch ((string)sender)
@@ -86,7 +64,6 @@ namespace PACT.VIEWMODEL
                     if (strMsg != null && !strMsg.Equals(""))
                     {
                         objCommonUtil.InfoMessageBox(strMsg, "Validations");
-                        break;
                     }
                     //Building collection to post values to DB
                     DataTable dt = objCommonUtil.GetDBValues(PACTControlData);
@@ -100,6 +77,14 @@ namespace PACT.VIEWMODEL
                     }
                     break;
                 }
+=======
+            string temp;
+            if ((string)sender == "OnSave")
+            {
+
+                temp = PACTControlData.Count.ToString();
+            }
+>>>>>>> 9d75c0ba5f8085ba71266aa3d7c4be021e1c165d
         }
 
 

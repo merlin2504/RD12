@@ -8,14 +8,14 @@ namespace PACT.COMMON
 {
     public class PactComboBoxData : PactControlData
     {
-        public List<string> ComboItems
+        public List<ComboBoxItemData> ComboItems
         {
             get
             {
 
                 if (_items == null)
                 {
-                    _items = new List<string>();
+                    _items = new List<ComboBoxItemData>();
                 }
                return _items;
 
@@ -30,7 +30,7 @@ namespace PACT.COMMON
                 }
             }
         }
-        private List<string> _items;
+        private List<ComboBoxItemData> _items;
 
         public string IsSelected
         {
@@ -50,5 +50,16 @@ namespace PACT.COMMON
         }
         private string _isSelected;
 
+    }
+
+    public class ComboBoxItemData
+    {
+        public string ItemDisplayName { get; set; }
+        public string ItemValue { get; set; }
+        public ComboBoxItemData(string itemNm, string itemVal)
+        {
+            ItemDisplayName = itemNm;
+            ItemValue=itemVal;
+        }
     }
 }

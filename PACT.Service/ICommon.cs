@@ -5,6 +5,8 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using System.Data;
+using System.Collections;
+using System.Collections.Specialized;
 
 namespace PACT.Service
 {
@@ -17,6 +19,15 @@ namespace PACT.Service
 
         [OperationContract]
         DataSet GetScreenInfoByID(int ScreenID, string CompanyIndex);
+
+        [OperationContract]
+        DataTable ExecuteQuery(string Query, string CompanyIndex);
+
+        [OperationContract]
+        int CreateAccount(string XMLControlData, string CompanyIndex);
+
+        [OperationContract]
+        int CreateProduct(string XMLControlData, string CompanyIndex);
 
     }
 }

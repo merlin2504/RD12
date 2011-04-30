@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Intellibox">
+    <Reference Include="Intellibox, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\Dlls\Intellibox.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Prism, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -46,7 +46,7 @@
       <HintPath>..\Dlls\RibbonControlsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -77,29 +77,24 @@
     <Content Include="Data\AccountsScreen.xml" />
     <Content Include="Data\DefaultScreen.xml" />
     <Content Include="Data\ProductsScreen.xml" />
-    <None Include="app.config" />
-    <None Include="Service References\CommonService\Common1.disco" />
-    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
-    <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
-    <None Include="Service References\CommonService\Common2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\CommonService\Common4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\CommonService\Common41.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\CommonService\Common42.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\CommonService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Service References\CommonService\configuration.svcinfo" />
     <None Include="Service References\CommonService\configuration91.svcinfo" />
+    <None Include="Service References\CommonService\Common.disco" />
+    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <None Include="Service References\CommonService\Common.wsdl" />
+    <None Include="Service References\CommonService\Common.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CommonService\Common1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CommonService\Common2.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
