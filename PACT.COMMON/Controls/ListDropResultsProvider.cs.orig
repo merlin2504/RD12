@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +17,11 @@ namespace PACT.COMMON
             if (_results == null)
             {
 
+<<<<<<< HEAD
+                var temp = Enumerable.Range(0, 250 * _numEach).Select(i =>
+=======
                 var temp = Enumerable.Range(0, 2500 * _numEach).Select(i =>
+>>>>>>> github/master
                 {
                     //var count = i % _numEach + 1;
                     //var charNum = (i / _numEach) % 26;

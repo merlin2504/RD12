@@ -17,6 +17,14 @@
                 <TextBox Margin="10,10,10,10" Width="250" Text="{Binding Path=Text,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
              Validation.ErrorTemplate="{x:Null}" IsEnabled="{Binding Path=Enable}" 
              BorderBrush="{Binding Path=BorderBrush,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+<<<<<<< HEAD
+             Background="{Binding Path=Background,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+             Foreground="{Binding Path=Foreground,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+               />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type data:PactComboBoxData}">
+                <ComboBox Margin="10,10,10,10" Width="250" ItemsSource="{Binding Path=ComboItems}" DisplayMemberPath="ItemDisplayName" SelectedValuePath="ItemValue" SelectedValue="{Binding IsSelected, Mode=TwoWay}"/>
+=======
              BorderThickness="{Binding Path=BorderThickness,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
              Background="{Binding Path=Background,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
              Foreground="{Binding Path=Foreground,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
@@ -30,6 +38,7 @@
                  Background="{Binding Path=Background,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                  ToolTip="{Binding Path=ToolTip}"      
                 />
+>>>>>>> github/master
             </DataTemplate>
             <DataTemplate DataType="{x:Type data:PactButtonData}">
                 <Button Margin="10,10,10,10" Width="100"  CommandParameter="{Binding DynamicCommand}" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=Tag}" Content="{Binding Path=Label}"/>
