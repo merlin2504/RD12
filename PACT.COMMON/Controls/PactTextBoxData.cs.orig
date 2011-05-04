@@ -1,0 +1,104 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.ComponentModel;
+
+namespace PACT.COMMON
+{
+    public class PactTextBoxData : PactControlData, IDataErrorInfo
+    {
+<<<<<<< HEAD
+       
+=======
+
+        public string Text
+        {
+            get
+            {
+                return _text;
+            }
+
+            set
+            {
+                if (_text != value)
+                {
+                    _text = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("Text"));
+                }
+            }
+        }
+        private string _text;
+
+        string IDataErrorInfo.Error { get { return null; } }
+
+        string IDataErrorInfo.this[string propertyName]
+        {
+            get { return this.GetValidationError(propertyName); }
+        }
+
+        public string[] ValidatedProperties { get; set; }
+
+        string GetValidationError(string propertyName)
+        {
+            BusinessRules br = new BusinessRules();
+            string error = null;
+            switch (propertyName)
+            {
+                case "Text":
+                    Foreground = "Black";
+                    BorderThickness = "1";
+                    BorderBrush = "Black";
+                    if (this.Mandatory.Equals("1"))
+                    {
+                        if (this.Text != null && br.IsStringMissing(this.Text))
+                        {
+                            BorderBrush = "Red";
+                            ToolTip = "Cannot be blank";
+                            BorderThickness = "3";
+                        }
+                        else
+                        {
+                            BorderBrush = "Black";
+                            ToolTip = this.Label;
+                        }
+                    }
+                    else
+                    {
+                        ToolTip = this.Label;
+                        BorderBrush = "Black";
+                    }
+
+                    if (this.DataType.Equals("INT"))
+                    {
+                        if (!br.ValidateInt(this.Text))
+                        {
+                            Foreground = "Red";
+                            BorderBrush = "Red";
+                            BorderThickness = "3";
+                            ToolTip = "Invalid data, accepts integers only";
+                        }
+                        else
+                        {
+                            Foreground = "Black";
+                            ToolTip = this.Label;
+                        }
+                    }
+                    break;
+                case "Background":
+                    if (this.Mandatory.Equals("1"))
+                    {
+                        Background = "Cyan";
+                    }
+                    else
+                    {
+                        Background = "White";
+                    }
+                    break;
+            }
+
+            return error;
+        }
+>>>>>>> github/master
+    }
+}

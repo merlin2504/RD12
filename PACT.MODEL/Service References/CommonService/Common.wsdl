@@ -411,7 +411,11 @@
       <wsa10:EndpointReference>
         <wsa10:Address>http://localhost:1088/Common.svc</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+<<<<<<< HEAD
+          <Upn>JAVED-PC\admin</Upn>
+=======
           <Upn>Admin-PC\Admin</Upn>
+>>>>>>> github/master
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

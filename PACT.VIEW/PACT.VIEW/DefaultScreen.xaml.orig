@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="PACT.VIEW.DefaultScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:data="clr-namespace:PACT.COMMON;assembly=PACT.COMMON"
+             xmlns:local="clr-namespace:PACT.VIEW"
+             x:Name="mainWin"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Margin="10,10,10,10" x:Name="LayoutGrid">
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type data:PactTextBlockData}">
+                <TextBlock Margin="10,10,10,10" Width="100" Text="{Binding Path=Text}"/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type data:PactTextBoxData}">
+                <TextBox Margin="10,10,10,10" Width="250" Text="{Binding Path=Text,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+             Validation.ErrorTemplate="{x:Null}" IsEnabled="{Binding Path=Enable}" 
+             BorderBrush="{Binding Path=BorderBrush,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+<<<<<<< HEAD
+             Background="{Binding Path=Background,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+             Foreground="{Binding Path=Foreground,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+               />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type data:PactComboBoxData}">
+                <ComboBox Margin="10,10,10,10" Width="250" ItemsSource="{Binding Path=ComboItems}" DisplayMemberPath="ItemDisplayName" SelectedValuePath="ItemValue" SelectedValue="{Binding IsSelected, Mode=TwoWay}"/>
+=======
+             BorderThickness="{Binding Path=BorderThickness,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+             Background="{Binding Path=Background,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+             Foreground="{Binding Path=Foreground,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+             ToolTip="{Binding Path=ToolTip}"            
+               />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type data:PactComboBoxData}">
+                <ComboBox Margin="10,10,10,10" Width="250" ItemsSource="{Binding Path=ComboItems}" DisplayMemberPath="ItemDisplayName"  Validation.ErrorTemplate="{x:Null}" SelectedValuePath="ItemValue" SelectedValue="{Binding IsSelected, Mode=TwoWay,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                 BorderBrush="{Binding Path=BorderBrush,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                 BorderThickness="{Binding Path=BorderThickness,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                 Background="{Binding Path=Background,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                 ToolTip="{Binding Path=ToolTip}"      
+                />
+>>>>>>> github/master
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type data:PactButtonData}">
+                <Button Margin="10,10,10,10" Width="100"  CommandParameter="{Binding DynamicCommand}" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=Tag}" Content="{Binding Path=Label}"/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type data:PactIntelliBoxData}">
+                <local:BasicSearchResultCtrl Margin="10,10,10,10" Provider="{Binding Path=ListDropColumnResults}" />
+            </DataTemplate>
+            
+        </Grid.Resources>
+        
+        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="PACTContainer"  ItemsSource="{Binding PACTControlData}"  Width="800"  HorizontalAlignment="Left" Tag="{Binding DynamicCommand}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
