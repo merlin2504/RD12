@@ -79,6 +79,8 @@
     <Compile Include="Controls\PactComboBoxData.cs" />
     <Compile Include="Controls\PactControlData.cs" />
     <Compile Include="Controls\PactControlDataCollection.cs" />
+    <Compile Include="Controls\PactGridColumnData.cs" />
+    <Compile Include="Controls\PactGridData.cs" />
     <Compile Include="Controls\PactIntelliBoxData.cs">
       <SubType>Code</SubType>
     </Compile>
