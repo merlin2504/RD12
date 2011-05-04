@@ -10,9 +10,16 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Margin="10,10,10,10" x:Name="LayoutGrid">
         <Grid.Resources>
+
+            <DataTemplate DataType="{x:Type data:PactGridData}">
+                <DataGrid AutoGenerateColumns="False"  ItemsSource="{Binding Path=DataSource}"  IsSynchronizedWithCurrentItem="True" data:PactGridColumnData.ColumnsSource="{Binding Path=Columns}"/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type data:PactTextBlockData}">
                 <TextBlock Margin="10,10,10,10" Width="100" Text="{Binding Path=Text}"/>
             </DataTemplate>
+
+           
             <DataTemplate DataType="{x:Type data:PactTextBoxData}">
                 <TextBox Margin="10,10,10,10" Width="250" Text="{Binding Path=Text,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
              Validation.ErrorTemplate="{x:Null}" IsEnabled="{Binding Path=Enable}" 
@@ -37,7 +44,8 @@
             <DataTemplate DataType="{x:Type data:PactIntelliBoxData}">
                 <local:BasicSearchResultCtrl Margin="10,10,10,10" Provider="{Binding Path=ListDropColumnResults}" />
             </DataTemplate>
-            
+           
+
         </Grid.Resources>
         
         <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">

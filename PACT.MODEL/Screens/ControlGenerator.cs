@@ -19,6 +19,8 @@ namespace PACT.MODEL
     public class ControlGenerator
     {
         private ObservableCollection<PactControlData> _PactControlData;
+      
+        
 
         private XmlDocument GetScreenInfo(int _ScreenID, string _CompanyIndex)
         {
@@ -207,6 +209,63 @@ namespace PACT.MODEL
                                             Text = strID,
                                             ListDropColumnResults = new ListDropResultsProvider()
                                         });
+
+                                        //START GRID
+                                         DataTable dtprocuctDetails = new DataTable();
+
+                                        dtprocuctDetails.Columns.Add("ProductID", typeof(int));
+                                        dtprocuctDetails.Columns.Add("Onhand");
+                                        dtprocuctDetails.Columns.Add("Rate");
+
+                                         DataRow dr = dtprocuctDetails.NewRow();
+
+                                        dr["ProductID"] = 1;
+                                        dr["Onhand"] = "10";
+                                        dr["Rate"] = "100";
+
+                                        dtprocuctDetails.Rows.Add(dr);
+
+                                        dr = dtprocuctDetails.NewRow();
+                                        dr["ProductID"] = 2;
+                                        dr["Onhand"] = "20";
+                                        dr["Rate"] = "200";
+                                        dtprocuctDetails.Rows.Add(dr);
+
+                                        dr = dtprocuctDetails.NewRow();
+                                        dr["ProductID"] = 3;
+                                        dr["Onhand"] = "30";
+                                        dr["Rate"] = "300";
+                                        dtprocuctDetails.Rows.Add(dr);
+
+                                        PactGridData grd = new PactGridData();
+                                        grd.DataSource = dtprocuctDetails;
+
+                                        //List<ColumnDescriptor> Cl = new List<ColumnDescriptor>();
+                                        //ColumnDescriptor c = new ColumnDescriptor();
+                                        //c.HeaderText = "Product ID";
+                                        //c.DisplayMember = "ProductID";
+                                        //Cl.Add(c);
+                                        //c = new ColumnDescriptor();
+                                        //c.HeaderText = "Product Name";
+                                        //c.DisplayMember = "ProductName";
+                                        //Cl.Add(c);
+                                        //c = new ColumnDescriptor();
+                                        //c.HeaderText = "Product Code";
+                                        //c.DisplayMember = "ProductCode";
+                                        //Cl.Add(c);
+
+                                        grd.Columns = new ObservableCollection<DatagridCols>
+                                        {
+                                            //new DatagridCols { HeaderText = "Produc tName", ValueBinding="ProductID", ValueMember="ProductID", DisplayMember = "ProductName", ColumnType="MultiCombo",width=100,
+                                            //    Columns=Cl, Source=dtprocuct.AsDataView()},
+                                            new DatagridCols { HeaderText = "Product Name", DisplayMember = "ProductID", ColumnType="Text",width=150 },
+                                            new DatagridCols { HeaderText = "On hand", DisplayMember = "Onhand", ColumnType="Text",width=150 },
+                                            new DatagridCols { HeaderText = "Rate", DisplayMember = "Rate" , ColumnType="Text",width=200}
+                                        };
+
+                                        _PactControlData.Add(grd);
+                                        //END OF GRID
+
                                         break;
                                 }
                             }
@@ -216,6 +275,7 @@ namespace PACT.MODEL
             }
             return _PactControlData;
         }
+       
         public int PostData(string XMLControlData, string ScreenID, string CompanyIndex)
         {
             int ReturnDBVal = -1;
