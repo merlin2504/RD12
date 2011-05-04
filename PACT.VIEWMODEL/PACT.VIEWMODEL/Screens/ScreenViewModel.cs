@@ -19,6 +19,7 @@ namespace PACT.VIEWMODEL
     /// </summary>
     public class ScreenViewModel : WorkspaceViewModel,IDataErrorInfo
     {
+
         string IDataErrorInfo.Error
         {
             get { return (_PACTControlData as IDataErrorInfo).Error; }
@@ -116,6 +117,9 @@ namespace PACT.VIEWMODEL
         }
 
         private ObservableCollection<PactControlData> _PACTControlData;
+
+
+        
 
         public string DisplayName
         {
