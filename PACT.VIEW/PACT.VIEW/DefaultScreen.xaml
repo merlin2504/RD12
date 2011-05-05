@@ -30,7 +30,7 @@
              ToolTip="{Binding Path=ToolTip}"            
                />
             </DataTemplate>
-            </DataTemplate>
+            
             <DataTemplate DataType="{x:Type data:PactComboBoxData}">
                 <ComboBox Margin="10,10,10,10" Width="250" ItemsSource="{Binding Path=ComboItems}" DisplayMemberPath="ItemDisplayName"  Validation.ErrorTemplate="{x:Null}" SelectedValuePath="ItemValue" SelectedValue="{Binding IsSelected, Mode=TwoWay,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                  BorderBrush="{Binding Path=BorderBrush,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
