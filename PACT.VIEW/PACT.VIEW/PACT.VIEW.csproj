@@ -53,10 +53,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\WPF Toolkit\v3.5.50211.1\WPFToolkit.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -234,6 +230,10 @@
     <ProjectReference Include="..\..\PACT.VIEWMODEL\PACT.VIEWMODEL\PACT.VIEWMODEL.csproj">
       <Project>{4B646F04-0A61-45BB-8138-83F054EDB85B}</Project>
       <Name>PACT.VIEWMODEL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WPFToolKit_v1\ControlsPack\WPFToolkit.csproj">
+      <Project>{9606A078-7135-4CE7-879E-39FCF527F1A3}</Project>
+      <Name>WPFToolkit</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

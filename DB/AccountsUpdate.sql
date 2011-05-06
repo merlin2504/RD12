@@ -1,4 +1,4 @@
-update AdmnLayoutScreens set ScreenXML='<?xml version="1.0" encoding="utf-8" ?>
+Update AdmnLayoutScreens set ScreenXML='<?xml version="1.0" encoding="utf-8" ?>
 <ScreenXML  TableName="Accounts" PrimaryColumn="NodeNo" ExtendedPrimaryColumn="">
   <Section Name="" Type="Static">
     <Tab Name="" TabType="Panel">
@@ -244,15 +244,70 @@ update AdmnLayoutScreens set ScreenXML='<?xml version="1.0" encoding="utf-8" ?>
           <FType>Static</FType>
           <Control>Button</Control>
           <Label>Save</Label>
-		 <Command>AccountCreate</Command>
+          <Command>AccountCreate</Command>
           <IsMandatory>1</IsMandatory>
           <IsReadOnly>1</IsReadOnly>
           <DataType></DataType>
           <Db>SaveAccount</Db>
         </Field>
-       
+
       </Row>
     </Tab>
   </Section>
+  <Grid>
+    <Properties>
+      <Rows>10</Rows>
+    </Properties>
+    <Columns>
+      <Column>
+        <ID>Sno</ID>
+        <Header>Sno</Header>
+        <Control>TextBlock</Control>
+        <DataType>INT</DataType>
+        <Mandatory>0</Mandatory>
+        <ReadOnly>1</ReadOnly>
+        <DefaultValue>AUTO</DefaultValue>
+        <DataSource></DataSource>
+        <Width>50</Width>
+        <Formula></Formula>
+      </Column>
+      <Column>
+        <ID>NodeNo</ID>
+        <Header>Account Name</Header>
+        <Control>TextBox</Control>
+        <DataType>INT</DataType>
+        <Mandatory>1</Mandatory>
+        <ReadOnly>0</ReadOnly>
+        <DefaultValue></DefaultValue>
+        <DataSource>ACCOUNTS</DataSource>
+        <Width>400</Width>
+        <Formula></Formula>
+      </Column>
+      <Column>
+        <ID>Amount</ID>
+        <Header>Amount</Header>
+        <Control>TextBox</Control>
+        <DataType>FLOAT</DataType>
+        <Mandatory>1</Mandatory>
+        <ReadOnly>0</ReadOnly>
+        <DefaultValue>0.0</DefaultValue>
+        <DataSource></DataSource>
+        <Width>200</Width>
+        <Formula></Formula>
+      </Column>
+      <Column>
+        <ID>Narration</ID>
+        <Header>Narration</Header>
+        <Control>TextBox</Control>
+        <DataType>TEXT</DataType>
+        <Mandatory>0</Mandatory>
+        <ReadOnly>0</ReadOnly>
+        <DefaultValue></DefaultValue>
+        <DataSource></DataSource>
+        <Width>200</Width>
+        <Formula></Formula>
+      </Column>
+    </Columns>
+  </Grid>
 </ScreenXML>'
-Where FeatureID=1000
+where FeatureID=1000

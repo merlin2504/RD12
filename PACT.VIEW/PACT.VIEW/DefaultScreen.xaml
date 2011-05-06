@@ -3,6 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+             xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase" 
+             xmlns:dg="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit"
              mc:Ignorable="d" 
              xmlns:data="clr-namespace:PACT.COMMON;assembly=PACT.COMMON"
              xmlns:local="clr-namespace:PACT.VIEW"
@@ -12,7 +16,14 @@
         <Grid.Resources>
 
             <DataTemplate DataType="{x:Type data:PactGridData}">
-                <DataGrid AutoGenerateColumns="False"  ItemsSource="{Binding Path=DataSource}"  IsSynchronizedWithCurrentItem="True" data:PactGridColumnData.ColumnsSource="{Binding Path=Columns}"/>
+                <dg:DataGrid AutoGenerateColumns="False"                                                             
+                     IsSynchronizedWithCurrentItem="True" 
+                     data:PactGridColumnData.ColumnsSource="{Binding Path=Columns}"
+                     Background="Transparent"
+                     RowHeaderWidth="25"                     
+                     RowBackground="White" 
+                     AlternatingRowBackground="LightBlue"
+                     AlternationCount="2" ItemsSource="{Binding DataSource}"></dg:DataGrid>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type data:PactTextBlockData}">
@@ -30,7 +41,7 @@
              ToolTip="{Binding Path=ToolTip}"            
                />
             </DataTemplate>
-            </DataTemplate>
+            
             <DataTemplate DataType="{x:Type data:PactComboBoxData}">
                 <ComboBox Margin="10,10,10,10" Width="250" ItemsSource="{Binding Path=ComboItems}" DisplayMemberPath="ItemDisplayName"  Validation.ErrorTemplate="{x:Null}" SelectedValuePath="ItemValue" SelectedValue="{Binding IsSelected, Mode=TwoWay,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                  BorderBrush="{Binding Path=BorderBrush,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
@@ -58,5 +69,7 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </ScrollViewer>
+        
+        
     </Grid>
 </UserControl>

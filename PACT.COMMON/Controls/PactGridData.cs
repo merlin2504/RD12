@@ -5,6 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using System.Data;
 using System.Collections.ObjectModel;
+using Microsoft.Windows.Controls;
 
 namespace PACT.COMMON
 {
@@ -22,7 +23,8 @@ namespace PACT.COMMON
         public string ValueBinding { get; set; }
         public string ColumnType { get; set; }
         public int width { get; set; }
-        public DataView Source { get; set; }
+        //public DataView Source { get; set; }
+        public PactControlData Source { get; set; }
         //public List<ColumnDescriptor> Columns { get; set; }
 
     }

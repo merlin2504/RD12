@@ -5,7 +5,9 @@ using System.Text;
 using System.Windows;
 using System.ComponentModel;
 using System.Windows.Data;
-using System.Windows.Controls;
+using Microsoft.Windows.Controls;
+using System.Reflection;
+
 
 namespace PACT.COMMON
 {
@@ -51,7 +53,7 @@ namespace PACT.COMMON
             }
         }
 
-        private static void CreateColumns(DataGrid gridView, ICollectionView view)
+        private static void CreateColumns(Microsoft.Windows.Controls.DataGrid gridView, ICollectionView view)
         {
             foreach (var item in view)
             {
@@ -64,13 +66,23 @@ namespace PACT.COMMON
         {
 
             DatagridCols col = columnSource as DatagridCols;
-
-            if (col.ColumnType == "Text")
+            
+            if (col.ColumnType == "TextBox")
             {
                 DataGridTextColumn column = new DataGridTextColumn();
                 column.Header = col.HeaderText;
                 column.Binding = new Binding(col.DisplayMember);
                 column.Width = col.width;
+                return column;
+            }
+
+            if (col.ColumnType == "TextBlock")
+            {
+                DataGridTextColumn column = new DataGridTextColumn();
+                column.Header = col.HeaderText;
+                column.Binding = new Binding(col.DisplayMember);
+                column.Width = col.width;
+                column.IsReadOnly = true;
                 return column;
             }
 
@@ -102,23 +114,23 @@ namespace PACT.COMMON
         }
     }
 
-    //public static class DataGridViewColumns
-    //{
-   
+    public static class DataGridViewColumns
+    {
 
-    //    // Using a DependencyProperty as the backing store for ColumnsSource.  This enables animation, styling, binding, etc...
-       
 
-    //    private static object GetPropertyValue(object obj, string propertyName)
-    //    {
-    //        if (obj != null)
-    //        {
-    //            PropertyInfo prop = obj.GetType().GetProperty(propertyName);
-    //            if (prop != null)
-    //                return prop.GetValue(obj, null);
-    //        }
-    //        return null;
-    //    }
-    //}
+        // Using a DependencyProperty as the backing store for ColumnsSource.  This enables animation, styling, binding, etc...
+
+
+        private static object GetPropertyValue(object obj, string propertyName)
+        {
+            if (obj != null)
+            {
+                PropertyInfo prop = obj.GetType().GetProperty(propertyName);
+                if (prop != null)
+                    return prop.GetValue(obj, null);
+            }
+            return null;
+        }
+    }
 
 }
