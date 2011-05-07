@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Data;
+using System.Collections.ObjectModel;
 
 namespace PACT.COMMON
 {
@@ -86,6 +88,7 @@ namespace PACT.COMMON
                                 strReturn = strReturn + objPactTB.Label + "  :: Cannot be blank. \n";
                             }
                         }
+
                         //Data Check
                         if (objPactTB.DataType != null && objPactTB.DataType.Equals("INT"))
                         {
@@ -116,6 +119,7 @@ namespace PACT.COMMON
                             }
                         }
                     }
+
                     if (objPactCtrl.GetType().Name.ToString().Equals("PactComboBoxData"))
                     {
                         objPactCmb = (PactComboBoxData)objPactCtrl;
@@ -127,6 +131,12 @@ namespace PACT.COMMON
                                 strReturn = strReturn + objPactCmb.Label + "  :: Cannot be blank. \n";
                             }
                         }
+                    }
+
+                    if (objPactCtrl.GetType().Name.ToString().Equals("PactGridData"))
+                    {
+                        PactGridData objGrid = (PactGridData)objPactCtrl;
+                        DataTable dt = objGrid.DataSource;
                     }
                 }
             }

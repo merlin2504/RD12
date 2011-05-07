@@ -79,6 +79,8 @@
     <Compile Include="Controls\PactComboBoxData.cs" />
     <Compile Include="Controls\PactControlData.cs" />
     <Compile Include="Controls\PactControlDataCollection.cs" />
+    <Compile Include="Controls\PactGridColumnData.cs" />
+    <Compile Include="Controls\PactGridData.cs" />
     <Compile Include="Controls\PactIntelliBoxData.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -108,7 +110,12 @@
     <Compile Include="Ribbon\ToggleButtonData.cs" />
     <Compile Include="Util.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\WPFToolKit_v1\ControlsPack\WPFToolkit.csproj">
+      <Project>{9606A078-7135-4CE7-879E-39FCF527F1A3}</Project>
+      <Name>WPFToolkit</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

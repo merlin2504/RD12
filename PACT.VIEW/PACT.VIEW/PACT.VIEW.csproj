@@ -231,6 +231,10 @@
       <Project>{4B646F04-0A61-45BB-8138-83F054EDB85B}</Project>
       <Name>PACT.VIEWMODEL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\WPFToolKit_v1\ControlsPack\WPFToolkit.csproj">
+      <Project>{9606A078-7135-4CE7-879E-39FCF527F1A3}</Project>
+      <Name>WPFToolkit</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
