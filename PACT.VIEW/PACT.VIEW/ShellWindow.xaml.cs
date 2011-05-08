@@ -20,12 +20,40 @@ namespace PACT.VIEW
     /// </summary>
     public partial class ShellWindow
     {
+        private static ShellWindow _Instance;
         ShellWindowViewModel objMainWindowViewModel;
+        private static volatile object _Lock = new object();
+        public static ShellWindow Instance()
+        {
+            if (_Instance == null)
+            {
+                try
+                {
+                    lock (_Lock)
+                    {
+                        if (_Instance == null)
+                        {
+                            _Instance = new ShellWindow();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    
+                }
+            }
+            return _Instance;
+        }
+
+
         public ShellWindow()
         {
-            this.InitializeComponent();
             objMainWindowViewModel = new ShellWindowViewModel();
             this.DataContext = objMainWindowViewModel;
+            this.InitializeComponent();
+
+            _Instance = this;
+
         }
     }
 }

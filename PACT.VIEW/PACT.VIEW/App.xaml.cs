@@ -13,6 +13,26 @@ namespace PACT.VIEW
     /// </summary>
     public partial class App : Application
     {
-      
+        void App_Startup(object sender, StartupEventArgs e)
+        {
+            this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+
+            Login loginWindow = new Login();
+            ShellWindow shell;
+            if (loginWindow.ShowDialog() ?? false)
+            {
+                this.ShutdownMode = ShutdownMode.OnMainWindowClose;
+
+                shell = ShellWindow.Instance();
+                this.MainWindow = shell;
+                this.MainWindow.Show();
+            }
+            else
+            {
+                this.Shutdown();
+            }
+        }
     }
+
+
 }

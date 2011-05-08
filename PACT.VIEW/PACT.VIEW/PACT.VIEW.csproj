@@ -63,6 +63,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Processing.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Ribbon\RibbonControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -81,6 +89,12 @@
     </Compile>
     <Compile Include="BasicSearchResultCtrl.xaml.cs">
       <DependentUpon>BasicSearchResultCtrl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Processing.xaml.cs">
+      <DependentUpon>Processing.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ribbon\RibbonControl.xaml.cs">
       <DependentUpon>RibbonControl.xaml</DependentUpon>
@@ -201,6 +215,7 @@
     <Resource Include="Images\PrintPreview_16x16.png" />
     <Resource Include="Images\Print_16x16.png" />
     <Resource Include="Images\PublishPlan_16x16.png" />
+    <Resource Include="Images\Logo.png" />
     <Content Include="Images\README.html" />
     <Resource Include="Images\RefreshArrow_32x32.png" />
     <Resource Include="Images\Replace_16x16.png" />
