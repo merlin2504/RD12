@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PACT.VIEWMODEL;
 using FeserWard.Controls;
+using Microsoft.Windows.Controls;
 
 namespace PACT.VIEW
 {
