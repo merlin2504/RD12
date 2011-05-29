@@ -1,0 +1,177 @@
+﻿<ScreenXML  TableName="POS_TSales" PrimaryColumn="iSalesSeqno" ExtendedPrimaryColumn="">
+  <Section Name="" Type="Static">
+    <Tab Name="" TabType="Panel">
+      <Row>
+        <Field>
+          <ID>txtVoucherNo</ID>
+          <Name>txtVoucherNo</Name>
+          <FType>Static</FType>
+          <Control>TextBox</Control>
+          <Label>Voucher No</Label>
+          <IsMandatory>0</IsMandatory>
+          <IsReadOnly>0</IsReadOnly>
+          <DataType></DataType>
+          <Db>strVocherNo</Db>
+        </Field>
+        <Field>
+          <ID>txtVoucherDate</ID>
+          <Name>txtVoucherDate</Name>
+          <FType>Static</FType>
+          <Control>DatePicker</Control>
+          <Label>Voucher Date</Label>
+          <IsMandatory>1</IsMandatory>
+          <IsReadOnly>0</IsReadOnly>
+          <DataType></DataType>
+          <Db>dtVocherDate</Db>
+        </Field>
+      </Row>
+      <Row>
+        <Field>
+          <ID>txtAccount</ID>
+          <Name>txtAccount</Name>
+          <FType>Static</FType>
+          <Control>ComboBox</Control>
+          <Label>Account</Label>
+          <IsMandatory>0</IsMandatory>
+          <IsReadOnly>0</IsReadOnly>
+          <DataType></DataType>
+          <Db>iCustomerSeqNo</Db>
+        </Field>
+      </Row>
+      <Row>
+        <Field>
+          <ID>txtRemarks</ID>
+          <Name>txtRemarks</Name>
+          <FType>Static</FType>
+          <Control>TextBox</Control>
+          <Label>Remarks</Label>
+          <IsMandatory>0</IsMandatory>
+          <IsReadOnly>0</IsReadOnly>
+          <DataType></DataType>
+          <Db>strRemarks</Db>
+        </Field>
+      </Row>
+    </Tab>
+  </Section>
+  <Section Name="" Type="Grid">
+    <Tab Name="Grid" TabType="Grid">
+      <Row>
+        <Field>
+          <ID>1</ID>
+          <Name>VoucherNo</Name>
+          <FType>Static</FType>
+          <Control>Grid</Control>
+          <Label></Label>
+          <IsMandatory>0</IsMandatory>
+          <IsReadOnly>0</IsReadOnly>
+          <DataType></DataType>
+          <Db></Db>
+        </Field>
+      </Row>
+    </Tab>
+  </Section>
+</ScreenXML>
+
+
+<GridXML>
+  <ShowSerialNo>1</ShowSerialNo>
+  <PColumns>
+    <PColumn>
+      <Name>Code</Name>
+      <FType>Static</FType>
+      <Control>List</Control>
+      <Label>Product Name</Label>
+      <Query>Select NodeNo,Code,Name,Description,BaseUnits,SellingRate,Packing from ProductMast</Query>
+      <IsMandatory>1</IsMandatory>
+      <IsReadOnly>0</IsReadOnly>
+      <DataType></DataType>
+      <Width>20</Width>
+      <ListColumns>
+        <string>Code</string>
+        <string>Name</string>
+      </ListColumns>
+      <RowBreak>0</RowBreak>
+      <Tab>1</Tab>
+    </PColumn>
+    <PColumn>
+      <Name>Name</Name>
+      <FType>Static</FType>
+      <Control>TextBox</Control>
+      <Label>Name</Label>
+      <Query>Select NodeNo,Code,Name,Description,BaseUnits,SellingRate,Packing from ProductMast</Query>
+      <IsMandatory>1</IsMandatory>
+      <IsReadOnly>0</IsReadOnly>
+      <DataType></DataType>
+      <Width>20</Width>
+      <Tab>0</Tab>
+      <RowBreak>0</RowBreak>
+    </PColumn>
+    <PColumn>
+      <Name>SellingRate</Name>
+      <FType>Static</FType>
+      <Control>TextBox</Control>
+      <Query>Select NodeNo,Code,Name,Description,BaseUnits,SellingRate,Packing from ProductMast</Query>
+      <Label>Unit Price</Label>
+      <IsMandatory>1</IsMandatory>
+      <IsReadOnly>0</IsReadOnly>
+      <DataType>DECIMAL</DataType>
+      <Width>15</Width>
+    </PColumn>
+    <PColumn>
+      <Name>iQuantity</Name>
+      <FType>Static</FType>
+      <Control>TextBox</Control>
+      <Query>Select NodeNo,Code,Name,Description,BaseUnits,SellingRate,Packing from ProductMast</Query>
+      <Label>Quantity</Label>
+      <IsMandatory>1</IsMandatory>
+      <IsReadOnly>0</IsReadOnly>
+      <DataType>INTEGER</DataType>
+      <Width>10</Width>
+      <DefaultValue>1</DefaultValue>
+      <ShowTotal>1</ShowTotal>
+      <Tab>2</Tab>
+      <ShowTotal>1</ShowTotal>
+    </PColumn>
+    <PColumn>
+      <Name>DblDiscount</Name>
+      <FType>Static</FType>
+      <Control>TextBox</Control>
+      <Query>Select NodeNo,Code,Name,Description,BaseUnits,SellingRate,Packing from ProductMast</Query>
+      <Label>Discount</Label>
+      <IsMandatory>0</IsMandatory>
+      <IsReadOnly>0</IsReadOnly>
+      <DataType>DECIMAL</DataType>
+      <Width>10</Width>
+    </PColumn>
+    <PColumn>
+      <Name>DblTaxes</Name>
+      <FType>Static</FType>
+      <Control>TextBox</Control>
+      <Query>Select NodeNo,Code,Name,Description,BaseUnits,SellingRate,Packing from ProductMast</Query>
+      <Label>Taxes</Label>
+      <IsMandatory>0</IsMandatory>
+      <IsReadOnly>0</IsReadOnly>
+      <DataType>DECIMAL</DataType>
+      <Width>10</Width>
+    </PColumn>
+    <PColumn>
+      <Name>DblAmount</Name>
+      <FType>Static</FType>
+      <Control>TextBox</Control>
+      <Query>Select NodeNo,Code,Name,Description,BaseUnits,SellingRate,Packing from ProductMast</Query>
+      <Label>Amount</Label>
+      <IsMandatory>0</IsMandatory>
+      <IsReadOnly>1</IsReadOnly>
+      <DataType>DECIMAL</DataType>
+      <Width>15</Width>
+      <Formula>((SellingRate*iQuantity)-DblDiscount)+(((SellingRate*iQuantity)-DblDiscount)*DblTaxes)/100</Formula>
+      <ShowTotal>1</ShowTotal>
+    </PColumn>
+  </PColumns>
+</GridXML>
+
+
+
+
+
+

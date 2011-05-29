@@ -56,12 +56,15 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationFramework.Aero" />
     <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dlls\RibbonControlsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -79,14 +82,14 @@
     <Compile Include="Controls\PactComboBoxData.cs" />
     <Compile Include="Controls\PactControlData.cs" />
     <Compile Include="Controls\PactControlDataCollection.cs" />
+    <Compile Include="Controls\PactDatePickerData.cs" />
     <Compile Include="Controls\PactGridColumnData.cs" />
     <Compile Include="Controls\PactGridData.cs" />
-    <Compile Include="Controls\PactIntelliBoxData.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Controls\PACTSerializer.cs" />
     <Compile Include="Controls\PactTextBlockData.cs" />
     <Compile Include="Controls\PactTextBoxData.cs" />
     <Compile Include="Controls\RelayCommand.cs" />
+    <Compile Include="PARAM\Account.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ribbon\ApplicationMenuItemData.cs" />
     <Compile Include="Ribbon\ApplicationSplitMenuItemData.cs" />
@@ -108,14 +111,67 @@
     <Compile Include="Ribbon\TabData.cs" />
     <Compile Include="Ribbon\TextBoxData.cs" />
     <Compile Include="Ribbon\ToggleButtonData.cs" />
+    <Compile Include="Service References\CommonService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Util.cs" />
+    <Compile Include="ViewResourceManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PACT.Globalization\PACT.Globalization.csproj">
+      <Project>{696DDD96-F494-4DB2-AB3D-3F25B70CF8F4}</Project>
+      <Name>PACT.Globalization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WPFToolKit_v1\ControlsPack\WPFToolkit.csproj">
       <Project>{9606A078-7135-4CE7-879E-39FCF527F1A3}</Project>
       <Name>WPFToolkit</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
+    <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
+    <None Include="Service References\CommonService\Common.wsdl" />
+    <None Include="Service References\CommonService\Common.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CommonService\Common1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CommonService\Common2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CommonService\Common3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CommonService\Common4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\CommonService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CommonService\Common.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CommonService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CommonService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CommonService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

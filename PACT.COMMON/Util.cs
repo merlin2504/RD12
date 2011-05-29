@@ -23,6 +23,8 @@ namespace PACT.COMMON
             PactControlData objPactCtrl;
             PactTextBoxData objPactTB;
             PactComboBoxData objPactCmb;
+            PactCheckBoxData objPactChk;
+            PactDatePickerData objPactDp;
             if (_controlData != null && _controlData.Count > 0)
             {
                 for (int i = 0; i < _controlData.Count; i++)
@@ -37,12 +39,28 @@ namespace PACT.COMMON
                         }
 
                     }
-                    if (objPactCtrl.GetType().Name.ToString().Equals("PactComboBoxData"))
+                    else if (objPactCtrl.GetType().Name.ToString().Equals("PactComboBoxData"))
                     {
                         objPactCmb = (PactComboBoxData)objPactCtrl;
                         if (objPactCmb.DBColumnName != null)
                         {
                             dt.Columns.Add(objPactCmb.DBColumnName.Trim());
+                        }
+                    }
+                    else if (objPactCtrl.GetType().Name.ToString().Equals("PactCheckBoxData"))
+                    {
+                        objPactChk = (PactCheckBoxData)objPactCtrl;
+                        if (objPactChk.DBColumnName != null)
+                        {
+                            dt.Columns.Add(objPactChk.DBColumnName.Trim());
+                        }
+                    }
+                    else if (objPactCtrl.GetType().Name.ToString().Equals("PactDatePickerData"))
+                    {
+                        objPactDp = (PactDatePickerData)objPactCtrl;
+                        if (objPactDp.DBColumnName != null)
+                        {
+                            dt.Columns.Add(objPactDp.DBColumnName.Trim());
                         }
                     }
                 }
@@ -56,6 +74,8 @@ namespace PACT.COMMON
             PactControlData objPactCtrl;
             PactTextBoxData objPactTB;
             PactComboBoxData objPactCmb;
+            PactCheckBoxData objPactChk;
+            PactDatePickerData objPactDp;
             DataRow dr = DbValues.NewRow();
             if (_controlData != null && _controlData.Count > 0)
             {
@@ -72,20 +92,34 @@ namespace PACT.COMMON
                                 dr[objPactTB.DBColumnName.Trim()] = objPactTB.Text.Trim();
                             }
                         }
-                        
                     }
-                    if (objPactCtrl.GetType().Name.ToString().Equals("PactComboBoxData"))
+                    else if (objPactCtrl.GetType().Name.ToString().Equals("PactComboBoxData"))
                     {
                         objPactCmb = (PactComboBoxData)objPactCtrl;
                         if (objPactCmb.DBColumnName != null)
                         {
-                            if (objPactCmb.IsSelected != null)
+                            if (objPactCmb.SelectedValue != null)
                             {
-                                dr[objPactCmb.DBColumnName.Trim()] = objPactCmb.IsSelected.Trim();
+                                dr[objPactCmb.DBColumnName.Trim()] = objPactCmb.SelectedValue.Trim();
                             }
                         }
-
                     }
+                    else if (objPactCtrl.GetType().Name.ToString().Equals("PactCheckBoxData"))
+                    {
+                        objPactChk = (PactCheckBoxData)objPactCtrl;
+                        if (objPactChk.DBColumnName != null)
+                        {
+                            dr[objPactChk.DBColumnName.Trim()] = objPactChk.IsChecked;
+                        }
+                    }
+                    else if (objPactCtrl.GetType().Name.ToString().Equals("PactDatePickerData"))
+                    {
+                        objPactDp = (PactDatePickerData)objPactCtrl;
+                        if (objPactDp.DBColumnName != null)
+                        {
+                            dr[objPactDp.DBColumnName.Trim()] = objPactDp.Date;
+                        }
+                    }     
                 }
             }
             DbValues.Rows.Add(dr);

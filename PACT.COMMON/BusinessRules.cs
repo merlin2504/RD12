@@ -81,7 +81,7 @@ namespace PACT.COMMON
                     {
                         objPactTB = (PactTextBoxData)objPactCtrl;
                         //Mandatory Check
-                        if (objPactTB.Mandatory!=null && objPactTB.Mandatory.Equals("1"))
+                        if (objPactTB.Mandatory)
                         {
                             if (IsStringMissing(objPactTB.Text))
                             {
@@ -124,9 +124,9 @@ namespace PACT.COMMON
                     {
                         objPactCmb = (PactComboBoxData)objPactCtrl;
                         //Mandatory Check
-                        if (objPactCmb.Mandatory != null && objPactCmb.Mandatory.Equals("1"))
+                        if (objPactCmb.Mandatory)
                         {
-                            if (IsStringMissing(objPactCmb.IsSelected))
+                            if (IsStringMissing(objPactCmb.SelectedValue))
                             {
                                 strReturn = strReturn + objPactCmb.Label + "  :: Cannot be blank. \n";
                             }

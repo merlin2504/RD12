@@ -336,6 +336,25 @@ namespace Microsoft.Windows.Controls
 
         #endregion IsDropDownOpen
 
+        #region IsButtonDynamicShow
+
+        /// <summary>
+        /// Gets or sets a value that indicates whether the drop-down Calendar is open or closed.
+        /// </summary>
+        public bool IsButtonDynamicShow
+        {
+            get;
+            set;
+        }
+
+        public bool HideTextBoxBackground
+        {
+            get;
+            set;
+        }
+        #endregion
+      
+
         #region IsEnabled
 
         /// <summary>
@@ -523,6 +542,16 @@ namespace Microsoft.Windows.Controls
             set { SetValue(TextProperty, value); }
         }
 
+        string _CustomFormat = "";
+        /// <summary>
+        /// Gets or sets the text that is displayed by the DatePicker.
+        /// </summary>
+        public string CustomFormat
+        {
+            get { return _CustomFormat; }
+            set { _CustomFormat = value; }
+        }
+
         /// <summary>
         /// Identifies the Text dependency property.
         /// </summary>
@@ -651,6 +680,7 @@ namespace Microsoft.Windows.Controls
                 _popUp.Closed += PopUp_Closed;
                 _popUp.Child = this._calendar;
 
+
                 if (this.IsDropDownOpen)
                 {
                     this._popUp.IsOpen = true;
@@ -698,6 +728,32 @@ namespace Microsoft.Windows.Controls
                     _textBox.Text = this.DateTimeToString((DateTime)this.SelectedDate);
                 }
             }
+
+            if (IsButtonDynamicShow)
+            {
+                _dropDownButton.Visibility = System.Windows.Visibility.Collapsed;
+                Grid oGrid = GetTemplateChild("PART_Root") as Grid;
+                oGrid.MouseEnter += new MouseEventHandler(_popUp_MouseEnter);
+                oGrid.MouseLeave += new MouseEventHandler(_popUp_MouseLeave);
+            }
+            if (HideTextBoxBackground)
+            {
+                _textBox.Watermark = string.Empty;
+                _textBox.BorderBrush = null;
+                _textBox.BorderThickness = new Thickness(0);
+                _textBox.Background = null;
+                this.BorderThickness = new Thickness(0);
+            }
+        }
+
+        void _popUp_MouseLeave(object sender, MouseEventArgs e)
+        {
+            _dropDownButton.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        void _popUp_MouseEnter(object sender, MouseEventArgs e)
+        {
+            _dropDownButton.Visibility = System.Windows.Visibility.Visible;
         }
 
         /// <summary>
@@ -874,7 +930,7 @@ namespace Microsoft.Windows.Controls
             if (!e.Handled && (e.Key == Key.Enter || e.Key == Key.Space || e.Key == Key.Escape) && c.DisplayMode == CalendarMode.Month)
             {
                 this.IsDropDownOpen = false;
-            }            
+            }
         }
 
         private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
@@ -918,7 +974,11 @@ namespace Microsoft.Windows.Controls
                     {
                         return string.Format(CultureInfo.CurrentCulture, d.ToString(dtfi.LongDatePattern, dtfi));
                     }
-            }      
+                case DatePickerFormat.Custom:
+                    {
+                        return d.ToString(CustomFormat);
+                    }
+            }
 
             return null;
         }
@@ -989,7 +1049,7 @@ namespace Microsoft.Windows.Controls
             _calendar.VerticalAlignment = VerticalAlignment.Top;
 
             _calendar.SelectionMode = CalendarSelectionMode.SingleDate;
-            _calendar.SetBinding(Calendar.ForegroundProperty, GetDatePickerBinding(DatePicker.ForegroundProperty));            
+            _calendar.SetBinding(Calendar.ForegroundProperty, GetDatePickerBinding(DatePicker.ForegroundProperty));
             _calendar.SetBinding(Calendar.StyleProperty, GetDatePickerBinding(DatePicker.CalendarStyleProperty));
             _calendar.SetBinding(Calendar.IsTodayHighlightedProperty, GetDatePickerBinding(DatePicker.IsTodayHighlightedProperty));
             _calendar.SetBinding(Calendar.FirstDayOfWeekProperty, GetDatePickerBinding(DatePicker.FirstDayOfWeekProperty));
@@ -1007,7 +1067,8 @@ namespace Microsoft.Windows.Controls
             DatePickerFormat format = (DatePickerFormat)value;
 
             return format == DatePickerFormat.Long
-                || format == DatePickerFormat.Short;
+                || format == DatePickerFormat.Short
+                || format == DatePickerFormat.Custom;
         }
 
         // iT SHOULD RETURN NULL IF THE STRING IS NOT VALID, RETURN THE DATETIME VALUE IF IT IS VALID
@@ -1059,29 +1120,29 @@ namespace Microsoft.Windows.Controls
             switch (e.Key)
             {
                 case Key.System:
-                {
-                    switch (e.SystemKey)
                     {
-                        case Key.Down:
+                        switch (e.SystemKey)
                         {
-                            if ((Keyboard.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt)
-                            {
-                                TogglePopUp();
-                                return true;
-                            }
+                            case Key.Down:
+                                {
+                                    if ((Keyboard.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt)
+                                    {
+                                        TogglePopUp();
+                                        return true;
+                                    }
 
-                            break;
+                                    break;
+                                }
                         }
+
+                        break;
                     }
 
-                    break;
-                }
-
                 case Key.Enter:
-                {
-                    SetSelectedDate();
-                    return true;
-                }
+                    {
+                        SetSelectedDate();
+                        return true;
+                    }
             }
 
             return false;
@@ -1189,6 +1250,11 @@ namespace Microsoft.Windows.Controls
                             this._textBox.Watermark = string.Format(CultureInfo.CurrentCulture, SR.Get(SRID.DatePicker_WatermarkText), dtfi.ShortDatePattern.ToString());
                             break;
                         }
+                    case DatePickerFormat.Custom:
+                        {
+                            this._textBox.Watermark = string.Format(CultureInfo.CurrentCulture, SR.Get(SRID.DatePicker_WatermarkText), dtfi.ShortDatePattern.ToString());
+                            break;
+                        }
                 }
             }
         }
@@ -1200,7 +1266,7 @@ namespace Microsoft.Windows.Controls
 
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            e.Handled = ProcessDatePickerKey(e) || e.Handled;            
+            e.Handled = ProcessDatePickerKey(e) || e.Handled;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

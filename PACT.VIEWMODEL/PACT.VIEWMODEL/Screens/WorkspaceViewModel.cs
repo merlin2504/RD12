@@ -73,5 +73,7 @@ namespace PACT.VIEWMODEL
         }
 
         #endregion // RequestClose [event]
+
+        
     }
 }

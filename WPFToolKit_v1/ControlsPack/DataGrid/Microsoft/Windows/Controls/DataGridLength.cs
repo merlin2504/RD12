@@ -82,6 +82,7 @@ namespace Microsoft.Windows.Controls
                 throw new ArgumentException(
                     SR.Get(SRID.DataGridLength_Infinity),
                     "value");
+              //  value = 100;
             }
 
             if (type != DataGridLengthUnitType.Auto &&

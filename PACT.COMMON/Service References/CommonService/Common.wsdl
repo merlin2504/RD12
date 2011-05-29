@@ -248,6 +248,44 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ICommon_CreateDepreciation_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ICommon_CreateDepreciation_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="WSHttpBinding_ICommon_CreateProduct_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -286,18 +324,127 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ICommon_GetDataTable_Search_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ICommon_GetDataTable_Search_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ICommon_GetDataTable_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ICommon_GetDataTable_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ICommon_GetDataSet_Search_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ICommon_GetDataSet_Search_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-<<<<<<< HEAD
-      <xsd:import schemaLocation="http://localhost/PactNxg/Common.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost/PactNxg/Common.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost/PactNxg/Common.svc?xsd=xsd2" />
-      <xsd:import schemaLocation="http://localhost/PactNxg/Common.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
-=======
       <xsd:import schemaLocation="http://localhost:1088/Common.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:1088/Common.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:1088/Common.svc?xsd=xsd2" />
->>>>>>> 9d75c0ba5f8085ba71266aa3d7c4be021e1c165d
+      <xsd:import schemaLocation="http://localhost:1088/Common.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+      <xsd:import schemaLocation="http://localhost:1088/Common.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/PACT.Service" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ICommon_GetCommonData_InputMessage">
@@ -324,11 +471,35 @@
   <wsdl:message name="ICommon_CreateAccount_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateAccountResponse" />
   </wsdl:message>
+  <wsdl:message name="ICommon_CreateDepreciation_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateDepreciation" />
+  </wsdl:message>
+  <wsdl:message name="ICommon_CreateDepreciation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateDepreciationResponse" />
+  </wsdl:message>
   <wsdl:message name="ICommon_CreateProduct_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateProduct" />
   </wsdl:message>
   <wsdl:message name="ICommon_CreateProduct_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommon_GetDataTable_Search_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataTable_Search" />
+  </wsdl:message>
+  <wsdl:message name="ICommon_GetDataTable_Search_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataTable_SearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommon_GetDataTable_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataTable" />
+  </wsdl:message>
+  <wsdl:message name="ICommon_GetDataTable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommon_GetDataSet_Search_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataSet_Search" />
+  </wsdl:message>
+  <wsdl:message name="ICommon_GetDataSet_Search_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataSet_SearchResponse" />
   </wsdl:message>
   <wsdl:portType name="ICommon">
     <wsdl:operation name="GetCommonData">
@@ -347,9 +518,25 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICommon/CreateAccount" message="tns:ICommon_CreateAccount_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICommon/CreateAccountResponse" message="tns:ICommon_CreateAccount_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="CreateDepreciation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommon/CreateDepreciation" message="tns:ICommon_CreateDepreciation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommon/CreateDepreciationResponse" message="tns:ICommon_CreateDepreciation_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CreateProduct">
       <wsdl:input wsaw:Action="http://tempuri.org/ICommon/CreateProduct" message="tns:ICommon_CreateProduct_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICommon/CreateProductResponse" message="tns:ICommon_CreateProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataTable_Search">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommon/GetDataTable_Search" message="tns:ICommon_GetDataTable_Search_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommon/GetDataTable_SearchResponse" message="tns:ICommon_GetDataTable_Search_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataTable">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommon/GetDataTable" message="tns:ICommon_GetDataTable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommon/GetDataTableResponse" message="tns:ICommon_GetDataTable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSet_Search">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommon/GetDataSet_Search" message="tns:ICommon_GetDataSet_Search_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommon/GetDataSet_SearchResponse" message="tns:ICommon_GetDataSet_Search_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_ICommon" type="tns:ICommon">
@@ -399,6 +586,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="CreateDepreciation">
+      <soap12:operation soapAction="http://tempuri.org/ICommon/CreateDepreciation" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_ICommon_CreateDepreciation_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_ICommon_CreateDepreciation_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CreateProduct">
       <soap12:operation soapAction="http://tempuri.org/ICommon/CreateProduct" style="document" />
       <wsdl:input>
@@ -410,6 +608,39 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetDataTable_Search">
+      <soap12:operation soapAction="http://tempuri.org/ICommon/GetDataTable_Search" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_ICommon_GetDataTable_Search_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_ICommon_GetDataTable_Search_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataTable">
+      <soap12:operation soapAction="http://tempuri.org/ICommon/GetDataTable" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_ICommon_GetDataTable_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_ICommon_GetDataTable_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSet_Search">
+      <soap12:operation soapAction="http://tempuri.org/ICommon/GetDataSet_Search" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_ICommon_GetDataSet_Search_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_ICommon_GetDataSet_Search_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="Common">
     <wsdl:port name="WSHttpBinding_ICommon" binding="tns:WSHttpBinding_ICommon">
@@ -417,7 +648,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>http://localhost:1088/Common.svc</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>MUKDEV\mukaram</Upn>
+          <Dns>localhost</Dns>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

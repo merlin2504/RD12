@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ribbon="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon"
         xmlns:l="clr-namespace:PACT.VIEWMODEL;assembly=PACT.VIEWMODEL"
-        xmlns:local="clr-namespace:PACT.VIEW"
+        xmlns:local="clr-namespace:PACT.VIEW" WindowState="Maximized"
         Title="BindRibbon"  Width="1000" Name="ME">
     <Window.Resources>
         <ResourceDictionary Source="../Resources/MainWindowResources.xaml" />

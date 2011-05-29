@@ -46,13 +46,13 @@ namespace PACT.COMMON
                     Foreground = "Black";
                     BorderThickness = "1";
                     BorderBrush = "Black";
-                    if (this.Mandatory.Equals("1"))
+                    if (this.Mandatory)
                     {
                         if (this.Text != null && br.IsStringMissing(this.Text))
                         {
                             BorderBrush = "Red";
                             ToolTip = "Cannot be blank";
-                            BorderThickness = "3";
+                            BorderThickness = "2";
                         }
                         else
                         {
@@ -72,8 +72,23 @@ namespace PACT.COMMON
                         {
                             Foreground = "Red";
                             BorderBrush = "Red";
-                            BorderThickness = "3";
+                            BorderThickness = "2";
                             ToolTip = "Invalid data, accepts integers only";
+                        }
+                        else
+                        {
+                            Foreground = "Black";
+                            ToolTip = this.Label;
+                        }
+                    }
+                    else if (this.DataType.Equals("FLOAT"))
+                    {
+                        if (!br.ValidateDecimal(this.Text))
+                        {
+                            Foreground = "Red";
+                            BorderBrush = "Red";
+                            BorderThickness = "2";
+                            ToolTip = "Invalid data, accepts numerics only";
                         }
                         else
                         {
@@ -83,7 +98,7 @@ namespace PACT.COMMON
                     }
                     break;
                 case "Background":
-                    if (this.Mandatory.Equals("1"))
+                    if (this.Mandatory)
                     {
                         Background = "Cyan";
                     }

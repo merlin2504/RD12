@@ -11,6 +11,7 @@ using PACT.MODEL;
 using PACT.COMMON;
 using Microsoft.Practices.Prism.Commands;
 using System.Collections.Specialized;
+using System.Runtime.Remoting.Messaging;
 
 namespace PACT.VIEWMODEL
 {
@@ -19,7 +20,7 @@ namespace PACT.VIEWMODEL
     /// </summary>
     public class ScreenViewModel : WorkspaceViewModel,IDataErrorInfo
     {
-
+        private string ScreenName = "";
         string IDataErrorInfo.Error
         {
             get { return (_PACTControlData as IDataErrorInfo).Error; }
@@ -55,12 +56,39 @@ namespace PACT.VIEWMODEL
 
         public ScreenViewModel(string ScreenID)
         {
+            BackgroundWorker worker = new BackgroundWorker();
             _ScreenID = ScreenID;
             switch (_ScreenID)
             {
-                case "1000":
-                    PactScreenID = "1000";
-                    _DisplayName = "Create Account";
+                case "1":
+                    PactScreenID = "1";
+                    ScreenName = "Create Account";
+                    //Calling Build control on non-UI thread using BackgroundWorker
+                    
+                    worker.DoWork += new DoWorkEventHandler(worker_DoWork);
+                    // Configure the function to run when completed
+                    worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
+                    // Launch the worker
+                    worker.RunWorkerAsync();                    
+
+                    ////Calling Build control on non-UI thread using BiginInvoke
+                    //DisplayName = "Loading...";
+                    //AsyncMethodHandler caller = default(AsyncMethodHandler);
+                    //caller = new AsyncMethodHandler(this.BuildControls);
+                    //// open new thread with callback method 
+                    //caller.BeginInvoke(CallBackBuildControls, null);
+                  
+                    //Calling BuildControls on UI Thread
+                    //this.BuildControls
+                    break;
+                case "4":
+                    PactScreenID = "4";
+                    ScreenName = "Depreciation";
+                      worker.DoWork += new DoWorkEventHandler(worker_DoWork);
+                    // Configure the function to run when completed
+                    worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
+                    // Launch the worker
+                    worker.RunWorkerAsync();
                     break;
                 case "2000":
                     _DisplayName = "Create Product"; ;
@@ -73,34 +101,118 @@ namespace PACT.VIEWMODEL
             DynamicCommand = new DelegateCommand<string>(CommandController);
         }
 
+       
+
         #endregion // Constructor
+
+        #region Background Thread
+        void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            DisplayName = "Loading...";
+            _PACTControlData = BuildControls();
+
+        }
+        void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            DisplayName = ScreenName;
+            PACTControlData = _PACTControlData;
+            
+        }
+
+        #endregion
+
+        #region Calling Async Method on non-ui thread
+        delegate ObservableCollection<PactControlData> AsyncMethodHandler();
+        delegate void UpdateUIHandler(ObservableCollection<PactControlData> _pcd);
+        public void UpdateUI(ObservableCollection<PactControlData> _pcd)
+        {
+            // Get back to primary thread to update ui 
+            UpdateUIHandler uiHandler = new UpdateUIHandler(UpdateUIIndicators);
+            _PACTControlData = _pcd;
+
+            // Run new thread off Dispatched (primary thread) 
+            Application.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, uiHandler, _PACTControlData);
+        }
+
+        public void UpdateUIIndicators(ObservableCollection<PactControlData> _pcd)
+        {
+            PACTControlData = _pcd;
+            DisplayName = "Account Create";
+
+        }
+
+
+        protected void CallBackBuildControls(IAsyncResult ar)
+        {
+            try
+            {
+                // Retrieve the delegate. 
+                AsyncResult result = (AsyncResult)ar;
+                AsyncMethodHandler caller = (AsyncMethodHandler)result.AsyncDelegate;
+
+                // Call EndInvoke to retrieve the results. 
+                _PACTControlData = caller.EndInvoke(ar);
+
+                // Still on secondary thread, must update ui on primary thread 
+                UpdateUI(_PACTControlData);
+            }
+            catch (Exception ex)
+            {
+                string exMessage = null;
+                exMessage = "Error: " + ex.Message;
+                //UpdateUI(exMessage);
+            }
+        }
+
+        #endregion
 
         public void CommandController(object sender)
         {
-                BusinessRules objUIRules = new BusinessRules();
-                Util objCommonUtil = new Util();
-                switch ((string)sender)
-                {
-                    case "AccountCreate":
+            DataTable dt;
+            string strMsg;
+            BusinessRules objUIRules = new BusinessRules();
+            Util objCommonUtil = new Util();
+            switch ((string)sender)
+            {
+                case "AccountCreate":
                     //UI Validation
-                    string strMsg = objUIRules.ValidateUIInfo(PACTControlData);
+                    strMsg = objUIRules.ValidateUIInfo(PACTControlData);
                     if (strMsg != null && !strMsg.Equals(""))
                     {
                         objCommonUtil.InfoMessageBox(strMsg, "Validations");
                         break;
                     }
                     //Building collection to post values to DB
-                    DataTable dt = objCommonUtil.GetDBValues(PACTControlData);
+                    dt = objCommonUtil.GetDBValues(PACTControlData);
                     if (dt != null)
                     {
                         System.IO.StringWriter writer = new System.IO.StringWriter();
                         dt.WriteXml(writer);
-                        int retVal=objControlGenerator.PostData(writer.ToString(), _ScreenID, ShellWindowViewModel.CompanyIndex);
-                        if(retVal>0)
+                        int retVal = objControlGenerator.PostData(writer.ToString(), _ScreenID, ShellWindowViewModel.CompanyIndex);
+                        if (retVal > 0)
                             objCommonUtil.InfoMessageBox("Record added sucessfully.", "Validations");
                     }
                     break;
-                }
+                case "SaveDepreciation":
+                    //UI Validation
+                    strMsg = objUIRules.ValidateUIInfo(PACTControlData);
+                    if (strMsg != null && !strMsg.Equals(""))
+                    {
+                        objCommonUtil.InfoMessageBox(strMsg, "Validations");
+                        break;
+                    }
+                    //Building collection to post values to DB
+                    dt = objCommonUtil.GetDBValues(PACTControlData);
+                    if (dt != null)
+                    {
+                        System.IO.StringWriter writer = new System.IO.StringWriter();
+                        dt.WriteXml(writer);
+                        int retVal = objControlGenerator.PostData(writer.ToString(), _ScreenID, ShellWindowViewModel.CompanyIndex);
+                        if (retVal > 0)
+                            objCommonUtil.InfoMessageBox("Record added sucessfully.", "Validations");
+                    }
+                    break;
+            }
         }
 
 
@@ -108,17 +220,40 @@ namespace PACT.VIEWMODEL
         {
             get
             {
-
-                _PACTControlData = objControlGenerator.GetControls(_ScreenID, ShellWindowViewModel.CompanyIndex);
-
                 return _PACTControlData;
-
+            }
+            set
+            {
+                //if (_PACTControlData != value)
+                //{
+                _PACTControlData = value;
+                base.OnPropertyChanged("PACTControlData");
+                // }
             }
         }
 
+
         private ObservableCollection<PactControlData> _PACTControlData;
 
+        public ObservableCollection<PactControlData> BuildControls()
+        {
+            _PACTControlData = objControlGenerator.GetControls(_ScreenID, ShellWindowViewModel.CompanyIndex);
+            if (_PACTControlData != null && _PACTControlData.Count > 0)
+            {
 
+                for (int i = 0; i < _PACTControlData.Count; i++)
+                {
+                    if (_PACTControlData[i].GetType().FullName.Equals("PACT.COMMON.PactTextBlockData"))
+                    {
+                        PactTextBlockData tb = (PactTextBlockData)_PACTControlData[i];
+
+                        tb.Text = tb.Text;
+                    }
+                }
+            }
+          
+            return _PACTControlData;
+        }
         
 
         public string DisplayName
@@ -150,7 +285,8 @@ namespace PACT.VIEWMODEL
         }
 
         #endregion
-
+        
+        
 
 
         #region Public Methods

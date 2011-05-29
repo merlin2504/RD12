@@ -1217,6 +1217,13 @@ namespace Microsoft.Windows.Controls
         }
 
         #endregion
+        
+        [DefaultValue(false)]
+        public bool DisableTab
+        {
+            get;
+            set;
+        }
 
         #region Column Reordering
 

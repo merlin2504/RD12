@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="cf7881c0-d1c1-4351-bdc8-e31231f0d303" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:1088/Common.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Common.xsd" MetadataType="Schema" ID="41afcb56-9760-4a33-8f08-7bc97864a287" SourceId="1" SourceUrl="http://localhost:1088/Common.svc?xsd=xsd4" />
+    <MetadataFile FileName="Common1.xsd" MetadataType="Schema" ID="96875d16-32d1-4142-bb14-82a0231e4363" SourceId="1" SourceUrl="http://localhost:1088/Common.svc?xsd=xsd2" />
+    <MetadataFile FileName="Common2.xsd" MetadataType="Schema" ID="ffdc0cee-85b7-4264-a4ff-e96846aebb73" SourceId="1" SourceUrl="http://localhost:1088/Common.svc?xsd=xsd3" />
+    <MetadataFile FileName="Common3.xsd" MetadataType="Schema" ID="ba0708f6-8495-4dde-bf10-e2c704a09b7b" SourceId="1" SourceUrl="http://localhost:1088/Common.svc?xsd=xsd0" />
+    <MetadataFile FileName="Common4.xsd" MetadataType="Schema" ID="3d1e0445-34b5-4642-8631-5ff8694ad574" SourceId="1" SourceUrl="http://localhost:1088/Common.svc?xsd=xsd1" />
+    <MetadataFile FileName="Common.wsdl" MetadataType="Wsdl" ID="62ae95e9-1a3b-4d55-a9f5-b42479b9c138" SourceId="1" SourceUrl="http://localhost:1088/Common.svc?wsdl" />
+    <MetadataFile FileName="Common.disco" MetadataType="Disco" ID="47198310-fc11-45c8-b08b-74e6215c24f6" SourceId="1" SourceUrl="http://localhost:1088/Common.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -15,7 +15,7 @@ Copyright (C) Microsoft Corporation.  All rights reserved.
         <Setter Property="IsTodayHighlighted" Value="True" />
         <Setter Property="SelectedDateFormat" Value="Short" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Padding" Value="2"/>
+        <Setter Property="Padding" Value="0"/>
         <Setter Property="BorderBrush">
             <Setter.Value>
                 <LinearGradientBrush EndPoint=".5,0" StartPoint=".5,1">

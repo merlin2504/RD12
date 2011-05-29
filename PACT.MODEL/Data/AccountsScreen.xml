@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ScreenXML  TableName="Mast000" PrimaryColumn="NodeNo" ExtendedPrimaryColumn="">
+<ScreenXML  TableName="Accounts" PrimaryColumn="NodeNo" ExtendedPrimaryColumn="">
   <Section Name="" Type="Static">
     <Tab Name="" TabType="Panel">
       <Row>
@@ -9,9 +9,9 @@
           <FType>Static</FType>
           <Control>TextBox</Control>
           <Label>Code</Label>
-          <IsMandatory>0</IsMandatory>
+          <IsMandatory>1</IsMandatory>
           <IsReadOnly>0</IsReadOnly>
-          <DataType></DataType>
+          <DataType>INT</DataType>
           <Db>Code</Db>
         </Field>
         <Field>
@@ -20,9 +20,9 @@
           <FType>Static</FType>
           <Control>ComboBox</Control>
           <Label>Type</Label>
-          <IsMandatory>0</IsMandatory>
+          <IsMandatory>1</IsMandatory>
           <IsReadOnly>0</IsReadOnly>
-          <DataType></DataType>
+          <DataType>INT</DataType>
           <Db>Type1</Db>
         </Field>
       </Row>
@@ -35,7 +35,7 @@
           <Label>Name</Label>
           <IsMandatory>1</IsMandatory>
           <IsReadOnly>0</IsReadOnly>
-          <DataType></DataType>
+          <DataType>TEXT</DataType>
           <Db>Name</Db>
         </Field>
       </Row>
@@ -46,9 +46,9 @@
           <FType>Static</FType>
           <Control>TextBox</Control>
           <Label>Alias Name</Label>
-          <IsMandatory>0</IsMandatory>
+          <IsMandatory>1</IsMandatory>
           <IsReadOnly>0</IsReadOnly>
-          <DataType></DataType>
+          <DataType>TEXT</DataType>
           <Db>Alias</Db>
         </Field>
       </Row>
@@ -60,19 +60,19 @@
           <Control>ComboBox</Control>
           <Label>Group</Label>
           <IsMandatory>0</IsMandatory>
-          <IsReadOnly>1</IsReadOnly>
-          <DataType></DataType>
+          <IsReadOnly>0</IsReadOnly>
+          <DataType>TEXT</DataType>
           <Db>Group1</Db>
         </Field>
         <Field>
-          <ID>chkStatus</ID>
-          <Name>chkStatus</Name>
+          <ID>drpAccountStatus</ID>
+          <Name>drpAccountStatus</Name>
           <FType>Static</FType>
           <Control>ComboBox</Control>
           <Label>Status</Label>
           <IsMandatory>0</IsMandatory>
           <IsReadOnly>0</IsReadOnly>
-          <DataType></DataType>
+          <DataType>INT</DataType>
           <Db>Status</Db>
         </Field>
       </Row>
@@ -89,7 +89,7 @@
           <Label>Address1</Label>
           <IsMandatory>0</IsMandatory>
           <IsReadOnly>0</IsReadOnly>
-          <DataType></DataType>
+          <DataType>TEXT</DataType>
           <Db>Address1</Db>
         </Field>
       </Row>
@@ -102,7 +102,7 @@
           <Label>Address2</Label>
           <IsMandatory>0</IsMandatory>
           <IsReadOnly>0</IsReadOnly>
-          <DataType></DataType>
+          <DataType>TEXT</DataType>
           <Db>Address2</Db>
         </Field>
         <Field>
@@ -113,7 +113,7 @@
           <Label>Address3</Label>
           <IsMandatory>0</IsMandatory>
           <IsReadOnly>0</IsReadOnly>
-          <DataType></DataType>
+          <DataType>TEXT</DataType>
           <Db>Address3</Db>
         </Field>
       </Row>
@@ -126,7 +126,7 @@
           <Label>Fax No</Label>
           <IsMandatory>0</IsMandatory>
           <IsReadOnly>0</IsReadOnly>
-          <DataType></DataType>
+          <DataType>TEXT</DataType>
           <Db>Faxno</Db>
         </Field>
         <Field>
@@ -137,7 +137,7 @@
           <Label>Contact Person</Label>
           <IsMandatory>0</IsMandatory>
           <IsReadOnly>0</IsReadOnly>
-          <DataType></DataType>
+          <DataType>TEXT</DataType>
           <Db>ContactPerson</Db>
         </Field>
       </Row>
@@ -150,7 +150,7 @@
           <Label>Email</Label>
           <IsMandatory>0</IsMandatory>
           <IsReadOnly>0</IsReadOnly>
-          <DataType></DataType>
+          <DataType>TEXT</DataType>
           <Db>Email</Db>
         </Field>
         <Field>
@@ -161,7 +161,7 @@
           <Label>Phone No</Label>
           <IsMandatory>0</IsMandatory>
           <IsReadOnly>0</IsReadOnly>
-          <DataType></DataType>
+          <DataType>TEXT</DataType>
           <Db>PhoneNo</Db>
         </Field>
       </Row>
@@ -174,7 +174,7 @@
           <Label>CreditLimit</Label>
           <IsMandatory>0</IsMandatory>
           <IsReadOnly>0</IsReadOnly>
-          <DataType>Integer</DataType>
+          <DataType>TEXT</DataType>
           <Db>CreditLimit</Db>
         </Field>
         <Field>
@@ -185,7 +185,7 @@
           <Label>DebitLimit</Label>
           <IsMandatory>0</IsMandatory>
           <IsReadOnly>0</IsReadOnly>
-          <DataType>Integer</DataType>
+          <DataType>TEXT</DataType>
           <Db>DebitLimit</Db>
         </Field>
       </Row>
@@ -198,7 +198,7 @@
           <Label>Credit Days</Label>
           <IsMandatory>0</IsMandatory>
           <IsReadOnly>0</IsReadOnly>
-          <DataType>Integer</DataType>
+          <DataType>TEXT</DataType>
           <Db>CreditDays</Db>
         </Field>
         <Field>
@@ -209,7 +209,7 @@
           <Label>Debit Days</Label>
           <IsMandatory>0</IsMandatory>
           <IsReadOnly>0</IsReadOnly>
-          <DataType>Integer</DataType>
+          <DataType>TEXT</DataType>
           <Db>DebitDays</Db>
         </Field>
       </Row>
@@ -218,11 +218,11 @@
           <ID>drpSalesAccount</ID>
           <Name>drpSalesAccount</Name>
           <FType>Static</FType>
-          <Control>ComboBox</Control>
+          <Control>ListDrop</Control>
           <Label>Sales Account</Label>
           <IsMandatory>0</IsMandatory>
           <IsReadOnly>0</IsReadOnly>
-          <DataType></DataType>
+          <DataType>TEXT</DataType>
           <Db>SalesAccount</Db>
         </Field>
         <Field>
@@ -233,7 +233,7 @@
           <Label>Purchase Account</Label>
           <IsMandatory>0</IsMandatory>
           <IsReadOnly>0</IsReadOnly>
-          <DataType></DataType>
+          <DataType>TEXT</DataType>
           <Db>PurchaseAccount</Db>
         </Field>
       </Row>
@@ -244,23 +244,69 @@
           <FType>Static</FType>
           <Control>Button</Control>
           <Label>Save</Label>
+          <Command>AccountCreate</Command>
           <IsMandatory>1</IsMandatory>
           <IsReadOnly>1</IsReadOnly>
           <DataType></DataType>
           <Db>SaveAccount</Db>
         </Field>
-        <Field>
-          <ID>CancelButton</ID>
-          <Name>CancelButton</Name>
-          <FType>Static</FType>
-          <Control>Button</Control>
-          <Label>Cancel</Label>
-          <IsMandatory>1</IsMandatory>
-          <IsReadOnly>1</IsReadOnly>
-          <DataType></DataType>
-          <Db>CancelAccount</Db>
-        </Field>
+
       </Row>
     </Tab>
   </Section>
+  <Grid>
+    <Properties>
+      <Rows>10</Rows>
+    </Properties>
+    <Columns>
+      <Column>
+        <ID>Sno</ID>
+        <Header>Sno</Header>
+        <Control>TextBlock</Control>
+        <DataType>INT</DataType>
+        <Mandatory>0</Mandatory>
+        <ReadOnly>1</ReadOnly>
+        <DefaultValue>AUTO</DefaultValue>
+        <DataSource></DataSource>
+        <Width>50</Width>
+        <Formula></Formula>
+      </Column>
+      <Column>
+        <ID>NodeNo</ID>
+        <Header>Account Name</Header>
+        <Control>ListBox</Control>
+        <DataType>INT</DataType>
+        <Mandatory>1</Mandatory>
+        <ReadOnly>0</ReadOnly>
+        <DefaultValue></DefaultValue>
+        <DataSource>ACCOUNTS</DataSource>
+        <Width>400</Width>
+        <Formula></Formula>
+      </Column>
+      <Column>
+        <ID>Amount</ID>
+        <Header>Amount</Header>
+        <Control>TextBox</Control>
+        <DataType>FLOAT</DataType>
+        <Mandatory>1</Mandatory>
+        <ReadOnly>0</ReadOnly>
+        <DefaultValue>0.0</DefaultValue>
+        <DataSource></DataSource>
+        <Width>200</Width>
+        <Formula></Formula>
+      </Column>
+      <Column>
+        <ID>Narration</ID>
+        <Header>Narration</Header>
+        <Control>TextBox</Control>
+        <DataType>TEXT</DataType>
+        <Mandatory>0</Mandatory>
+        <ReadOnly>0</ReadOnly>
+        <DefaultValue></DefaultValue>
+        <DataSource></DataSource>
+        <Width>200</Width>
+        <Formula></Formula>
+      </Column>
+    </Columns>
+  </Grid>
 </ScreenXML>

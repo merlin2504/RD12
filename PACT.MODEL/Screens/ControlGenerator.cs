@@ -19,8 +19,34 @@ namespace PACT.MODEL
     public class ControlGenerator
     {
         private ObservableCollection<PactControlData> _PactControlData;
-      
-        
+
+        public class Field
+        {
+            public string ID { get; set; }
+            public string FType { get; set; }
+            public string Control { get; set; }
+
+            public string Label { get; set; }
+            public bool IsMandatory { get; set; }
+            public bool IsReadOnly { get; set; }
+            public string DataType { get; set; }
+            public string Db { get; set; }
+            public int FeatureID { get; set; }
+            //IsPartiralData
+            [System.ComponentModel.Browsable(false)]
+            public virtual string Xml
+            {
+                get
+                {
+                    return PACTSerializer.ToXml(this, this.GetType(), false);
+                }
+            }
+
+            public static Field FromXml(string Xml)
+            {
+                return ((Field)(PACTSerializer.FromXml(Xml, typeof(Field))));
+            }
+        }
 
         private XmlDocument GetScreenInfo(int _ScreenID, string _CompanyIndex)
         {
@@ -34,12 +60,23 @@ namespace PACT.MODEL
                 wcfService = new CommonService.CommonClient(binding, endpoint);
                 //wcfService= new CommonService.CommonClient();
                 wcfService.Open();
-                DataSet ds = wcfService.GetScreenInfoByID(_ScreenID, _CompanyIndex);
+                DataSet ds = wcfService.GetScreenInfoByID(_ScreenID, ViewResourceManager.strCulture, _CompanyIndex);
                 if (ds != null && ds.Tables.Count > 0)
                 {
-
                     xDoc.LoadXml(ds.Tables[0].Rows[0]["ScreenXML"].ToString());
+                    UIDbResources.Clear();
+                    if (ds.Tables.Count > 1)
+                    {
+                        for (int i = 0; i < ds.Tables[1].Rows.Count; i++)
+                        {
+                            UIDbResources.Add(ds.Tables[1].Rows[i][0].ToString(), ds.Tables[1].Rows[i][1].ToString());
+                        }
+                    }
+
                 }
+
+
+                //UIDbResources
                 return xDoc;
             }
             catch (Exception ex)
@@ -55,69 +92,67 @@ namespace PACT.MODEL
             }
         }
 
+        //NO Need
+        //private PactComboBoxData GetLookupData(PactComboBoxData _pcb, string LookupName, string CompanyIndex)
+        //{
+        //    _pcb.ComboItems.Clear();
+        //    string sqlQuery = "";
+        //    switch (LookupName)
+        //    {
+        //        case "drpAccountType":
+        //            sqlQuery = "Select ID,AccountType from AccountTypes WITH(NOLOCK) order by ID";
+        //            break;
+        //        case "drpAccountStatus":
+        //            sqlQuery = "Select ID,AccountStatus from AccountStatus WITH(NOLOCK) order by ID";
+        //            break;
+
+        //    }
+        //    if (!sqlQuery.Equals(""))
+        //    {
+        //        CommonService.CommonClient wcfService = null;
+        //        try
+        //        {
+        //            wcfService = new CommonService.CommonClient();
+        //            wcfService.Open();
+        //            DataTable dt = wcfService.ExecuteQuery(sqlQuery, CompanyIndex);
+        //            if (dt != null && dt.Rows.Count > 0)
+        //            {
+        //                for (int i = 0; i < dt.Rows.Count; i++)
+        //                {
+        //                    _pcb.ComboItems.Add(new ComboBoxItemData(dt.Rows[i][1].ToString(), dt.Rows[i][0].ToString()));
+        //                }
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            throw new Exception("Error in ControlGenerator::GetLookupData::-->" + ex.StackTrace);
+        //        }
+        //        finally
+        //        {
+        //            if (wcfService != null)
+        //            {
+        //                wcfService.Close();
+        //            }
+        //        }
+        //    }
+        //    return _pcb;
+        //}
 
 
-        private PactComboBoxData GetLookupData(PactComboBoxData _pcb,string LookupName, string CompanyIndex)
-        {
-            _pcb.ComboItems.Clear();
-            string sqlQuery = "";
-            switch (LookupName)
-            {
-                case "drpAccountType":
-                    sqlQuery = "Select ID,AccountType from AccountTypes WITH(NOLOCK) order by ID";
-                    break;
-                case "drpAccountStatus":
-                    sqlQuery = "Select ID,AccountStatus from AccountStatus WITH(NOLOCK) order by ID";
-                    break;
-                    
-            }
-            if (!sqlQuery.Equals(""))
-            {
-                CommonService.CommonClient wcfService = null;
-                try
-                {
-                    wcfService = new CommonService.CommonClient();
-                    wcfService.Open();
-                    DataTable dt = wcfService.ExecuteQuery(sqlQuery, CompanyIndex);
-                    if (dt != null && dt.Rows.Count > 0)
-                    {
-                        for (int i = 0; i < dt.Rows.Count; i++)
-                        {
-                            _pcb.ComboItems.Add(new ComboBoxItemData(dt.Rows[i][1].ToString(),dt.Rows[i][0].ToString()));
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Error in ControlGenerator::GetLookupData::-->" + ex.StackTrace);
-                }
-                finally
-                {
-                    if (wcfService != null)
-                    {
-                        wcfService.Close();
-                    }
-                }
-            }
-            return _pcb;
-        }
         public ObservableCollection<PactControlData> GetControls(string ScreenID, string CompanyIndex)
         {
             if (_PactControlData == null)
-            {
-                string strID = "";
-                string strLable = "";
-                    string strCommand = "";
-                string strNm = "";
-                    string IsMandatory = "";
-                    string IsReadOnly = "";                    
-                    string DataType = "";
-                    string ColumnName = "";
-                    int Width =0;     
-                    
+            {              
+                int FeatureID = 0;
+                bool IsPartiralData = false;
+                PactTextBoxData oText;
+
                 XmlDocument xDoc = GetScreenInfo(Convert.ToInt32(ScreenID), CompanyIndex);
+
+
                 _PactControlData = new ObservableCollection<PactControlData>();
                 #region Sections
+                Field oField;
                 for (int iRow = 0; iRow < xDoc.DocumentElement.SelectNodes("Section").Count; iRow++)
                 {
                     XmlNode xSec = xDoc.DocumentElement.ChildNodes[iRow];
@@ -127,92 +162,96 @@ namespace PACT.MODEL
                         {
                             foreach (XmlNode xRowInfo in xTemp.ChildNodes)
                             {
-                                    IsReadOnly="True";
-                                    IsMandatory = "0";
-                                    DataType = "NA";
-                                    ColumnName = "NA";
-                                    if(xRowInfo.SelectSingleNode("ID")!=null)
-                                        strID = xRowInfo.SelectSingleNode("ID").InnerText.ToString();
-                                    if (xRowInfo.SelectSingleNode("Label") != null)
-                                        strLable = xRowInfo.SelectSingleNode("Label").InnerText.ToString();
-                                    if (xRowInfo.SelectSingleNode("Control") != null)
-                                strNm = xRowInfo.SelectSingleNode("Control").InnerText.ToString();
-                                    if (xRowInfo.SelectSingleNode("IsMandatory") != null)
-                                        IsMandatory = xRowInfo.SelectSingleNode("IsMandatory").InnerText.ToString();
-                                    if (xRowInfo.SelectSingleNode("DataType") != null)
-                                        DataType = xRowInfo.SelectSingleNode("DataType").InnerText.ToString();
-                                    if (xRowInfo.SelectSingleNode("Db") != null)
-                                        ColumnName = xRowInfo.SelectSingleNode("Db").InnerText.ToString();
-                                    if (xRowInfo.SelectSingleNode("IsReadOnly") != null)
-                                    {
-                                        IsReadOnly = xRowInfo.SelectSingleNode("IsReadOnly").InnerText.ToString();
-                                        if (IsReadOnly.Equals("0"))
-                                            IsReadOnly = "True";
-                                        else
-                                            IsReadOnly = "False";
-                                    }
-                                switch (strNm)
+                                oField = Field.FromXml(xRowInfo.OuterXml);
+                                if (xRowInfo.SelectSingleNode("FeatureID") != null)
+                                    FeatureID = Convert.ToInt32(xRowInfo.SelectSingleNode("FeatureID").InnerText.ToString());
+                                else
+                                    FeatureID = 0;
+                                if (xRowInfo.SelectSingleNode("IsPartiralData") != null)
+                                    IsPartiralData = Convert.ToBoolean(xRowInfo.SelectSingleNode("IsPartiralData").InnerText.ToString());
+                                else
+                                    IsPartiralData = false;
+                                switch (oField.Control)
                                 {
                                     case "TextBox":
                                         _PactControlData.Add(new PactTextBlockData()
                                         {
-                                            Text = strLable,
+                                            Text = ViewResourceManager.GetResource(oField.Label, UIDbResources),
                                             Style = "PACTTextBlockStyle"
                                         });
-                                        _PactControlData.Add(new PactTextBoxData()
+                                        oText = new PactTextBoxData()
                                         {
-                                                Label=strLable,
-                                            Text = strID,
-                                                Mandatory = IsMandatory,
-                                                DataType = DataType,
-                                                DBColumnName = ColumnName,
-                                                Enable = IsReadOnly,
+                                            Label = oField.Label,
+                                            //Text = strID,
+                                            Mandatory = oField.IsMandatory,
+                                            DataType = oField.DataType,
+                                            DBColumnName = oField.Db,
+                                            Enable = !oField.IsReadOnly,
+                                            
+                                        };
+                                        if (oText.DataType == "INT") { oText.Text = "0"; oText.Align = "Right"; }
+                                        else if (oText.DataType == "FLOAT") { oText.Text = "0.00"; oText.Align = "Right"; }
+
+                                        _PactControlData.Add(oText);
+                                        break;
+                                    case "CheckBox":
+                                        _PactControlData.Add(new PactTextBlockData()
+                                        {
+                                            Text = "",
+                                            Style = "PACTTextBlockStyle"
+                                        });
+                                        _PactControlData.Add(new PactCheckBoxData()
+                                        {
+                                            Label = oField.Label,
+                                            Mandatory = oField.IsMandatory,
+                                            DataType = oField.DataType,
+                                            DBColumnName = oField.Db,
+                                            Enable = !oField.IsReadOnly,
                                         });
                                         break;
-
+                                    case "DatePicker":
+                                        _PactControlData.Add(new PactTextBlockData()
+                                        {
+                                            Text = ViewResourceManager.GetResource(oField.Label, UIDbResources),
+                                            Style = "PACTTextBlockStyle"
+                                        });
+                                        _PactControlData.Add(new PactDatePickerData()
+                                        {
+                                            Date = System.DateTime.Now.AddDays(-20),
+                                            Label = oField.Label,
+                                            Text = "HI",
+                                            Mandatory = oField.IsMandatory,
+                                            DataType = oField.DataType,
+                                            DBColumnName = oField.Db,
+                                            Enable = !oField.IsReadOnly,
+                                        });
+                                        break;
                                     case "ComboBox":
                                         _PactControlData.Add(new PactTextBlockData()
                                         {
-                                            Text = strLable,
+                                            Text = ViewResourceManager.GetResource(oField.Label, UIDbResources),
                                         });
 
-                                            PactComboBoxData CMB = new PactComboBoxData()
-                                            {
-                                                Label = strLable,
-                                                Mandatory = IsMandatory,
-                                                DataType = DataType,
-                                                DBColumnName = ColumnName,
-                                                Enable = IsReadOnly,
-                                            };
-                                  
-
-                                            if(strID!=null)
-                                                CMB = GetLookupData(CMB, strID, CompanyIndex);
-                                            
-                                            if(CMB.ComboItems.Count==0)
-                                                CMB.ComboItems.Add(new ComboBoxItemData("0",strID));
-
+                                        PactComboBoxData CMB = new PactComboBoxData()
+                                        {
+                                            IsPartiralData=IsPartiralData,
+                                            FeatureID = FeatureID,
+                                            CompanyIndex = Convert.ToInt32(CompanyIndex),
+                                            Label = oField.Label,
+                                            Mandatory = oField.IsMandatory,
+                                            DataType = oField.DataType,
+                                            DBColumnName = oField.Db,
+                                            Enable = !oField.IsReadOnly,
+                                        };
                                         _PactControlData.Add(CMB);
                                         break;
 
                                     case "Button":
-                                            strCommand = xRowInfo.SelectSingleNode("Command").InnerText.ToString();
+                                       string strCommand = xRowInfo.SelectSingleNode("Command").InnerText.ToString();
                                         _PactControlData.Add(new PactButtonData()
                                         {
-                                            Label = strLable,
-                                                DynamicCommand = strCommand,
-                                        });
-                                        break;
-                                    case "ListDrop":
-                                        _PactControlData.Add(new PactTextBlockData()
-                                        {
-                                            Text = strLable,
-                                            Style = "PACTTextBlockStyle"
-                                        });
-                                        _PactControlData.Add(new PactIntelliBoxData()
-                                        {
-                                            Text = strID,
-                                            ListDropColumnResults = new ListDropResultsProvider()
+                                            Label = ViewResourceManager.GetResource(oField.Label, UIDbResources),
+                                            DynamicCommand = strCommand,
                                         });
                                         break;
                                 }
@@ -222,70 +261,45 @@ namespace PACT.MODEL
                 }
                 #endregion Sections
                 #region Grid
-                DataTable GridDt = new DataTable();
-                PactGridData PactGrid = new PactGridData();
-                DatagridCols PactGridCols = new DatagridCols();
-                PactGrid.Columns = new ObservableCollection<DatagridCols>();
-                int BlankRows=0;
-                XmlNode xProp = xDoc.DocumentElement.SelectSingleNode("Grid//Properties");
-                if (xProp.SelectSingleNode("Rows") != null)
-                    BlankRows = int.Parse(xProp.SelectSingleNode("Rows").InnerText.ToString());
-
-               
-              
-
                 XmlNode xGrd = xDoc.DocumentElement.SelectSingleNode("Grid//Columns");
-                
-                
+                if (xGrd != null)
+                {
+                    DataTable GridDt = new DataTable();
+                    PactGridData PactGrid = new PactGridData();
+                    DgColumn PactGridCols = new DgColumn();
+                    PactGrid.Columns = new ObservableCollection<DgColumn>();
+                    int BlankRows = 0;
+                    XmlNode xProp = xDoc.DocumentElement.SelectSingleNode("Grid//Properties");
+                    if (xProp.SelectSingleNode("Rows") != null)
+                        BlankRows = int.Parse(xProp.SelectSingleNode("Rows").InnerText.ToString());
+
+
                     foreach (XmlNode xCols in xGrd.ChildNodes)
                     {
-                            IsReadOnly="True";
-                            IsMandatory = "0";
-                            DataType = "NA";
-                            ColumnName = "NA";
-                            Width = 100;
-                            if(xCols.SelectSingleNode("ID")!=null)
-                                strID = xCols.SelectSingleNode("ID").InnerText.ToString();
-                            if (xCols.SelectSingleNode("Header") != null)
-                                strLable = xCols.SelectSingleNode("Header").InnerText.ToString();
-                            if (xCols.SelectSingleNode("Control") != null)
-                                strNm = xCols.SelectSingleNode("Control").InnerText.ToString();
-                            if (xCols.SelectSingleNode("DataType") != null)
-                                DataType = xCols.SelectSingleNode("DataType").InnerText.ToString();
-                            if (xCols.SelectSingleNode("Mandatory") != null)
-                                IsMandatory = xCols.SelectSingleNode("Mandatory").InnerText.ToString();
-                            if (xCols.SelectSingleNode("Width") != null)
-                                Width = int.Parse(xCols.SelectSingleNode("Width").InnerText.ToString());
-                        
+                        DgColumn oCol = DgColumn.FromXml(xCols.OuterXml);
+                        oCol.DisplayMember = oCol.ID;
+                        PactGrid.Columns.Add(oCol);
 
-                            if (xCols.SelectSingleNode("ReadOnly") != null)
-                            {
-                                IsReadOnly = xCols.SelectSingleNode("ReadOnly").InnerText.ToString();
-                                if (IsReadOnly.Equals("0"))
-                                    IsReadOnly = "True";
-                                else
-                                    IsReadOnly = "False";
-                            }
-                            switch (DataType)
-                            {
-                                case "INT":
-                                    GridDt.Columns.Add(strID, typeof(int));
-                                    break;
-                                case "FLOAT":
-                                    GridDt.Columns.Add(strID, typeof(float));
-                                    break;
-                                case "TEXT":
-                                    GridDt.Columns.Add(strID);
-                                    break;
-                            }
-                            DatagridCols dt = new DatagridCols();
-                            dt.HeaderText = strLable;
-                            dt.DisplayMember = strID;
-                            dt.ColumnType = strNm;
-                            dt.width = Width;
-                            PactGrid.Columns.Add(dt);
+                        switch (oCol.DataType)
+                        {
+                            case "INT":
+                                GridDt.Columns.Add(oCol.ID, typeof(int));
+                                break;
+                            case "FLOAT":
+                                GridDt.Columns.Add(oCol.ID, typeof(float));
+                                break;
+                            case "PACTCOMBO":
+                                GridDt.Columns.Add(oCol.ID);
+                                GridDt.Columns.Add(oCol.ID + "_Key", typeof(int));
+                                break;
+                            case "TEXT":
+                                GridDt.Columns.Add(oCol.ID);
+                                break;
+                            case "DATE":
+                                GridDt.Columns.Add(oCol.ID, typeof(DateTime));
+                                break;
+                        }
                     }
-
 
                     if (BlankRows != 0)
                     {
@@ -293,19 +307,25 @@ namespace PACT.MODEL
                         for (int i = 0; i < BlankRows; i++)
                         {
                             dr = GridDt.NewRow();
-                            dr["Sno"] = i+1;
+                            dr["Sno"] = i + 1;
                             GridDt.Rows.Add(dr);
                         }
                     }
 
-
+                    //                CommonService.CommonClient wcfService = new CommonService.CommonClient();
+                    //                GridDt = wcfService.ExecuteQuery(@"SELECT Top 100 ROW_NUMBER() OVER(ORDER BY NodeNo DESC) AS Sno,A.Name AccountName,A.NodeNo AccountName_Key,1000 Amount
+                    //,'Nar' As Narration, T.AccountType AccountType, T.ID AccountType_Key
+                    // FROM Accounts A INNER JOIN AccountTypes T ON T.ID=A.Type1 WHERE A.NodeNo>1000", CompanyIndex);
+                    //                wcfService.Close();
                     PactGrid.DataSource = GridDt;
                     _PactControlData.Add(PactGrid);
+                }
+               
                 #endregion Grid
             }
             return _PactControlData;
         }
-       
+
         public int PostData(string XMLControlData, string ScreenID, string CompanyIndex)
         {
             int ReturnDBVal = -1;
@@ -314,10 +334,13 @@ namespace PACT.MODEL
             {
                 wcfService = new CommonService.CommonClient();
                 wcfService.Open();
-                 switch (ScreenID)
+                switch (ScreenID)
                 {
-                    case "1000":
+                    case "1":
                         ReturnDBVal = wcfService.CreateAccount(XMLControlData, CompanyIndex);
+                        break;
+                    case "4":
+                        ReturnDBVal = wcfService.CreateDepreciation(XMLControlData, CompanyIndex);
                         break;
                     case "2000":
                         ReturnDBVal = wcfService.CreateProduct(XMLControlData, CompanyIndex);
@@ -337,7 +360,20 @@ namespace PACT.MODEL
             }
             return ReturnDBVal;
         }
-       
-    
+
+        private static Dictionary<string, string> UIDbResources = new Dictionary<string, string>();
+
+        //public string GetResource(string strKey)
+        //{
+        //    if (ViewResourceManager.IsKeyExists(strKey))
+        //    {
+        //        return ViewResourceManager.GetResource(strKey);
+        //    }
+        //    else
+        //    {
+        //        return strKey;
+        //    }
+        //}
+
     }
 }

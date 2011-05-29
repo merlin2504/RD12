@@ -20,6 +20,7 @@ namespace Microsoft.Windows.Controls
     /// </summary>
     public class DataGridTextColumn : DataGridBoundColumn
     {
+
         static DataGridTextColumn()
         {
             ElementStyleProperty.OverrideMetadata(typeof(DataGridTextColumn), new FrameworkPropertyMetadata(DefaultElementStyle));
@@ -76,7 +77,7 @@ namespace Microsoft.Windows.Controls
 
         #endregion
 
-        #region Element Generation
+         #region Element Generation
 
         /// <summary>
         ///     Creates the visual tree for text based cells.
