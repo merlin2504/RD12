@@ -324,7 +324,7 @@ namespace Microsoft.Windows.Controls
         /// <summary>
         ///     Assigns the Binding to the desired property on the target object.
         /// </summary>
-        private static void ApplyBinding(BindingBase binding, DependencyObject target, DependencyProperty property)
+        public static void ApplyBinding(BindingBase binding, DependencyObject target, DependencyProperty property)
         {
             if (binding != null)
             {

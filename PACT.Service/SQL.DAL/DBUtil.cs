@@ -498,14 +498,14 @@
                 if (System.Configuration.ConfigurationManager.AppSettings["DBAuthentication"] == "SQLServer")
                 {
                     ConnectionCache.Add(CompanyIndex, "Data Source=" + System.Configuration.ConfigurationManager.AppSettings["DBServer"]
-                          + ";Initial Catalog=PACTC" + CompanyIndex
+                          + ";Initial Catalog=PACT2C" + CompanyIndex
                           + ";Persist Security Info=True;User ID=" + System.Configuration.ConfigurationManager.AppSettings["DBUserID"]
                           + ";Password=" + System.Configuration.ConfigurationManager.AppSettings["DBPassword"]);// PACTCryptoEngine.Decrypt(System.Configuration.ConfigurationSettings.AppSettings["DBPassword"], true));
                 }
                 else
                 {
                     ConnectionCache.Add(CompanyIndex, "Data Source=" + System.Configuration.ConfigurationManager.AppSettings["DBServer"]
-                         + ";Initial Catalog=PACTC" + CompanyIndex + ";Trusted_Connection=Yes;");
+                         + ";Initial Catalog=PACT2.0C" + CompanyIndex + ";Trusted_Connection=Yes;");
                 }
                 
             }

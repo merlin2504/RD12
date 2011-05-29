@@ -70,6 +70,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.XML" />
     <Reference Include="UIAutomationProvider" />
     <Reference Include="UIAutomationTypes" />
@@ -279,6 +282,11 @@
     <Compile Include="DataGrid\Microsoft\Windows\Automation\Peers\DataGridRowAutomationPeer.cs" />
     <Compile Include="DataGrid\Microsoft\Windows\Automation\Peers\DataGridRowHeaderAutomationPeer.cs" />
     <Compile Include="DataGrid\Microsoft\Windows\Automation\Peers\DataGridRowsPresenterAutomationPeer.cs" />
+    <Compile Include="DataGrid\Microsoft\Windows\Controls\DataGridDateColumn.cs" />
+    <Compile Include="DataGrid\Microsoft\Windows\Controls\DataGridPactComboBoxColumn.cs" />
+    <Compile Include="DataGrid\Microsoft\Windows\Controls\DataGridComboBoxColumn.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DataGrid\Microsoft\Windows\Controls\DataGridCellEditEndingEventArgs.cs" />
     <Compile Include="DataGrid\Microsoft\Windows\Controls\DataGridEditAction.cs" />
     <Compile Include="DataGrid\Microsoft\Windows\Controls\DataGridRowEditEndingEventArgs.cs" />
@@ -306,7 +314,6 @@
     <Compile Include="DataGrid\Microsoft\Windows\Controls\Primitives\DataGridColumnHeader.cs" />
     <Compile Include="DataGrid\Microsoft\Windows\Controls\Primitives\DataGridColumnHeadersPresenter.cs" />
     <Compile Include="DataGrid\Microsoft\Windows\Controls\DataGridColumnReorderingEventArgs.cs" />
-    <Compile Include="DataGrid\Microsoft\Windows\Controls\DataGridComboBoxColumn.cs" />
     <Compile Include="DataGrid\Microsoft\Windows\Controls\Primitives\DataGridDetailsPresenter.cs" />
     <Compile Include="DataGrid\Microsoft\Windows\Controls\DataGridEditingUnit.cs" />
     <Compile Include="DataGrid\Microsoft\Windows\Controls\DataGridGridLinesVisibility.cs" />
@@ -353,8 +360,16 @@
     <Compile Include="DatePicker\Microsoft\Windows\Controls\DatePickerFormat.cs" />
     <Compile Include="DatePicker\Microsoft\Windows\Controls\DatePickerTextBox.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="PactComboBox\PactComboBox.cs" />
+    <Compile Include="PactComboBox\PACTSerializer.cs" />
+    <Compile Include="PactComboBox\TreeColumn.cs" />
     <Compile Include="Resources\SR.cs" />
     <Compile Include="Resources\SRID.cs" />
+    <Compile Include="Service References\CommonService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="VSM\VisualStateManager\Microsoft\Windows\Controls\ButtonBaseBehavior.cs" />
     <Compile Include="VSM\VisualStateManager\Microsoft\Windows\Controls\ControlBehavior.cs" />
     <Compile Include="VSM\VisualStateManager\Microsoft\Windows\Controls\ListBoxItemBehavior.cs" />
@@ -402,6 +417,50 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
+    <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
+    <None Include="Service References\CommonService\Common.wsdl" />
+    <None Include="Service References\CommonService\Common.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CommonService\Common1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CommonService\Common2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CommonService\Common3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CommonService\Common4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\CommonService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CommonService\Common.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CommonService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CommonService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CommonService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

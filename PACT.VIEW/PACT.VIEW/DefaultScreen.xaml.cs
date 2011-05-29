@@ -33,6 +33,13 @@ namespace PACT.VIEW
         {
             //SingleColumnResults = new SingleColumnResultsProvider();
             this.InitializeComponent();
+
+
+//            System.Data.SqlClient.SqlConnection oCon = new System.Data.SqlClient.SqlConnection();
+//            oCon.ConnectionString = @"Data Source=VINAY\\SQLEXPRESS;Initial Catalog=master;Persist Security Info=True;
+//User ID=sa;Password=Sql2008";
+//            oCon.Open();
+
         }
     }
 }

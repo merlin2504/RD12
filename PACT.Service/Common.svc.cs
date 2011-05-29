@@ -30,6 +30,17 @@ namespace PACT.Service
             return returnValue;
         }
 
+        public int CreateDepreciation(string XMLControlData, string CompanyIndex)
+        {
+            int returnValue = 0;
+            string DbType = System.Configuration.ConfigurationManager.AppSettings["DBTYPE"];
+            if (!String.IsNullOrEmpty(DbType) && DbType.Equals("SQL"))
+            {
+                CommonSqlDal objCommon = new CommonSqlDal();
+                returnValue = objCommon.CreateDepreciation(XMLControlData, CompanyIndex);
+            }
+            return returnValue;
+        }
 
         public int CreateProduct(string XMLControlData, string CompanyIndex)
         {
@@ -62,16 +73,57 @@ namespace PACT.Service
             
         }
 
-        public DataSet GetScreenInfoByID(int ScreenID,string CompanyIndex)
+        public DataSet GetScreenInfoByID(int ScreenID,string strCulture,string CompanyIndex)
         {
             DataSet ds = new DataSet();
             string DbType=System.Configuration.ConfigurationManager.AppSettings["DBTYPE"];
             if (!String.IsNullOrEmpty(DbType) && DbType.Equals("SQL"))
             {
                 CommonSqlDal objCommon = new CommonSqlDal();
-                ds = objCommon.GetScreenInfoByID(ScreenID, CompanyIndex);
+                ds = objCommon.GetScreenInfoByID(ScreenID, strCulture, CompanyIndex);
             }
             return ds;
+        }
+
+
+
+        public DataTable GetDataTable_Search(SearchCriteria objSearch, string CompanyIndex)
+        {
+            DataSet ds = GetDataSet_Search(objSearch, CompanyIndex);//DBUtil.GetConnectionString(CompanyIndex));
+            return ds.Tables[ds.Tables.Count - 1];
+        }
+
+        public DataTable GetDataTable(string strQuery, string CompanyIndex)
+        {
+            ArrayList param = new ArrayList();
+            param.Add(strQuery);
+            param.Add(null);
+
+            DbUtilResult dbResult = DBUtil.Execute("SPExecuteQuery", param, DBUtil.GetConnection(CompanyIndex));
+            return dbResult.Contents.Tables[0];
+        }
+
+        public DataSet GetDataSet_Search(SearchCriteria objSearch, string CompanyIndex)
+        {
+            ArrayList param = new ArrayList();
+            param.Add(objSearch.Query);
+            param.Add(objSearch.WhereString);
+            param.Add(objSearch.SearchOn);
+            param.Add(objSearch.SearchValue);
+            param.Add(objSearch.MaximumRows);
+            param.Add(objSearch.IsMoveUp);
+            param.Add(objSearch.GroupBy);
+            param.Add(objSearch.SelectedValueQuery);
+
+            try
+            {
+                DbUtilResult dbResult = DBUtil.Execute("SPWPOSExecuteSearchQuery", param, DBUtil.GetConnection(CompanyIndex));
+                return dbResult.Contents;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

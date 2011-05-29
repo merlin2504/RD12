@@ -19,6 +19,9 @@ namespace Microsoft.Windows.Controls
         /// <summary>
         /// Specifies that the date should be displayed using abbreviated days of the week and month names.
         /// </summary>
-        Short = 1
+        Short = 1,
+
+        Custom = 2
+
     }
 }

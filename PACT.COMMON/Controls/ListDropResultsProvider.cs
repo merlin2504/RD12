@@ -48,7 +48,7 @@ namespace PACT.COMMON
         public IEnumerable<object> DoSearch(string searchTerm, int maxResults, object tag)
         {
             ConstructDataSource();
-            return _results.Where(term => term.PersonID.Contains(searchTerm)).Take(10).Cast<object>();
+            return _results.Where(term => term.PersonID.Contains(searchTerm)).Take(200).Cast<object>();
             //return _results.Cast<object>();
         }
     }

@@ -39,6 +39,7 @@
     <Reference Include="Intellibox">
       <HintPath>..\..\Dlls\Intellibox.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero" />
     <Reference Include="RibbonControlsLibrary">
       <HintPath>..\..\Dlls\RibbonControlsLibrary.dll</HintPath>
     </Reference>
@@ -226,6 +227,10 @@
     <ProjectReference Include="..\..\PACT.COMMON\PACT.COMMON.csproj">
       <Project>{BEFCD9C8-196E-4547-B3E8-0F0796E62532}</Project>
       <Name>PACT.COMMON</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PACT.Globalization\PACT.Globalization.csproj">
+      <Project>{696DDD96-F494-4DB2-AB3D-3F25B70CF8F4}</Project>
+      <Name>PACT.Globalization</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\PACT.VIEWMODEL\PACT.VIEWMODEL\PACT.VIEWMODEL.csproj">
       <Project>{4B646F04-0A61-45BB-8138-83F054EDB85B}</Project>

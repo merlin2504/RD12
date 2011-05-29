@@ -5059,15 +5059,13 @@ namespace Microsoft.Windows.Controls
         protected override void OnKeyDown(KeyEventArgs e)
         {
             switch (e.Key)
-            {
+            {  
+                case Key.Enter:
                 case Key.Tab:
                     OnTabKeyDown(e);
                     break;
 
-                case Key.Enter:
-                    OnEnterKeyDown(e);
-                    break;
-
+              
                 case Key.Left:
                 case Key.Right:
                 case Key.Up:
@@ -5326,6 +5324,7 @@ namespace Microsoft.Windows.Controls
         /// </summary>
         private void OnTabKeyDown(KeyEventArgs e)
         {
+            
             // When the end-user uses the keyboard to tab to another cell while the current cell
             // is in edit-mode, then the next cell should enter edit mode in addition to gaining
             // focus. There is no way to detect this from the focus change events, so the cell

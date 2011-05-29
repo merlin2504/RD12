@@ -98,6 +98,7 @@ namespace Microsoft.Windows.Controls
                     DataGridColumn column = dataGrid.Columns[index];
                     Column = column;
                     TabIndex = column.DisplayIndex;
+                    IsTabStop = !column.DisableTab;
                 }
 
                 if (IsEditing)
@@ -878,7 +879,7 @@ namespace Microsoft.Windows.Controls
             }
         }
 
-        internal DataGridRow RowOwner
+        public DataGridRow RowOwner
         {
             get { return _owner; }
         }

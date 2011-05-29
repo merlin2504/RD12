@@ -20,14 +20,16 @@ namespace PACT.MODEL
         public ObservableCollection<TabData> GetControls()
         {
             {
+                TabData td; 
+                GroupData GrpData;
                 _tabDataCollection = new ObservableCollection<TabData>();
 
                 Uri smallImage = new Uri("/PACT.VIEW;component/Images/SmallIcon.png", UriKind.Relative);
                 Uri largeImage = new Uri("/PACT.VIEW;component/Images/LargeIcon.png", UriKind.Relative);
 
                 #region Inventory Tab
-                TabData td = new TabData("Inventory");
-                GroupData GrpData = new GroupData("Products");
+                td = new TabData("Inventory");
+                GrpData = new GroupData("Products");
                 GrpData.ControlDataCollection.Add(new ButtonData()
                 {
                     Label = "Products",
@@ -90,6 +92,24 @@ namespace PACT.MODEL
                 _tabDataCollection.Insert(0, td);
                 #endregion
 
+                #region Home Tab
+                td = new TabData("Home");
+
+                td.GroupDataCollection.Add(new GroupData("DashBoard")
+                {
+                    LargeImage = largeImage,
+                    SmallImage = smallImage
+                });
+
+                td.GroupDataCollection.Add(new GroupData("Sales DashBoard")
+                {
+                    LargeImage = largeImage,
+                    SmallImage = smallImage
+                });
+
+                _tabDataCollection.Insert(0, td);
+                #endregion
+
                 #region Accounting Tab
                 //Accounts Tab
                 td = new TabData("Accounting");
@@ -102,18 +122,18 @@ namespace PACT.MODEL
                     ToolTipDescription = "ToolTip Description",
                     ToolTipImage = smallImage,
                    // Command = RibbonViewModel.cmdLoadPage,
-                    Tag = "1000"
+                    Tag = "1"
 
                 });
                 GrpData.ControlDataCollection.Add(new ButtonData()
                 {
-                    Label = "New",
+                    Label = "Depreciation",
                     SmallImage = smallImage,
                     ToolTipTitle = "ToolTip Title",
                     ToolTipDescription = "ToolTip Description",
                     ToolTipImage = smallImage,
                     //Command = RibbonViewModel.cmdLoadPage,
-                    Tag = "1001"
+                    Tag = "4"
                 });
                 td.GroupDataCollection.Add(GrpData);
 
@@ -132,23 +152,7 @@ namespace PACT.MODEL
                 _tabDataCollection.Insert(0, td);
                 #endregion
 
-                #region Home Tab
-                td = new TabData("Home");
-
-                td.GroupDataCollection.Add(new GroupData("DashBoard")
-                {
-                    LargeImage = largeImage,
-                    SmallImage = smallImage
-                });
-
-                td.GroupDataCollection.Add(new GroupData("Sales DashBoard")
-                {
-                    LargeImage = largeImage,
-                    SmallImage = smallImage
-                });
-
-                _tabDataCollection.Insert(0, td);
-                #endregion
+                
 
                 return _tabDataCollection;
             }

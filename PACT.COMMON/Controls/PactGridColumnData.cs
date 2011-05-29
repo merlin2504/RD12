@@ -39,14 +39,11 @@ namespace PACT.COMMON
             if (gridView != null)
             {
                 gridView.Columns.Clear();
-
-
                 if (e.NewValue != null)
                 {
                     ICollectionView view = CollectionViewSource.GetDefaultView(e.NewValue);
                     if (view != null)
                     {
-
                         CreateColumns(gridView, view);
                     }
                 }
@@ -57,35 +54,46 @@ namespace PACT.COMMON
         {
             foreach (var item in view)
             {
+                DgColumn obj = item as DgColumn;
                 DataGridColumn column = CreateColumn(gridView, item);
+                column.IsReadOnly = obj.ReadOnly;
+                column.Width = obj.Width;
+                column.DisableTab = obj.DisableTab;
+                column.Header = obj.Header;
                 gridView.Columns.Add(column);
             }
         }
 
         private static DataGridColumn CreateColumn(DataGrid gridView, object columnSource)
         {
-
-            DatagridCols col = columnSource as DatagridCols;
-            
-            if (col.ColumnType == "TextBox")
+            DgColumn col = columnSource as DgColumn;
+            if (col.Control == "TextBlock")
             {
                 DataGridTextColumn column = new DataGridTextColumn();
-                column.Header = col.HeaderText;
                 column.Binding = new Binding(col.DisplayMember);
-                column.Width = col.width;
                 return column;
             }
-
-            if (col.ColumnType == "TextBlock")
+            else if (col.Control == "PactComboBox")
+            {
+                DataGridPactComboBoxColumn column = new DataGridPactComboBoxColumn();
+                column.Binding = new Binding(col.DisplayMember);
+                column.FeatureID = Convert.ToInt32(col.Param);
+                column.SelectedValueBinding = new Binding(col.DisplayMember + "_Key");
+                return column;
+            }
+            else if (col.Control == "DatePicker")
+            {
+                DataGridDateColumn column = new DataGridDateColumn();
+                column.Binding = new Binding(col.DisplayMember);
+               // column.SelectedValueBinding = new Binding(col.DisplayMember + "_Key");
+                return column;
+            }
+            else//if (col.ColumnType == "TextBox")
             {
                 DataGridTextColumn column = new DataGridTextColumn();
-                column.Header = col.HeaderText;
                 column.Binding = new Binding(col.DisplayMember);
-                column.Width = col.width;
-                column.IsReadOnly = true;
                 return column;
             }
-
             //if (col.ColumnType == "MultiCombo")
             //{
             //    CustDataGridComboBoxColumn combcolumn = new CustDataGridComboBoxColumn();
@@ -108,7 +116,7 @@ namespace PACT.COMMON
             //    return combcolumn;
 
             //}
-
+          
             return null;
 
         }

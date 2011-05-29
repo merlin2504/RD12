@@ -23,17 +23,17 @@ namespace PACT.COMMON
             string error = null;
             switch (propertyName)
             {
-                case "IsSelected":
+                case "SelectedValue":
                     Foreground = "Black";
-                    BorderThickness = "5";
+                    BorderThickness = "1";
                     BorderBrush = "Black";
-                    if (this.Mandatory.Equals("1"))
+                    if (this.Mandatory)
                     {
-                        if (br.IsStringMissing(this.IsSelected))
+                        if (br.IsStringMissing(this.SelectedValue))
                         {
                             BorderBrush = "Red";
                             ToolTip = "Cannot be blank";
-                            BorderThickness = "10";
+                            BorderThickness = "2";
                         }
                         else
                         {
@@ -48,7 +48,7 @@ namespace PACT.COMMON
                     }
                     break;
                 case "Background":
-                    if (this.Mandatory.Equals("1"))
+                    if (this.Mandatory)
                     {
                         Background = "Cyan";
                     }
@@ -60,60 +60,79 @@ namespace PACT.COMMON
             }
 
             return error;
-        }
-
-        public List<ComboBoxItemData> ComboItems
+        } 
+        public string SelectedValue
         {
             get
             {
-
-                if (_items == null)
-                {
-                    _items = new List<ComboBoxItemData>();
-                }
-               return _items;
-
+                return _selectedvalue;
             }
 
             set
             {
-                if (_items != value)
+                if (_selectedvalue != value)
                 {
-                    _items = value;
-                    OnPropertyChanged(new PropertyChangedEventArgs("ComboItems"));
+                    _selectedvalue = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("SelectedValue"));
                 }
             }
         }
-        private List<ComboBoxItemData> _items;
+        private string _selectedvalue;
 
-        public string IsSelected
+        public int FeatureID
         {
             get
             {
-                return _isSelected;
+                return _featureid;
             }
 
             set
             {
-                if (_isSelected != value)
+                if (_featureid != value)
                 {
-                    _isSelected = value;
-                    OnPropertyChanged(new PropertyChangedEventArgs("IsSelected"));
+                    _featureid = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("FeatureID"));
                 }
             }
         }
-        private string _isSelected;
+        private int _featureid;
 
-    }
-
-    public class ComboBoxItemData
-    {
-        public string ItemDisplayName { get; set; }
-        public string ItemValue { get; set; }
-        public ComboBoxItemData(string itemNm, string itemVal)
+        public int CompanyIndex
         {
-            ItemDisplayName = itemNm;
-            ItemValue=itemVal;
+            get
+            {
+                return _companyindex;
+            }
+
+            set
+            {
+                if (_companyindex != value)
+                {
+                    _companyindex = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("CompanyIndex"));
+                }
+            }
         }
-    }
+        private int _companyindex;
+
+
+        public bool IsPartiralData
+        {
+            get
+            {
+                return _ispartiraldata;
+            }
+
+            set
+            {
+                if (_ispartiraldata != value)
+                {
+                    _ispartiraldata = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("IsPartiralData"));
+                }
+            }
+        }
+        private bool _ispartiraldata;
+    } 
+     
 }

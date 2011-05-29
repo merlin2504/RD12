@@ -28,8 +28,6 @@ namespace PACT.COMMON
         }
         private string _tooltip;
 
-
-        
         public string Foreground
         {
             get
@@ -101,8 +99,7 @@ namespace PACT.COMMON
             }
         }
         private string _borderthickness;      
-
-
+        
         public string DBColumnName
         {
             get
@@ -139,7 +136,7 @@ namespace PACT.COMMON
         }
         private string _datatype;
 
-        public string Mandatory
+        public bool Mandatory
         {
             get
             {
@@ -155,7 +152,7 @@ namespace PACT.COMMON
                 }
             }
         }
-        private string _mandatory;
+        private bool _mandatory;
 
         public string Align
         {
@@ -192,8 +189,7 @@ namespace PACT.COMMON
             }
         }
         private string _height;
-
-
+        
         public string Width
         {
             get
@@ -212,7 +208,7 @@ namespace PACT.COMMON
         }
         private string _width;
 
-        public string Enable
+        public bool Enable
         {
             get
             {
@@ -228,7 +224,7 @@ namespace PACT.COMMON
                 }
             }
         }
-        private string _enable;
+        private bool _enable;
 
         public string Label
         {
