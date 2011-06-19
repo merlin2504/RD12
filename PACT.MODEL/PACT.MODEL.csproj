@@ -72,6 +72,10 @@
       <Project>{BEFCD9C8-196E-4547-B3E8-0F0796E62532}</Project>
       <Name>PACT.COMMON</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PACT.DBHandler\PACT.DBHandler\PACT.DBHandler.csproj">
+      <Project>{4A901CF9-3AB8-42AC-995C-C35B14AE7035}</Project>
+      <Name>PACT.DBHandler</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\AccountsScreen.xml" />

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e3341ee6-9a13-48b5-b2e9-040625a2f8f8" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:1553/PactWebService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="PactWebService1.xsd" MetadataType="Schema" ID="9f46c16b-74d4-4390-8643-cdd07a215a5d" SourceId="1" SourceUrl="http://localhost:1553/PactWebService.svc?xsd=xsd2" />
+    <MetadataFile FileName="PactWebService2.xsd" MetadataType="Schema" ID="15a98c88-3386-47c0-8342-8d346f2c671b" SourceId="1" SourceUrl="http://localhost:1553/PactWebService.svc?xsd=xsd0" />
+    <MetadataFile FileName="PactWebService.xsd" MetadataType="Schema" ID="ab8af1ed-10f8-45e3-a47e-f90425fd67db" SourceId="1" SourceUrl="http://localhost:1553/PactWebService.svc?xsd=xsd1" />
+    <MetadataFile FileName="PactWebService.wsdl" MetadataType="Wsdl" ID="7b06bdba-16b0-48ef-89b8-976f7ea07020" SourceId="1" SourceUrl="http://localhost:1553/PactWebService.svc?wsdl" />
+    <MetadataFile FileName="PactWebService3.xsd" MetadataType="Schema" ID="f2df225a-f783-4a83-aa67-7e9c6b685d37" SourceId="1" SourceUrl="http://localhost:1553/PactWebService.svc?xsd=xsd3" />
+    <MetadataFile FileName="PactWebService.disco" MetadataType="Disco" ID="7c2c1086-1a21-4983-80cd-8b1f09be5dde" SourceId="1" SourceUrl="http://localhost:1553/PactWebService.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

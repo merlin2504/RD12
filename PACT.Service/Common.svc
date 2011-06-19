@@ -1,1 +1,0 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="PACT.Service.Common" CodeBehind="Common.svc.cs" %>

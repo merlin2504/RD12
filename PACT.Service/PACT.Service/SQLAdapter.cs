@@ -1,4 +1,9 @@
-﻿namespace PACT.Service
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace PACT.Service
 {
     using System;
     using System.Data;
@@ -6,7 +11,7 @@
     using System.Collections;
     using System.Threading;
     using System.Configuration;
-    using System.Security.Cryptography;    
+    using System.Security.Cryptography;
     using System.Text;
     using System.Runtime.Serialization;
 
@@ -15,29 +20,16 @@
     ///		Provides an abstraction of database functions
     ///		
     /// </summary>
-    public class DBUtil
+    public class SQLAdapter
     {
         private static ReaderWriterLock m_ProcedureCacheLock = new ReaderWriterLock();
         private static Hashtable m_ProcedureCache = new Hashtable();
 
-        private static System.Collections.Generic.Dictionary<string, string> ConnectionCache = 
-            new System.Collections.Generic.Dictionary<string, string>();
+        private static System.Collections.Generic.Dictionary<int, string> ConnectionCache =
+            new System.Collections.Generic.Dictionary<int, string>();
 
-        static DBUtil()
+        static SQLAdapter()
         {
-
-            try
-            {
-                //connectionString = "Data Source=" + ConfigurationManager.AppSettings["DBServer"]
-                //    + ";Initial Catalog=PACTPOS;Persist Security Info=True;User ID="
-                //    + ConfigurationManager.AppSettings["DBUserID"]
-                //    + ";Password=" + ConfigurationManager.AppSettings["DBPassword"];
-            }
-            catch
-            {
-                throw new Exception();
-            }
-            //System.Configuration.ConfigurationManager.ConnectionStrings["PACTPOS"].ConnectionString;
         }
 
         /// <summary>
@@ -283,9 +275,8 @@
 
                         procedure = new DbUtilProcedure();
 
-                        SqlCommand command = new SqlCommand("SpHelpOnProcedure", connection);
+                        SqlCommand command = new SqlCommand("spUTL_GetProcedureMetaData", connection);
                         command.Parameters.AddWithValue("@objname", procedureName);
-                        //command.Parameters.Add( "@objname", procedureName );
                         command.CommandType = CommandType.StoredProcedure;
                         command.Transaction = oTransaction;
 
@@ -358,14 +349,14 @@
             }
             return procedure;
         }
-      
 
-        public static DbUtilResult Execute(
+
+        public static SQLDBResult Execute(
             string procedureName,
             ArrayList procedureParameters, string strConnection)
         {
 
-            DbUtilResult result = null;
+            SQLDBResult result = null;
             SqlConnection connection = null;
             try
             {
@@ -378,7 +369,7 @@
                 // Create Command 
                 SqlCommand command = procedure.Command(connection, procedureParameters);
                 command.CommandTimeout = 0;
-                result = new DbUtilResult();
+                result = new SQLDBResult();
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
 
                 // Execute and Fill Results
@@ -422,75 +413,7 @@
             return result;
         }
 
-        public class POSTransaction
-        {
-            public SqlConnection oCon = null;
-            public SqlTransaction oTransaction = null;
-            public void Begin(string CompanyIndex)
-            {
-                oCon = new SqlConnection(DBUtil.GetConnection(CompanyIndex));
-                oCon.Open();
-                oTransaction = oCon.BeginTransaction();
-            }
-
-            public void Commit()
-            {
-                oTransaction.Commit();
-                oCon.Close();
-            }
-
-            public void RollBack()
-            {
-                oTransaction.Rollback();
-                oCon.Close();
-            }
-
-            public DbUtilResult Execute(string procedureName,ArrayList procedureParameters)
-            {
-
-                DbUtilResult result = null;
-                try
-                {
-                    DbUtilProcedure procedure = Procedure(oCon, procedureName, oTransaction);
-
-                    // Create Command 
-                    SqlCommand command = procedure.Command(oCon, procedureParameters);
-                    command.Transaction = oTransaction;
-                    command.CommandTimeout = 0;
-                    result = new DbUtilResult();
-                    SqlDataAdapter adapter = new SqlDataAdapter(command);
-
-                    // Execute and Fill Results
-                    adapter.Fill(result.Contents);
-                    foreach (SqlParameter cparam in command.Parameters)
-                    {
-                        switch (cparam.Direction)
-                        {
-
-                            case ParameterDirection.InputOutput:
-                            case ParameterDirection.Output:
-                            case ParameterDirection.ReturnValue:
-                                result.Parameters[cparam.ParameterName] = cparam.Value;
-                                break;
-                            case ParameterDirection.Input:
-                            default:
-                                // do nothing
-                                break;
-                        }
-                    }
-                }
-                catch (System.Exception e)
-                {
-                    throw new DbUtilException(e.Message, e);
-                }
-                return result;
-            }
-        
-        }
-
-     
-
-        public static string GetConnection(string CompanyIndex)
+        public static string GetConnection(int CompanyIndex)
         {
             if (!ConnectionCache.ContainsKey(CompanyIndex))
             {
@@ -498,32 +421,32 @@
                 if (System.Configuration.ConfigurationManager.AppSettings["DBAuthentication"] == "SQLServer")
                 {
                     ConnectionCache.Add(CompanyIndex, "Data Source=" + System.Configuration.ConfigurationManager.AppSettings["DBServer"]
-                          + ";Initial Catalog=PACT2C" + CompanyIndex
+                          + ";Initial Catalog=PACT2C" + CompanyIndex.ToString()
                           + ";Persist Security Info=True;User ID=" + System.Configuration.ConfigurationManager.AppSettings["DBUserID"]
                           + ";Password=" + System.Configuration.ConfigurationManager.AppSettings["DBPassword"]);// PACTCryptoEngine.Decrypt(System.Configuration.ConfigurationSettings.AppSettings["DBPassword"], true));
                 }
                 else
                 {
                     ConnectionCache.Add(CompanyIndex, "Data Source=" + System.Configuration.ConfigurationManager.AppSettings["DBServer"]
-                         + ";Initial Catalog=PACT2.0C" + CompanyIndex + ";Trusted_Connection=Yes;");
+                         + ";Initial Catalog=PACT2C" + CompanyIndex + ";Trusted_Connection=Yes;");
                 }
-                
+
             }
 
             return ConnectionCache[CompanyIndex];
         }
     }
 
-    
-    public class DbUtilResult
+
+    public class SQLDBResult
     {
-       
+
         public DataSet Contents = new DataSet();
 
-       
+
         public Hashtable Parameters = new Hashtable();
 
-       
+
         public object Return = null;
     }
 

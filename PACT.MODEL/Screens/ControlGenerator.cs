@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Xml;
 using Microsoft.Practices.Prism.Commands;
 using PACT.COMMON;
+using PACT.DBHandler;
 using System.Windows.Input;
 using System.ServiceModel;
 using System.Data;
@@ -51,93 +52,24 @@ namespace PACT.MODEL
         private XmlDocument GetScreenInfo(int _ScreenID, string _CompanyIndex)
         {
             XmlDocument xDoc = new XmlDocument();
-            CommonService.CommonClient wcfService = null;
             try
             {
+                PACT.DBHandler.DBHandler DBH = new DBHandler.DBHandler();
+                ArrayList AL = new ArrayList();
+                AL.Add(1);
+                AL.Add("Majeed");
+                AL.Add(0);
 
-                var endpoint = new EndpointAddress(new Uri(ConfigurationManager.AppSettings["SERVICEURL"].ToString()));
-                var binding = new WSHttpBinding();
-                wcfService = new CommonService.CommonClient(binding, endpoint);
-                //wcfService= new CommonService.CommonClient();
-                wcfService.Open();
-                DataSet ds = wcfService.GetScreenInfoByID(_ScreenID, ViewResourceManager.strCulture, _CompanyIndex);
-                if (ds != null && ds.Tables.Count > 0)
-                {
-                    xDoc.LoadXml(ds.Tables[0].Rows[0]["ScreenXML"].ToString());
-                    UIDbResources.Clear();
-                    if (ds.Tables.Count > 1)
-                    {
-                        for (int i = 0; i < ds.Tables[1].Rows.Count; i++)
-                        {
-                            UIDbResources.Add(ds.Tables[1].Rows[i][0].ToString(), ds.Tables[1].Rows[i][1].ToString());
-                        }
-                    }
+                DataSet ds = DBH.GetAddAccountScreenDetails(1, AL);
 
-                }
-
-
-                //UIDbResources
+                string s = "asdfasdf";
                 return xDoc;
             }
             catch (Exception ex)
             {
                 throw new Exception("Error in ControlGenerator::GetScreenInfo::-->" + ex.StackTrace);
             }
-            finally
-            {
-                if (wcfService != null)
-                {
-                    wcfService.Close();
-                }
-            }
         }
-
-        //NO Need
-        //private PactComboBoxData GetLookupData(PactComboBoxData _pcb, string LookupName, string CompanyIndex)
-        //{
-        //    _pcb.ComboItems.Clear();
-        //    string sqlQuery = "";
-        //    switch (LookupName)
-        //    {
-        //        case "drpAccountType":
-        //            sqlQuery = "Select ID,AccountType from AccountTypes WITH(NOLOCK) order by ID";
-        //            break;
-        //        case "drpAccountStatus":
-        //            sqlQuery = "Select ID,AccountStatus from AccountStatus WITH(NOLOCK) order by ID";
-        //            break;
-
-        //    }
-        //    if (!sqlQuery.Equals(""))
-        //    {
-        //        CommonService.CommonClient wcfService = null;
-        //        try
-        //        {
-        //            wcfService = new CommonService.CommonClient();
-        //            wcfService.Open();
-        //            DataTable dt = wcfService.ExecuteQuery(sqlQuery, CompanyIndex);
-        //            if (dt != null && dt.Rows.Count > 0)
-        //            {
-        //                for (int i = 0; i < dt.Rows.Count; i++)
-        //                {
-        //                    _pcb.ComboItems.Add(new ComboBoxItemData(dt.Rows[i][1].ToString(), dt.Rows[i][0].ToString()));
-        //                }
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            throw new Exception("Error in ControlGenerator::GetLookupData::-->" + ex.StackTrace);
-        //        }
-        //        finally
-        //        {
-        //            if (wcfService != null)
-        //            {
-        //                wcfService.Close();
-        //            }
-        //        }
-        //    }
-        //    return _pcb;
-        //}
-
 
         public ObservableCollection<PactControlData> GetControls(string ScreenID, string CompanyIndex)
         {

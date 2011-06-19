@@ -1,0 +1,5 @@
+SCC = This is a Source Code Control file
+
+[PACT.Service.csproj]
+SCC_Aux_Path = "\\Pactserverhyd\vssdb\"
+SCC_Project_Name = "$/PACT2.0/PACT.DBHandler/PACT.Service/PACT.Service", YVFBAAAA
