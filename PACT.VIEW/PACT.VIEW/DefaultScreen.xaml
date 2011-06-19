@@ -298,13 +298,14 @@
         
 
         <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
-            <ItemsControl x:Name="PACTContainer"  ItemsSource="{Binding PACTControlData}"  Width="800"  HorizontalAlignment="Left" Tag="{Binding DynamicCommand}">
+            <!--<ItemsControl x:Name="PACTContainer"  ItemsSource="{Binding PACTControlData}"  Width="800"  HorizontalAlignment="Left" Tag="{Binding DynamicCommand}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-            </ItemsControl>
+            </ItemsControl>-->
+            <local:AddEditAccount />
         </ScrollViewer>
     </Grid>
 </UserControl>
