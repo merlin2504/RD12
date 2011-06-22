@@ -7,9 +7,11 @@ using System.IO;
 using System.Windows.Resources;
 using System.Windows;
 using System.Data;
+using System.Linq;
 using PACT.MODEL;
 using PACT.COMMON;
 using Microsoft.Practices.Prism.Commands;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Runtime.Remoting.Messaging;
 
@@ -56,6 +58,9 @@ namespace PACT.VIEWMODEL
 
         public AddAccountScreenViewModel()
         {
+            _AccountTypes = new ObservableCollection<ComboBoxItems>();
+            _AccountStatuses = new ObservableCollection<ComboBoxItems>();
+            _AccountGroups = new ObservableCollection<ComboBoxItems>();
             BackgroundWorker worker = new BackgroundWorker();
             _ScreenID = "1";           
             switch (_ScreenID)
@@ -110,6 +115,24 @@ namespace PACT.VIEWMODEL
         {
             DisplayName = "Loading...";
             _ScreenData = BuildControls();
+
+            //_AccountTypes = _ScreenData.Tables[0].AsEnumerable().ToList();
+            //DataTable dt = _ScreenData.Tables[0];
+
+            foreach (DataRow dr in _ScreenData.Tables[0].Rows)
+            {
+                _AccountTypes.Add(new ComboBoxItems(dr[2].ToString(), dr[0].ToString()));
+            }
+
+            foreach (DataRow dr in _ScreenData.Tables[1].Rows)
+            {
+                _AccountStatuses.Add(new ComboBoxItems(dr[1].ToString(), dr[0].ToString()));
+            }
+
+            foreach (DataRow dr in _ScreenData.Tables[2].Rows)
+            {
+                _AccountGroups.Add(new ComboBoxItems(dr[1].ToString(), dr[2].ToString()));
+            }
 
         }
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -234,7 +257,6 @@ namespace PACT.VIEWMODEL
         private ObservableCollection<PactControlData> _PACTControlData;
 
         private DataSet _ScreenData;
-
         public DataSet ScreenData
         {
             get
@@ -251,8 +273,47 @@ namespace PACT.VIEWMODEL
             }
         }
 
+        private ObservableCollection<ComboBoxItems> _AccountGroups;
+        public ObservableCollection<ComboBoxItems> AccountGroups
+        {
+            get
+            {
+                return _AccountGroups;
+            }
+            set
+            {
+                _AccountGroups = value;
+                base.OnPropertyChanged("AccountGroups");
+            }
+        }
 
-       
+        private ObservableCollection<ComboBoxItems> _AccountTypes;
+        public ObservableCollection<ComboBoxItems> AccountTypes
+        {
+            get
+            {
+                return _AccountTypes;
+            }
+            set
+            {
+                _AccountTypes = value;
+                base.OnPropertyChanged("AccountTypes");
+            }
+        }
+
+        private ObservableCollection<ComboBoxItems> _AccountStatuses;
+        public ObservableCollection<ComboBoxItems> AccountStatuses
+        {
+            get
+            {
+                return _AccountStatuses;
+            }
+            set
+            {
+                _AccountStatuses = value;
+                base.OnPropertyChanged("AccountStatuses");
+            }
+        }
 
 
         //public ObservableCollection<PactControlData> BuildControls()
@@ -323,4 +384,36 @@ namespace PACT.VIEWMODEL
         #endregion // Public Methods
 
     }
+
+    public class ComboBoxItems
+    {
+        #region Properties
+
+        private string _name = string.Empty;
+        private string _value = string.Empty;
+
+        public string Name 
+        { 
+            get 
+            { 
+                return _name; 
+            } 
+        }
+        public string Value 
+        { 
+            get 
+            { 
+                return _value; 
+            } 
+        }
+
+        #endregion Properties
+
+        public ComboBoxItems(string name, string value)
+        {
+            this._name = name;
+            this._value = value;
+        }
+    }
+
 }

@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PACT.VIEWMODEL;
 
 namespace PACT.VIEW
 {
@@ -21,7 +22,12 @@ namespace PACT.VIEW
     {
         public AddEditAccount()
         {
+
             InitializeComponent();
+            
+            //AddAccountScreenViewModel obj = new AddAccountScreenViewModel();
+            //this.DataContext = obj;
+
             DetailsAddContact.Visibility = Visibility.Collapsed;
             DetailsAttachments.Visibility = Visibility.Collapsed;
         }

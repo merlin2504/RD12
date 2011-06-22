@@ -260,7 +260,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Grid.Row="1" Margin="2,0,6,0">
                             <Label Content="Account Type*" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
-                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Style="{DynamicResource FamilyMemberComboBox}">
+                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0" ItemsSource="{Binding AccountTypes, Mode=TwoWay, UpdateSourceTrigger=Default}" DisplayMemberPath="Name" SelectedValuePath="Value">
                                 <ComboBox.Background>
                                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                                         <GradientStop Color="#FFF3F3F3"/>
@@ -269,18 +269,18 @@
                                         <GradientStop Color="#FFAAD4F5" Offset="1"/>
                                     </LinearGradientBrush>
                                 </ComboBox.Background>
-                                <ComboBoxItem x:Name="cbi1" Content="Assets"/>
+                                <!--<ComboBoxItem x:Name="cbi1" Content="Assets"/>
                                 <ComboBoxItem x:Name="cbi2" Content="Income"/>
                                 <ComboBoxItem x:Name="cbi3" Content="Sales Account"/>
                                 <ComboBoxItem x:Name="cbi4" Content="Bank Account"/>
                                 <ComboBoxItem x:Name="cbi7" Content="Purchase Account"/>
                                 <ComboBoxItem x:Name="cbi5" Content="Hyderabad Account"/>
-                                <ComboBoxItem x:Name="cbi6" Content="Chennai Account"/>
+                                <ComboBoxItem x:Name="cbi6" Content="Chennai Account"/>-->
                             </ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Vertical"  Grid.Column="1" Margin="2,0,6,0" Grid.Row="1">
                             <Label Content="Status*" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
-                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0" Style="{DynamicResource FamilyMemberComboBox}">
+                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0" Style="{DynamicResource FamilyMemberComboBox}" ItemsSource="{Binding AccountStatuses, Mode=TwoWay, UpdateSourceTrigger=Default}" DisplayMemberPath="Name" SelectedValuePath="Value">
                                 <ComboBox.Background>
                                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                                         <GradientStop Color="#FFF3F3F3"/>
@@ -289,15 +289,15 @@
                                         <GradientStop Color="#FFAAD4F5" Offset="1"/>
                                     </LinearGradientBrush>
                                 </ComboBox.Background>
-                                <ComboBoxItem Content="Active"/>
+                                <!--<ComboBoxItem Content="Active"/>
                                 <ComboBoxItem Content="Deleted"/>
                                 <ComboBoxItem Content="Hold"/>
-                                <ComboBoxItem Content="Inactive"/>
+                                <ComboBoxItem Content="Inactive"/>-->
                             </ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Grid.Column="2" Margin="2,0,6,0" Grid.Row="1">
                             <Label Content="Group*" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
-                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0">
+                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0" ItemsSource="{Binding AccountGroups, Mode=TwoWay, UpdateSourceTrigger=Default}" DisplayMemberPath="Name" SelectedValuePath="Value">
                                 <ComboBox.Background>
                                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                                         <GradientStop Color="#FFF3F3F3"/>
@@ -306,10 +306,6 @@
                                         <GradientStop Color="#FFAAD4F5" Offset="1"/>
                                     </LinearGradientBrush>
                                 </ComboBox.Background>
-                                <ComboBoxItem Content="Debtors"/>
-                                <ComboBoxItem Content="Creditors"/>
-                                <ComboBoxItem Content="Hyderabad"/>
-                                <ComboBoxItem Content="Assets"/>
                             </ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Margin="2,0,6,0">
