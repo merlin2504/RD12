@@ -22,11 +22,7 @@ namespace PACT.VIEW
     {
         public AddEditAccount()
         {
-
             InitializeComponent();
-            
-            //AddAccountScreenViewModel obj = new AddAccountScreenViewModel();
-            //this.DataContext = obj;
 
             DetailsAddContact.Visibility = Visibility.Collapsed;
             DetailsAttachments.Visibility = Visibility.Collapsed;

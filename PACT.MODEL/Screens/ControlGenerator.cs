@@ -288,6 +288,25 @@ namespace PACT.MODEL
             return ReturnDBVal;
         }
 
+        public long AddAccountDetails(ArrayList AddAccountAL, int _CompanyIndex)
+        {
+            long ReturnDBVal = -1;
+
+            try
+            {
+                PACT.DBHandler.DBHandler DBH = new DBHandler.DBHandler();
+
+                string s = DBH.SetAccountDetails(_CompanyIndex, AddAccountAL, out ReturnDBVal);
+                
+                return ReturnDBVal;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error in ControlGenerator::GetScreenInfo::-->" + ex.StackTrace);
+            }
+
+        }
+
         private static Dictionary<string, string> UIDbResources = new Dictionary<string, string>();
 
         //public string GetResource(string strKey)

@@ -11,6 +11,7 @@ using System.Linq;
 using PACT.MODEL;
 using PACT.COMMON;
 using Microsoft.Practices.Prism.Commands;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Runtime.Remoting.Messaging;
@@ -51,16 +52,23 @@ namespace PACT.VIEWMODEL
         private string _ScreenID;
         ControlGenerator objControlGenerator = new ControlGenerator();
         public DelegateCommand<string> DynamicCommand { get; set; }
-
+        public DelegateCommand<string> SaveAccount { get; set; }
         #endregion // Fields
 
         #region Constructor
-
         public AddAccountScreenViewModel()
         {
             _AccountTypes = new ObservableCollection<ComboBoxItems>();
             _AccountStatuses = new ObservableCollection<ComboBoxItems>();
             _AccountGroups = new ObservableCollection<ComboBoxItems>();
+            _SalesAccounts = new ObservableCollection<ComboBoxItems>();
+            _PurchaseAccounts = new ObservableCollection<ComboBoxItems>();
+            _AccountCurrency = new ObservableCollection<ComboBoxItems>();
+            _BillWise = new ObservableCollection<ComboBoxItems>();
+
+            SaveAccount = new DelegateCommand<string>(OnSaveAccount, onCanSaveAccount);
+
+
             BackgroundWorker worker = new BackgroundWorker();
             _ScreenID = "1";           
             switch (_ScreenID)
@@ -105,10 +113,43 @@ namespace PACT.VIEWMODEL
 
             DynamicCommand = new DelegateCommand<string>(CommandController);
         }
-
-       
-
         #endregion // Constructor
+
+        public void OnSaveAccount(object sender)
+        {
+            try
+            {
+                ArrayList ParamValues = new ArrayList();
+                ParamValues.Add(0);
+                ParamValues.Add(_AccountCode);
+                ParamValues.Add(_AccountName);
+                ParamValues.Add(_AliasName);
+                ParamValues.Add(_SelectedAccountType);
+                ParamValues.Add(_SelectedAccountStatus);
+                ParamValues.Add(_SelectedAccountGroup);
+                ParamValues.Add(false);
+                ParamValues.Add(_CreditLimit);
+                ParamValues.Add(_CreditDays);
+                ParamValues.Add(37); //_SelectedPurchaseAccount
+                ParamValues.Add(42); //_SelectedSalesAccount
+                ParamValues.Add(false);
+                ParamValues.Add("");
+                ParamValues.Add("asdfasdfasdf");
+                ParamValues.Add("Mukaram");
+                ParamValues.Add(0);
+                ParamValues.Add("");
+                long ret = objControlGenerator.AddAccountDetails(ParamValues, 1);
+
+                
+            }
+            catch (Exception exe)
+            {
+            }
+        }
+        private bool onCanSaveAccount(object sender)
+        {
+            return true;
+        }
 
         #region Background Thread
         void worker_DoWork(object sender, DoWorkEventArgs e)
@@ -117,7 +158,6 @@ namespace PACT.VIEWMODEL
             _ScreenData = BuildControls();
 
             //_AccountTypes = _ScreenData.Tables[0].AsEnumerable().ToList();
-            //DataTable dt = _ScreenData.Tables[0];
 
             foreach (DataRow dr in _ScreenData.Tables[0].Rows)
             {
@@ -131,8 +171,27 @@ namespace PACT.VIEWMODEL
 
             foreach (DataRow dr in _ScreenData.Tables[2].Rows)
             {
-                _AccountGroups.Add(new ComboBoxItems(dr[1].ToString(), dr[2].ToString()));
+                _AccountGroups.Add(new ComboBoxItems(dr[2].ToString(), dr[0].ToString()));
             }
+            
+            foreach (DataRow dr in _ScreenData.Tables[3].Rows)
+            {
+                _SalesAccounts.Add(new ComboBoxItems(dr[2].ToString(), dr[0].ToString()));
+            }
+            
+            foreach (DataRow dr in _ScreenData.Tables[4].Rows)
+            {
+                _PurchaseAccounts.Add(new ComboBoxItems(dr[2].ToString(), dr[0].ToString()));
+            }
+
+            foreach (DataRow dr in _ScreenData.Tables[5].Rows)
+            {
+                _AccountCurrency.Add(new ComboBoxItems(dr[1].ToString(), dr[0].ToString()));
+            }
+
+            _BillWise.Add(new ComboBoxItems("No", "0"));
+            _BillWise.Add(new ComboBoxItems("Yes", "1"));
+
 
         }
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -238,7 +297,7 @@ namespace PACT.VIEWMODEL
             }
         }
 
-
+        private ObservableCollection<PactControlData> _PACTControlData;
         public ObservableCollection<PactControlData> PACTControlData
         {
             get
@@ -254,8 +313,7 @@ namespace PACT.VIEWMODEL
                 // }
             }
         }
-        private ObservableCollection<PactControlData> _PACTControlData;
-
+        
         private DataSet _ScreenData;
         public DataSet ScreenData
         {
@@ -270,20 +328,6 @@ namespace PACT.VIEWMODEL
                 _ScreenData = value;
                 base.OnPropertyChanged("ScreenData");
                 // }
-            }
-        }
-
-        private ObservableCollection<ComboBoxItems> _AccountGroups;
-        public ObservableCollection<ComboBoxItems> AccountGroups
-        {
-            get
-            {
-                return _AccountGroups;
-            }
-            set
-            {
-                _AccountGroups = value;
-                base.OnPropertyChanged("AccountGroups");
             }
         }
 
@@ -315,8 +359,310 @@ namespace PACT.VIEWMODEL
             }
         }
 
+        private ObservableCollection<ComboBoxItems> _AccountGroups;
+        public ObservableCollection<ComboBoxItems> AccountGroups
+        {
+            get
+            {
+                return _AccountGroups;
+            }
+            set
+            {
+                _AccountGroups = value;
+                base.OnPropertyChanged("AccountGroups");
+            }
+        }
 
-        //public ObservableCollection<PactControlData> BuildControls()
+        private ObservableCollection<ComboBoxItems> _SalesAccounts;
+        public ObservableCollection<ComboBoxItems> SalesAccounts
+        {
+            get
+            {
+                return _SalesAccounts;
+            }
+            set
+            {
+                _SalesAccounts = value;
+                base.OnPropertyChanged("SalesAccounts");
+            }
+        }
+
+        private ObservableCollection<ComboBoxItems> _PurchaseAccounts;
+        public ObservableCollection<ComboBoxItems> PurchaseAccounts
+        {
+            get
+            {
+                return _PurchaseAccounts;
+            }
+            set
+            {
+                _PurchaseAccounts = value;
+                base.OnPropertyChanged("PurchaseAccounts");
+            }
+        }
+
+        private ObservableCollection<ComboBoxItems> _AccountCurrency;
+        public ObservableCollection<ComboBoxItems> AccountCurrency
+        {
+            get
+            {
+                return _AccountCurrency;
+            }
+            set
+            {
+                _AccountCurrency = value;
+                base.OnPropertyChanged("AccountCurrency");
+            }
+        }
+
+        private ObservableCollection<ComboBoxItems> _BillWise;
+        public ObservableCollection<ComboBoxItems> BillWise
+        {
+            get
+            {
+                return _BillWise;
+            }
+            set
+            {
+                _BillWise = value;
+                base.OnPropertyChanged("BillWise");
+            }
+        }
+
+        private string _DisplayName;
+        public string DisplayName
+        {
+            get
+            {
+                return _DisplayName;
+            }
+            set
+            {
+                if (value == _DisplayName)
+                    return;
+
+                _DisplayName = value;
+
+                base.OnPropertyChanged("DisplayName");
+            }
+        }
+
+        private string _SelectedAccountType;
+        public string SelectedAccountType
+        {
+            get
+            {
+                return _SelectedAccountType;
+            }
+            set
+            {
+                if (value == _SelectedAccountType)
+                    return;
+
+                _SelectedAccountType = value;
+
+                base.OnPropertyChanged("SelectedAccountType");
+            }
+        }
+
+        private string _SelectedAccountStatus;
+        public string SelectedAccountStatus
+        {
+            get
+            {
+                return _SelectedAccountStatus;
+            }
+            set
+            {
+                if (value == _SelectedAccountStatus)
+                    return;
+
+                _SelectedAccountStatus = value;
+
+                base.OnPropertyChanged("SelectedAccountStatus");
+            }
+        }
+
+        private string _SelectedAccountGroup;
+        public string SelectedAccountGroup
+        {
+            get
+            {
+                return _SelectedAccountGroup;
+            }
+            set
+            {
+                if (value == _SelectedAccountGroup)
+                    return;
+
+                _SelectedAccountGroup = value;
+
+                base.OnPropertyChanged("SelectedAccountGroup");
+            }
+        }
+
+        private string _SelectedSalesAccount;
+        public string SelectedSalesAccount
+        {
+            get
+            {
+                return _SelectedSalesAccount;
+            }
+            set
+            {
+                if (value == _SelectedSalesAccount)
+                    return;
+
+                _SelectedSalesAccount = value;
+
+                base.OnPropertyChanged("SelectedSalesAccount");
+            }
+        }
+
+        private string _SelectedPurchaseAccount;
+        public string SelectedPurchaseAccount
+        {
+            get
+            {
+                return _SelectedPurchaseAccount;
+            }
+            set
+            {
+                if (value == _SelectedPurchaseAccount)
+                    return;
+
+                _SelectedPurchaseAccount = value;
+
+                base.OnPropertyChanged("SelectedPurchaseAccount");
+            }
+        }
+               
+        private string _SelectedCurrency;
+        public string SelectedCurrency
+        {
+            get
+            {
+                return _SelectedCurrency;
+            }
+            set
+            {
+                if (value == _SelectedCurrency)
+                    return;
+
+                _SelectedCurrency = value;
+
+                base.OnPropertyChanged("SelectedCurrency");
+            }
+        }
+
+        private string _SelectedBillWise;
+        public string SelectedBillWise
+        {
+            get
+            {
+                return _SelectedBillWise;
+            }
+            set
+            {
+                if (value == _SelectedBillWise)
+                    return;
+
+                _SelectedBillWise = value;
+
+                base.OnPropertyChanged("SelectedBillWise");
+            }
+        }
+
+        private string _AccountName;
+        public string AccountName
+        {
+            get
+            {
+                return _AccountName;
+            }
+            set
+            {
+                if (value == _AccountName)
+                    return;
+
+                _AccountName = value;
+
+                base.OnPropertyChanged("AccountName");
+            }
+        }
+
+        private string _AccountCode;
+        public string AccountCode
+        {
+            get
+            {
+                return _AccountCode;
+            }
+            set
+            {
+                if (value == _AccountCode)
+                    return;
+
+                _AccountCode = value;
+
+                base.OnPropertyChanged("AccountCode");
+            }
+        }
+
+        private string _AliasName;
+        public string AliasName
+        {
+            get
+            {
+                return _AliasName;
+            }
+            set
+            {
+                if (value == _AliasName)
+                    return;
+
+                _AliasName = value;
+
+                base.OnPropertyChanged("AliasName");
+            }
+        }
+
+        private string _CreditLimit;
+        public string CreditLimit
+        {
+            get
+            {
+                return _CreditLimit;
+            }
+            set
+            {
+                if (value == _CreditLimit)
+                    return;
+
+                _CreditLimit = value;
+
+                base.OnPropertyChanged("CreditLimit");
+            }
+        }
+
+        private string _CreditDays;
+        public string CreditDays
+        {
+            get
+            {
+                return _CreditDays;
+            }
+            set
+            {
+                if (value == _CreditDays)
+                    return;
+
+                _CreditDays = value;
+
+                base.OnPropertyChanged("CreditDays");
+            }
+        }
+
         public DataSet BuildControls()
         {
             DataSet ds = objControlGenerator.GetControls(_ScreenID, ShellWindowViewModel.CompanyIndex);
@@ -338,20 +684,6 @@ namespace PACT.VIEWMODEL
         }
         
 
-        public string DisplayName
-        {
-            get { return _DisplayName; }
-            set
-            {
-                if (value == _DisplayName)
-                    return;
-
-                _DisplayName = value;
-
-                base.OnPropertyChanged("DisplayName");
-            }
-        }
-        private string _DisplayName;
 
 
         #region INotifyPropertyChanged Members
