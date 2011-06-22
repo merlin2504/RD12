@@ -20,7 +20,7 @@ namespace PACT.MODEL
     public class ControlGenerator
     {
         private ObservableCollection<PactControlData> _PactControlData;
-
+        private DataSet _ds;
         public class Field
         {
             public string ID { get; set; }
@@ -49,9 +49,8 @@ namespace PACT.MODEL
             }
         }
 
-        private XmlDocument GetScreenInfo(int _ScreenID, string _CompanyIndex)
+        private DataSet GetScreenInfo(int _ScreenID, string _CompanyIndex)
         {
-            XmlDocument xDoc = new XmlDocument();
             try
             {
                 PACT.DBHandler.DBHandler DBH = new DBHandler.DBHandler();
@@ -62,8 +61,7 @@ namespace PACT.MODEL
 
                 DataSet ds = DBH.GetAddAccountScreenDetails(1, AL);
 
-                string s = "asdfasdf";
-                return xDoc;
+                return ds;
             }
             catch (Exception ex)
             {
@@ -71,18 +69,15 @@ namespace PACT.MODEL
             }
         }
 
-        public ObservableCollection<PactControlData> GetControls(string ScreenID, string CompanyIndex)
+        //public ObservableCollection<PactControlData> GetControls(string ScreenID, string CompanyIndex)
+        public DataSet GetControls(string ScreenID, string CompanyIndex)
         {
-            if (_PactControlData == null)
+            if (_ds == null)
             {              
-                int FeatureID = 0;
-                bool IsPartiralData = false;
-                PactTextBoxData oText;
+                _ds = GetScreenInfo(Convert.ToInt32(ScreenID), CompanyIndex);
 
-                XmlDocument xDoc = GetScreenInfo(Convert.ToInt32(ScreenID), CompanyIndex);
-
-
-                _PactControlData = new ObservableCollection<PactControlData>();
+                #region Sections
+                //_PactControlData = new ObservableCollection<PactControlData>();
                 //#region Sections
                 //Field oField;
                 //for (int iRow = 0; iRow < xDoc.DocumentElement.SelectNodes("Section").Count; iRow++)
@@ -253,9 +248,9 @@ namespace PACT.MODEL
                 //    _PactControlData.Add(PactGrid);
                 //}
                
-                //#endregion Grid
+                #endregion Grid
             }
-            return _PactControlData;
+            return _ds;
         }
 
         public int PostData(string XMLControlData, string ScreenID, string CompanyIndex)

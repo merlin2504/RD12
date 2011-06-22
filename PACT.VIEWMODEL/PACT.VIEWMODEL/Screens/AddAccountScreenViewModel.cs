@@ -18,7 +18,7 @@ namespace PACT.VIEWMODEL
     /// <summary>
     /// A UI-friendly wrapper for a Customer object.
     /// </summary>
-    public class ScreenViewModel : WorkspaceViewModel,IDataErrorInfo
+    public class AddAccountScreenViewModel : WorkspaceViewModel,IDataErrorInfo
     {
         private string ScreenName = "";
         string IDataErrorInfo.Error
@@ -54,10 +54,10 @@ namespace PACT.VIEWMODEL
 
         #region Constructor
 
-        public ScreenViewModel(string ScreenID)
+        public AddAccountScreenViewModel()
         {
             BackgroundWorker worker = new BackgroundWorker();
-            _ScreenID = ScreenID;
+            _ScreenID = "1";           
             switch (_ScreenID)
             {
                 case "1":
@@ -94,7 +94,7 @@ namespace PACT.VIEWMODEL
                     _DisplayName = "Create Product"; ;
                     break;
                 default:
-                    _DisplayName = ScreenID;
+                    //_DisplayName = ScreenID;
                     break;
             }
 
@@ -109,13 +109,13 @@ namespace PACT.VIEWMODEL
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {
             DisplayName = "Loading...";
-            _ComboBoxData = BuildControls();
+            _ScreenData = BuildControls();
 
         }
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             DisplayName = ScreenName;
-            PACTControlData = _PACTControlData;
+            //PACTControlData = _PACTControlData;
             
         }
 
@@ -233,20 +233,20 @@ namespace PACT.VIEWMODEL
         }
         private ObservableCollection<PactControlData> _PACTControlData;
 
-        private DataSet _ComboBoxData;
+        private DataSet _ScreenData;
 
-        public DataSet ComboBoxData
+        public DataSet ScreenData
         {
             get
             {
-                return _ComboBoxData;
+                return _ScreenData;
             }
             set
             {
                 //if (_PACTControlData != value)
                 //{
-                _ComboBoxData = value;
-                base.OnPropertyChanged("ComboBoxData");
+                _ScreenData = value;
+                base.OnPropertyChanged("ScreenData");
                 // }
             }
         }

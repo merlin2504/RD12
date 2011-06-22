@@ -9,15 +9,18 @@ This resource dictionary is used by the MainWindow.
     xmlns:System="clr-namespace:System;assembly=mscorlib"
   >
 
-  <DataTemplate DataType="{x:Type vm:ScreenViewModel}">
-        <vw:DefaultScreen />
+  <DataTemplate DataType="{x:Type vm:AddAccountScreenViewModel}">
+        <vw:AddEditAccount />
   </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ScreenViewModel}">
+        <vw:DefaultScreen/>
+    </DataTemplate>
 
-  <!-- 
+    <!-- 
   This style configures both of the main content areas in the main window.
   -->
   <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
-    <Setter Property="HeaderTemplate">
+    <!--<Setter Property="HeaderTemplate">
       <Setter.Value>
         <DataTemplate>
           <Border 
@@ -39,7 +42,7 @@ This resource dictionary is used by the MainWindow.
           </Border>
         </DataTemplate>
       </Setter.Value>
-    </Setter>
+    </Setter>-->
     <Setter Property="IsTabStop" Value="False" />
     <Setter Property="Template">
       <Setter.Value>

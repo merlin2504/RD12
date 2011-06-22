@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Ribbon\RibbonViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screens\AddAccountScreenViewModel.cs" />
     <Compile Include="Screens\ScreenViewModel.cs">
       <SubType>Code</SubType>
     </Compile>

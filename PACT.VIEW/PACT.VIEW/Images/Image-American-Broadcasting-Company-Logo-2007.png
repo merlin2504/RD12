@@ -1,0 +1,10 @@
+<html>
+<head>
+  <title>Page not found</title>
+</head>
+<body>
+<h1>404 Not Found</h1>
+Sorry, the page you are looking for does not exist.<br/>
+Click <a href="/index.php">here</a> to return to the home page.<br/>
+</body>
+</html>

@@ -22,47 +22,56 @@ namespace PACT.VIEWMODEL
 
         public RibbonViewModel()
         {
-            cmdLoadPage = new DelegateCommand<string>(OnLoadPage);
+            cmdLoadPage = new DelegateCommand<string>(OncmdLoadPage);
         }
 
-        void OnLoadPage(string obj)
+        void OncmdLoadPage(string obj)
         {
-            ScreenViewModel workspace;
-            WorkspaceViewModel wsvm;
-            int _screenID = -1;
-            if (objMainWindowViewModel.Workspaces.Count > 0)
+            //ScreenViewModel workspace;
+            //WorkspaceViewModel wsvm;
+            //int _screenID = -1;
+            //if (objMainWindowViewModel.Workspaces.Count > 0)
+            //{
+            //    for (int i = 0; i < objMainWindowViewModel.Workspaces.Count; i++)
+            //    {
+            //        wsvm = objMainWindowViewModel.Workspaces[i];
+            //        if (wsvm.PactScreenID != null && wsvm.PactScreenID.Equals(obj))
+            //        {
+            //            _screenID = i;
+            //            break;
+            //        }
+            //    }
+            //    if (_screenID != -1)
+            //    {
+            //        workspace = (ScreenViewModel)objMainWindowViewModel.Workspaces[_screenID];
+            //        objMainWindowViewModel.SetActiveWorkspace(workspace);
+            //    }
+            //    else
+            //    {
+            //        workspace = new ScreenViewModel(obj);
+            //        //workspace.DisplayName = obj;
+            //        workspace.PactScreenID = obj;
+            //        objMainWindowViewModel.Workspaces.Add(workspace);
+            //        objMainWindowViewModel.SetActiveWorkspace(workspace);
+            //    }
+            //}
+            //else
+            //{
+            //    workspace = new ScreenViewModel(obj);
+            //    //workspace.DisplayName = obj;
+            //    workspace.PactScreenID = obj;
+            //    objMainWindowViewModel.Workspaces.Add(workspace);
+            //    objMainWindowViewModel.SetActiveWorkspace(workspace);
+            //}
+            if (obj == "1")
             {
-                for (int i = 0; i < objMainWindowViewModel.Workspaces.Count; i++)
-                {
-                    wsvm = objMainWindowViewModel.Workspaces[i];
-                    if (wsvm.PactScreenID != null && wsvm.PactScreenID.Equals(obj))
-                    {
-                        _screenID = i;
-                        break;
-                    }
-                }
-                if (_screenID != -1)
-                {
-                    workspace = (ScreenViewModel)objMainWindowViewModel.Workspaces[_screenID];
-                    objMainWindowViewModel.SetActiveWorkspace(workspace);
-                }
-                else
-                {
-                    workspace = new ScreenViewModel(obj);
-                    //workspace.DisplayName = obj;
-                    workspace.PactScreenID = obj;
-                    objMainWindowViewModel.Workspaces.Add(workspace);
-                    objMainWindowViewModel.SetActiveWorkspace(workspace);
-                }
+                AddAccountScreenViewModel AddAccountWorkspace = new AddAccountScreenViewModel();
+                AddAccountWorkspace.PactScreenID = "1";
+                objMainWindowViewModel.Workspaces.Add(AddAccountWorkspace);
+                objMainWindowViewModel.SetActiveWorkspace(AddAccountWorkspace);
             }
-            else
-            {
-                workspace = new ScreenViewModel(obj);
-                //workspace.DisplayName = obj;
-                workspace.PactScreenID = obj;
-                objMainWindowViewModel.Workspaces.Add(workspace);
-                objMainWindowViewModel.SetActiveWorkspace(workspace);
-            }
+
+
         }
         //void OnLoadPage(string obj)
         //{

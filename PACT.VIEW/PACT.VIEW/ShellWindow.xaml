@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PACT.VIEW" WindowState="Maximized"
         Title="BindRibbon"  Width="1000" Name="ME">
     <Window.Resources>
-        <ResourceDictionary Source="../Resources/MainWindowResources.xaml" />
+        <ResourceDictionary Source="../Resources/MainWindowResources.xaml"/>
        
     </Window.Resources>
 
@@ -21,14 +21,13 @@
 
         <Grid Grid.Row="1">
             <Border Style="{StaticResource MainBorderStyle}">
-                <HeaderedContentControl 
+            <HeaderedContentControl 
               Content="{Binding Path=Workspaces}"
               ContentTemplate="{StaticResource WorkspacesTemplate}"
-              Header="Work Area"
               Style="{StaticResource MainHCCStyle}"
               />
             </Border>
         </Grid>
-
+        <!--Header="Work Area"-->
     </Grid>
 </ribbon:RibbonWindow>

@@ -74,8 +74,8 @@ namespace PACT.VIEWMODEL
                 {
                     _workspaces = new ObservableCollection<WorkspaceViewModel>();
                     _workspaces.CollectionChanged += this.OnWorkspacesChanged;
-                    ScreenViewModel HomeScreen = new ScreenViewModel("1");
-                    _workspaces.Add(HomeScreen);
+                    //AddAccountScreenViewModel HomeScreen = new AddAccountScreenViewModel("1");
+                    //_workspaces.Add(HomeScreen);
                 }
                 return _workspaces;
             }
