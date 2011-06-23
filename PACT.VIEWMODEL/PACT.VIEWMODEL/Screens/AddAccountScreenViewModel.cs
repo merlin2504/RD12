@@ -66,6 +66,9 @@ namespace PACT.VIEWMODEL
             _AccountCurrency = new ObservableCollection<ComboBoxItems>();
             _BillWise = new ObservableCollection<ComboBoxItems>();
 
+            _MessageVisibility = false;
+            _DisplayMessage = "Account";
+
             SaveAccount = new DelegateCommand<string>(OnSaveAccount, onCanSaveAccount);
 
 
@@ -132,7 +135,14 @@ namespace PACT.VIEWMODEL
                 ParamValues.Add(_CreditDays);
                 ParamValues.Add(37); //_SelectedPurchaseAccount
                 ParamValues.Add(42); //_SelectedSalesAccount
-                ParamValues.Add(false);
+                if (_SelectedBillWise == "1")
+                {
+                    ParamValues.Add(true);
+                }
+                else
+                {
+                    ParamValues.Add(false);
+                }
                 ParamValues.Add("");
                 ParamValues.Add("asdfasdfasdf");
                 ParamValues.Add("Mukaram");
@@ -140,7 +150,21 @@ namespace PACT.VIEWMODEL
                 ParamValues.Add("");
                 long ret = objControlGenerator.AddAccountDetails(ParamValues, 1);
 
+                if (ret > 0)
+                {
+                    _MessageVisibility = true;
+                    _DisplayMessage = "Account Added!  " + ret.ToString();
+                }
+                else
+                {
+                    _MessageVisibility = true;
+                    _DisplayMessage = ret.ToString();
+
+                }
                 
+                OnPropertyChanged("MessageVisibility");
+                OnPropertyChanged("DisplayMessage");
+
             }
             catch (Exception exe)
             {
@@ -315,21 +339,7 @@ namespace PACT.VIEWMODEL
         }
         
         private DataSet _ScreenData;
-        public DataSet ScreenData
-        {
-            get
-            {
-                return _ScreenData;
-            }
-            set
-            {
-                //if (_PACTControlData != value)
-                //{
-                _ScreenData = value;
-                base.OnPropertyChanged("ScreenData");
-                // }
-            }
-        }
+       
 
         private ObservableCollection<ComboBoxItems> _AccountTypes;
         public ObservableCollection<ComboBoxItems> AccountTypes
@@ -663,7 +673,40 @@ namespace PACT.VIEWMODEL
             }
         }
 
-        public DataSet BuildControls()
+        private bool _MessageVisibility;
+        public bool MessageVisibility
+        {
+            get
+            {
+                return _MessageVisibility;
+            }
+            set
+            {
+                if (value == _MessageVisibility)
+                    return;
+                _MessageVisibility = value;
+                base.OnPropertyChanged("MessageVisibility");
+
+            }
+        }
+
+        private string _DisplayMessage;
+        public string DisplayMessage
+        {
+            get
+            {
+                return _DisplayMessage;
+            }
+            set
+            {
+                if (value == _DisplayMessage)
+                    return;
+                _DisplayMessage = value;
+                base.OnPropertyChanged("DisplayMessage");
+            }
+        }
+
+        private DataSet BuildControls()
         {
             DataSet ds = objControlGenerator.GetControls(_ScreenID, ShellWindowViewModel.CompanyIndex);
             //if (_PACTControlData != null && _PACTControlData.Count > 0)
@@ -688,15 +731,15 @@ namespace PACT.VIEWMODEL
 
         #region INotifyPropertyChanged Members
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        //public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, e);
-            }
-        }
+        //protected void OnPropertyChanged(PropertyChangedEventArgs e)
+        //{
+        //    if (PropertyChanged != null)
+        //    {
+        //        PropertyChanged(this, e);
+        //    }
+        //}
 
         #endregion
         

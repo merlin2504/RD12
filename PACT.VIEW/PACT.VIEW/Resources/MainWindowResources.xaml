@@ -294,6 +294,8 @@ This resource dictionary is used by the MainWindow.
         <GradientStop Color="#FF636F8B" Offset="0.54" />
     </LinearGradientBrush>
 
+    
+
     <DrawingBrush x:Key="PersonFigureFill" Stretch="Uniform">
         <DrawingBrush.Drawing>
             <DrawingGroup>

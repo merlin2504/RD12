@@ -157,11 +157,11 @@
 				<Setter Property="FontWeight" Value="Bold" />
 			</Style>
 
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
+        </ResourceDictionary>
 
-		</ResourceDictionary>
-
-
+       
 
 
 	</UserControl.Resources>
@@ -231,6 +231,11 @@
 							</ToolBar>
 						</ToolBarTray>
 					</DockPanel>
+                    <DockPanel Visibility="{Binding MessageVisibility, Converter={StaticResource BooleanToVisibilityConverter}, Mode=TwoWay}">
+
+                        <TextBlock HorizontalAlignment="Center" Margin="5,0,0,0" TextWrapping="Wrap" Text="{Binding DisplayMessage, Mode=TwoWay, UpdateSourceTrigger=Default}" FontSize="18" VerticalAlignment="Center" FontFamily="Segoe UI Semibold" Foreground="#FF5F00EF"/>
+
+                    </DockPanel>
                     <Grid Margin="4,15,4,8" Height="284.05">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="0.25*"/>
