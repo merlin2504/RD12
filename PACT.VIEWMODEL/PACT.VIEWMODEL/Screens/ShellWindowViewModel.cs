@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Data;
+using PACT.COMMON;
 
 
 //using DemoApp.DataAccess;
@@ -39,6 +40,7 @@ namespace PACT.VIEWMODEL
 
         public ShellWindowViewModel()
         {
+            Logger.InfoLog("ShellWindowViewModel:: Constructor");
             LoadApplicationConfig();
             //base.DisplayName = Strings.MainWindowViewModel_DisplayName;
         }

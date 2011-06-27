@@ -1,5 +1,5 @@
 SCC = This is a Source Code Control file
 
 [PACT.DBHandler.sln]
-SCC_Aux_Path = "\\Pactserverhyd\vssdb\"
-SCC_Project_Name = "$/PACT2.0/PACT.DBHandler", EQFBAAAA
+SCC_Aux_Path = "\\Pactserverhyd\VSSDB\"
+SCC_Project_Name = "$/PACT2.0/PACT.DBHandler/PACT.DBHandler", FQFBAAAA

@@ -27,6 +27,7 @@ namespace PACT.VIEWMODEL
 
         void OncmdLoadPage(string obj)
         {
+            Logger.InfoLog("RibbonViewModel:: Inside OncmdLoadPage  ID=" + obj.ToString());
             //ScreenViewModel workspace;
             //WorkspaceViewModel wsvm;
             //int _screenID = -1;

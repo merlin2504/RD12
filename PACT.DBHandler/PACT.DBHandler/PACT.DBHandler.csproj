@@ -67,9 +67,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="app.config" />
     <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <None Include="Service References\PactWebService\PactWebService.wsdl" />
     <None Include="Service References\PactWebService\PactWebService.xsd">

@@ -58,6 +58,7 @@ namespace PACT.VIEWMODEL
         #region Constructor
         public AddAccountScreenViewModel()
         {
+            Logger.InfoLog("AddAccountScreenViewModel::Entering AddAccountScreenViewModel");
             _AccountTypes = new ObservableCollection<ComboBoxItems>();
             _AccountStatuses = new ObservableCollection<ComboBoxItems>();
             _AccountGroups = new ObservableCollection<ComboBoxItems>();
@@ -66,11 +67,14 @@ namespace PACT.VIEWMODEL
             _AccountCurrency = new ObservableCollection<ComboBoxItems>();
             _BillWise = new ObservableCollection<ComboBoxItems>();
 
+            _SelectedAccountType = "1";
+
             _MessageVisibility = false;
             _DisplayMessage = "Account";
 
             SaveAccount = new DelegateCommand<string>(OnSaveAccount, onCanSaveAccount);
 
+            PactTextBlockData TB = new PactTextBlockData();
 
             BackgroundWorker worker = new BackgroundWorker();
             _ScreenID = "1";           
@@ -115,11 +119,14 @@ namespace PACT.VIEWMODEL
             }
 
             DynamicCommand = new DelegateCommand<string>(CommandController);
+
+            Logger.InfoLog("AddAccountScreenViewModel::Exiting AddAccountScreenViewModel");
         }
         #endregion // Constructor
 
         public void OnSaveAccount(object sender)
         {
+            Logger.InfoLog("AddAccountScreenViewModel::Entering OnSaveAccount");
             try
             {
                 ArrayList ParamValues = new ArrayList();
@@ -133,8 +140,10 @@ namespace PACT.VIEWMODEL
                 ParamValues.Add(false);
                 ParamValues.Add(_CreditLimit);
                 ParamValues.Add(_CreditDays);
-                ParamValues.Add(37); //_SelectedPurchaseAccount
-                ParamValues.Add(42); //_SelectedSalesAccount
+                ParamValues.Add(_SelectedPurchaseAccount); //_SelectedPurchaseAccount
+
+
+                ParamValues.Add(_Selected); //_SelectedSalesAccount
                 if (_SelectedBillWise == "1")
                 {
                     ParamValues.Add(true);
@@ -164,10 +173,13 @@ namespace PACT.VIEWMODEL
                 
                 OnPropertyChanged("MessageVisibility");
                 OnPropertyChanged("DisplayMessage");
+                OnPropertyChanged("AccountName");
+                Logger.InfoLog("AddAccountScreenViewModel::Exiting OnSaveAccount");
 
             }
-            catch (Exception exe)
+            catch (Exception ex)
             {
+                Logger.ErrorLog("AddAccountScreenViewModel:: OnSaveAccount" + ex.StackTrace.ToString());
             }
         }
         private bool onCanSaveAccount(object sender)
@@ -178,9 +190,10 @@ namespace PACT.VIEWMODEL
         #region Background Thread
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {
+            Logger.InfoLog("AddAccountScreenViewModel::Entering worker_DoWork");
             DisplayName = "Loading...";
             _ScreenData = BuildControls();
-
+            Logger.InfoLog("AddAccountScreenViewModel::BuildControls Success");
             //_AccountTypes = _ScreenData.Tables[0].AsEnumerable().ToList();
 
             foreach (DataRow dr in _ScreenData.Tables[0].Rows)
@@ -215,7 +228,7 @@ namespace PACT.VIEWMODEL
 
             _BillWise.Add(new ComboBoxItems("No", "0"));
             _BillWise.Add(new ComboBoxItems("Yes", "1"));
-
+            Logger.InfoLog("AddAccountScreenViewModel::Exiting worker_DoWork");
 
         }
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -320,6 +333,22 @@ namespace PACT.VIEWMODEL
                     break;
             }
         }
+
+        private DataRowView _Selected;
+        public DataRowView Selected
+        {
+            get
+            {
+                return _Selected;
+            }
+            set
+            {
+                _Selected = value;
+                base.OnPropertyChanged("Selected");
+                // do whatever you need to do
+            }
+        }
+
 
         private ObservableCollection<PactControlData> _PACTControlData;
         public ObservableCollection<PactControlData> PACTControlData
@@ -708,7 +737,13 @@ namespace PACT.VIEWMODEL
 
         private DataSet BuildControls()
         {
-            DataSet ds = objControlGenerator.GetControls(_ScreenID, ShellWindowViewModel.CompanyIndex);
+            Logger.InfoLog("AddAccountScreenViewModel::Entering BuildControls");
+
+            try
+            {
+                DataSet ds = objControlGenerator.GetControls(_ScreenID, ShellWindowViewModel.CompanyIndex);
+                return ds;
+            }
             //if (_PACTControlData != null && _PACTControlData.Count > 0)
             //{
 
@@ -722,8 +757,12 @@ namespace PACT.VIEWMODEL
             //        }
             //    }
             //}
-          
-            return ds;
+            catch (Exception ex)
+            {
+                Logger.ErrorLog("AddAccountScreenViewModel:: BuildControls" + ex.StackTrace.ToString());
+                return null;
+            }
+
         }
         
 

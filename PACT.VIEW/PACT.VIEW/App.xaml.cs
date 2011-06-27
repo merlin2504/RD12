@@ -39,7 +39,10 @@ namespace PACT.VIEW
               new FrameworkPropertyMetadata(
                   XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
 
-           
+            Logger.Instance();
+            Logger.InfoLog("OnStartup: Logger Instance Created Successfully");
+            Logger.InfoLog("OnStartup: Application Starting...");
+                      
             base.OnStartup(e);
         }
     }

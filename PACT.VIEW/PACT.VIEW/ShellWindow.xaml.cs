@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using PACT.VIEWMODEL;
+using PACT.COMMON;
 
 
 namespace PACT.VIEW
@@ -23,6 +24,7 @@ namespace PACT.VIEW
         ShellWindowViewModel objMainWindowViewModel;
         public ShellWindow()
         {
+            Logger.InfoLog("ShellWindow:: Constructor");
             this.InitializeComponent();
             objMainWindowViewModel = new ShellWindowViewModel();
             this.DataContext = objMainWindowViewModel;

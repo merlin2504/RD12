@@ -124,8 +124,10 @@ namespace PACT.Service
                         cparam.Direction = parameter.ParameterDirection;
                         if (parameter.ParameterDirection == ParameterDirection.Input)
                         {
-
-                            cparam.Value = values[i++];
+                            if (values.Count > i)
+                            {
+                                cparam.Value = values[i++];
+                            }
                         }
                     }
                 }

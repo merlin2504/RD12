@@ -20,7 +20,7 @@ namespace TestClientDBHandler
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DataSet ds = new DBHandler().Getter(1, GetParams(), textBox1.Text);
+            DataSet ds = new DBHandler().Getter(1, GetParams(), cmbProcedures.Text);
             if (ds != null && ds.Tables.Count > 0)
             {
                 dataGridView1.Visible = true;
@@ -34,7 +34,7 @@ namespace TestClientDBHandler
             long ID;
             try
             {
-                string Message = new DBHandler().settter(1, GetParams(), textBox1.Text, out ID);
+                string Message = new DBHandler().settter(1, GetParams(), cmbProcedures.Text, out ID);
                 MessageBox.Show(Message);
             }
             catch (Exception ex)
@@ -57,10 +57,15 @@ namespace TestClientDBHandler
 
         private void button4_Click(object sender, EventArgs e)
         {
-            tableLayoutPanel1.Controls.Clear();
+            GetParameters();
+        }
 
+        private void GetParameters()
+        {
+            tableLayoutPanel1.Controls.Clear();
             ArrayList param = new ArrayList();
-            param.Add(textBox1.Text);
+            param.Add(cmbProcedures.Text);
+
             DataSet ds = new DBHandler().GetMetaData(1, param);
             if (ds != null && ds.Tables.Count > 0)
             {
@@ -82,6 +87,24 @@ namespace TestClientDBHandler
                     tableLayoutPanel1.Controls.Add(txt, 1, i);
                 }
             }
+        }
+
+        private void TestSP_Load(object sender, EventArgs e)
+        {
+            ArrayList param = new ArrayList();
+            
+            DataSet ds = new DBHandler().Getter(1, param, "GetProcedures");
+            if (ds != null && ds.Tables.Count > 0)
+            { 
+                cmbProcedures.DataSource = ds.Tables[0];
+                cmbProcedures.DisplayMember = "name";
+                cmbProcedures.ValueMember = "name";
+            }
+        }
+
+        private void cmbProcedures_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GetParameters();
         }
     }
 }

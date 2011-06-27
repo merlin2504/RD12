@@ -3,6 +3,9 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+             xmlns:data="clr-namespace:PACT.COMMON;assembly=PACT.COMMON"
+             xmlns:toolKit="http://schemas.microsoft.com/wpf/2008/toolkit"
 			 mc:Ignorable="d" 
 			 d:DesignHeight="300" d:DesignWidth="300">
 	<UserControl.Resources>
@@ -158,13 +161,241 @@
 			</Style>
 
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <DataTemplate DataType="{x:Type data:PactTextBlockData}">
+                <TextBlock Margin="10,10,10,10" Width="100" Text="{Binding Path=Text}"/>
+            </DataTemplate>
+
+
+            <!--StartListView-->
+            <Style x:Key="ComboBoxFocusVisual">
+                <Setter Property="Control.Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Rectangle Stroke="Black" StrokeDashArray="1 2" StrokeThickness="1" Margin="4,4,21,4" SnapsToDevicePixels="true"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <LinearGradientBrush x:Key="ButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
+                <GradientStop Color="#F3F3F3" Offset="0"/>
+                <GradientStop Color="#EBEBEB" Offset="0.5"/>
+                <GradientStop Color="#DDDDDD" Offset="0.5"/>
+                <GradientStop Color="#CDCDCD" Offset="1"/>
+            </LinearGradientBrush>
+            <SolidColorBrush x:Key="ButtonNormalBorder" Color="#FF707070"/>
+            <Geometry x:Key="DownArrowGeometry">M 0 0 L 3.5 4 L 7 0 Z</Geometry>
+            <Style x:Key="ComboBoxReadonlyToggleButton" TargetType="{x:Type ToggleButton}">
+                <Setter Property="OverridesDefaultStyle" Value="true"/>
+                <Setter Property="IsTabStop" Value="false"/>
+                <Setter Property="Focusable" Value="false"/>
+                <Setter Property="ClickMode" Value="Press"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <Microsoft_Windows_Themes:ButtonChrome x:Name="Chrome" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" RenderMouseOver="{TemplateBinding IsMouseOver}" RenderPressed="{TemplateBinding IsPressed}">
+                                <Grid HorizontalAlignment="Right" Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}">
+                                    <Path x:Name="Arrow" Fill="Black" HorizontalAlignment="Center" Margin="3,1,0,0" VerticalAlignment="Center" Data="{StaticResource DownArrowGeometry}"/>
+                                </Grid>
+                            </Microsoft_Windows_Themes:ButtonChrome>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="true">
+                                    <Setter Property="RenderPressed" TargetName="Chrome" Value="true"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Fill" TargetName="Arrow" Value="#AFAFAF"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <LinearGradientBrush x:Key="TextBoxBorder" EndPoint="0,20" StartPoint="0,0" MappingMode="Absolute">
+                <GradientStop Color="#ABADB3" Offset="0.05"/>
+                <GradientStop Color="#E2E3EA" Offset="0.07"/>
+                <GradientStop Color="#E3E9EF" Offset="1"/>
+            </LinearGradientBrush>
+            <Style x:Key="ComboBoxEditableTextBox" TargetType="{x:Type TextBox}">
+                <Setter Property="OverridesDefaultStyle" Value="true"/>
+                <Setter Property="AllowDrop" Value="true"/>
+                <Setter Property="MinWidth" Value="0"/>
+                <Setter Property="MinHeight" Value="0"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TextBox}">
+                            <ScrollViewer x:Name="PART_ContentHost" Background="Transparent" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+                <Setter Property="OverridesDefaultStyle" Value="true"/>
+                <Setter Property="IsTabStop" Value="false"/>
+                <Setter Property="Focusable" Value="false"/>
+                <Setter Property="ClickMode" Value="Press"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <Microsoft_Windows_Themes:ButtonChrome x:Name="Chrome" Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" RenderMouseOver="{TemplateBinding IsMouseOver}" RenderPressed="{TemplateBinding IsPressed}" RoundCorners="false">
+                                <Path x:Name="Arrow" Fill="Black" HorizontalAlignment="Center" Margin="0,1,0,0" VerticalAlignment="Center" Data="{StaticResource DownArrowGeometry}"/>
+                            </Microsoft_Windows_Themes:ButtonChrome>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="true">
+                                    <Setter Property="RenderPressed" TargetName="Chrome" Value="true"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Fill" TargetName="Arrow" Value="#AFAFAF"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+
+            <ControlTemplate x:Key="ComboBoxEditableTemplatePaging" TargetType="{x:Type data:PACTListView}">
+                <Grid x:Name="Placement" SnapsToDevicePixels="true">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Popup x:Name="PART_Popup" AllowsTransparency="true" IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Bottom" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Grid.ColumnSpan="2">
+                        <Microsoft_Windows_Themes:SystemDropShadowChrome x:Name="Shdw" MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{Binding ActualWidth, ElementName=Placement}" Color="Transparent">
+                            <Border x:Name="DropDownBorder" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" BorderThickness="1">
+                                <toolKit:DataGrid x:Name="PART_PopupDataGrid" 
+                                           ItemsSource="{TemplateBinding ItemsSource}" 
+                                           AutoGenerateColumns="False" 
+                                           IsReadOnly="True" 
+                                           IsSynchronizedWithCurrentItem="False" 
+                                           SelectionMode="Single" 
+                                           HeadersVisibility="Column" 
+                                           SelectedIndex="{TemplateBinding SelectedIndex}" 
+                                           DisplayMemberPath="{TemplateBinding DisplayMemberPath}" 
+                                           Focusable="False" SelectedItem="{TemplateBinding SelectedItem}" 
+                                           SelectedValue="{TemplateBinding SelectedValue}" 
+                                           SelectedValuePath="{TemplateBinding SelectedValuePath}" 
+                                           RowDetailsVisibilityMode="Collapsed" Tag="{TemplateBinding Tag}" 
+                                           MaxHeight="{TemplateBinding MaxDropDownHeight}" 
+                                           IsTextSearchEnabled="{TemplateBinding IsTextSearchEnabled}" 
+                                           CanUserSortColumns="True"
+                                           
+                                           >
+
+                                </toolKit:DataGrid>
+
+                            </Border>
+                        </Microsoft_Windows_Themes:SystemDropShadowChrome>
+                    </Popup>
+                    <Microsoft_Windows_Themes:ListBoxChrome x:Name="Border" Grid.ColumnSpan="2" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" RenderFocused="{TemplateBinding IsKeyboardFocusWithin}" RenderMouseOver="{TemplateBinding IsMouseOver}"/>
+                    <TextBox x:Name="PART_EditableTextBox" Margin="{TemplateBinding Padding}" Style="{StaticResource ComboBoxEditableTextBox}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}"/>
+                    <ToggleButton Style="{StaticResource ComboBoxToggleButton}" Grid.Column="1" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                </Grid>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsKeyboardFocusWithin" Value="true">
+                        <Setter Property="Foreground" Value="Black"/>
+                    </Trigger>
+                    <Trigger Property="IsDropDownOpen" Value="true">
+                        <Setter Property="RenderFocused" TargetName="Border" Value="true"/>
+                    </Trigger>
+                    <Trigger Property="HasItems" Value="false">
+                        <Setter Property="Height" TargetName="DropDownBorder" Value="95"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="false">
+                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                        <Setter Property="Background" Value="#FFF4F4F4"/>
+                    </Trigger>
+                    <Trigger Property="IsGrouping" Value="true">
+                        <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                    </Trigger>
+                    <Trigger Property="HasDropShadow" SourceName="PART_Popup" Value="true">
+                        <Setter Property="Margin" TargetName="Shdw" Value="0,0,5,5"/>
+                        <Setter Property="Color" TargetName="Shdw" Value="#71000000"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+
+            <Style TargetType="{x:Type data:PACTListView}">
+                <Setter Property="FocusVisualStyle" Value="{StaticResource ComboBoxFocusVisual}"/>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+                <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+                <!--<Setter Property="Padding" Value="4,3"/>-->
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type data:PACTListView}">
+                            <Grid x:Name="MainGrid" SnapsToDevicePixels="true">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0"/>
+                                </Grid.ColumnDefinitions>
+                                <Popup x:Name="PART_Popup" Margin="1" AllowsTransparency="true" 
+                               IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" 
+                               Placement="Bottom" 
+                               PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Grid.ColumnSpan="2">
+                                    <Microsoft_Windows_Themes:SystemDropShadowChrome x:Name="Shdw" MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{Binding ActualWidth, ElementName=MainGrid}" Color="Transparent">
+                                        <Border x:Name="DropDownBorder" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" BorderThickness="1">
+                                            <toolKit:DataGrid x:Name="PART_PopupDataGrid" 
+                                                      ItemsSource="{TemplateBinding ItemsSource}" 
+                                                      AutoGenerateColumns="False" 
+                                                      IsReadOnly="True" 
+                                                      IsSynchronizedWithCurrentItem="False" 
+                                                      SelectionMode="Single" 
+                                                      HeadersVisibility="Column" 
+                                                      SelectedIndex="{TemplateBinding SelectedIndex}" 
+                                                      DisplayMemberPath="{TemplateBinding DisplayMemberPath}" 
+                                                      Focusable="False" SelectedItem="{TemplateBinding SelectedItem}" 
+                                                      SelectedValue="{TemplateBinding SelectedValue}" 
+                                                      SelectedValuePath="{TemplateBinding SelectedValuePath}" 
+                                                      RowDetailsVisibilityMode="Collapsed" Tag="{TemplateBinding Tag}" 
+                                                      MaxHeight="{TemplateBinding MaxDropDownHeight}" 
+                                                      IsTextSearchEnabled="{TemplateBinding IsTextSearchEnabled}" 
+                                                      CanUserSortColumns="False"
+                                                      />
+                                        </Border>
+                                    </Microsoft_Windows_Themes:SystemDropShadowChrome>
+                                </Popup>
+                                <ToggleButton Style="{StaticResource ComboBoxReadonlyToggleButton}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Grid.ColumnSpan="2" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsHitTestVisible="false" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Content="{TemplateBinding SelectionBoxItem}" ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="HasDropShadow" SourceName="PART_Popup" Value="true">
+                                    <Setter Property="Margin" TargetName="Shdw" Value="0,0,5,5"/>
+                                    <Setter Property="Color" TargetName="Shdw" Value="#71000000"/>
+                                </Trigger>
+                                <Trigger Property="HasItems" Value="false">
+                                    <Setter Property="Height" TargetName="DropDownBorder" Value="95"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                    <Setter Property="Background" Value="#FFF4F4F4"/>
+                                </Trigger>
+                                <Trigger Property="IsGrouping" Value="true">
+                                    <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsEditable" Value="true">
+                        <Setter Property="BorderBrush" Value="{StaticResource TextBoxBorder}"/>
+                        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+                        <Setter Property="IsTabStop" Value="false"/>
+                        <Setter Property="Padding" Value="3"/>
+                        <Setter Property="Template" Value="{StaticResource ComboBoxEditableTemplatePaging}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!--EndListView-->
 
         </ResourceDictionary>
 
-       
 
-
-	</UserControl.Resources>
+    </UserControl.Resources>
 
 	<UserControl.Triggers>
 		<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="AddContactButton">
@@ -185,7 +416,7 @@
 						<ToolBarTray Background="#FFE4F0FF" HorizontalAlignment="Right">
 							<ToolBar Width="255.803" Height="35" Background="#FFE4F0FF" Band="1" BandIndex="1" HorizontalContentAlignment="Right">
 								<Button Command="{Binding SaveAccount, Mode=TwoWay, UpdateSourceTrigger=Default}">
-									<Image Source="../Images/new.png" ToolTip="New" />
+									<Image Source="../Images/Save.png" ToolTip="New" />
 								</Button>
 								<Button>
 									<Image Source="../Images/attach.png" ToolTip="Attache" />
@@ -253,7 +484,7 @@
 						</Grid.RowDefinitions>
 						<StackPanel Orientation="Vertical" Grid.ColumnSpan="2" Margin="2,0,6,0">
 							<Label Content="Account Name*" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
-                            <TextBox TextWrapping="Wrap" FontSize="16" Margin="5,0,0,0" Text="{Binding AccountName, Mode=TwoWay, UpdateSourceTrigger=Default}"/>
+                            <TextBox TextWrapping="Wrap" FontSize="16" Margin="5,0,0,0" Text="{Binding AccountName, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
 						</StackPanel>
 						<StackPanel Orientation="Vertical"  Grid.Column="2" Margin="2,0,6,0">
 							<Label Content="Account Code" Foreground="{DynamicResource InputFontColor}" FontSize="16"  />
@@ -265,7 +496,7 @@
 						</StackPanel>
 						<StackPanel Orientation="Vertical" Grid.Row="1" Margin="2,0,6,0">
 							<Label Content="Account Type*" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
-							<ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0" ItemsSource="{Binding AccountTypes, Mode=TwoWay, UpdateSourceTrigger=Default}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding SelectedAccountType, Mode=TwoWay}">
+							<ComboBox FontSize="16" Foreground="#FF3A485C" Margin="5,0,0,0" ItemsSource="{Binding AccountTypes, Mode=TwoWay, UpdateSourceTrigger=Default}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding SelectedAccountType, Mode=TwoWay}">
 								<ComboBox.Background>
 									<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
 										<GradientStop Color="#FFF3F3F3"/>
@@ -317,14 +548,17 @@
 							<Label Content="Credit Limit" Foreground="{DynamicResource InputFontColor}" FontSize="16"  />
                             <TextBox FontSize="16" Margin="5,0,0,0" Text="{Binding CreditLimit, Mode=TwoWay, UpdateSourceTrigger=Default}"/>
 						</StackPanel>
-						<StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="2,0,6,0">
+                        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="2,0,6,0">
 							<Label Content="Credit Days" Foreground="{DynamicResource InputFontColor}" FontSize="16"  />
                             <TextBox FontSize="16" Margin="5,0,0,0" Text="{Binding CreditDays, Mode=TwoWay, UpdateSourceTrigger=Default}"/>
 						</StackPanel>
-
-						<StackPanel Orientation="Vertical" Grid.Row="3" Margin="2,0,6,0">
+                        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="2" Margin="2,0,6,0">
+                            <Label Content="Opening Balance" Foreground="{DynamicResource InputFontColor}" FontSize="16"  />
+                            <TextBox FontSize="16" Margin="5,0,0,0" Text="{Binding CreditDays, Mode=TwoWay, UpdateSourceTrigger=Default}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="3" Margin="2,0,6,0">
 							<Label Content="Sales Account" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
-							<ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0" ItemsSource="{Binding SalesAccounts, Mode=TwoWay, UpdateSourceTrigger=Default}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding SelectedSalesAccount, Mode=TwoWay}">
+							<!--<ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0" ItemsSource="{Binding SalesAccounts, Mode=TwoWay, UpdateSourceTrigger=Default}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding SelectedSalesAccount, Mode=TwoWay}">
 								<ComboBox.Background>
 									<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
 										<GradientStop Color="#FFF3F3F3"/>
@@ -333,7 +567,10 @@
 										<GradientStop Color="#FFAAD4F5" Offset="1"/>
 									</LinearGradientBrush>
 								</ComboBox.Background>
-							</ComboBox>
+							</ComboBox>-->
+                            <data:PACTListView SelectedItem="{Binding Selected, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True" UserID="1" IsPartiralData="True" CostCenterID="1" CompanyDBIndex="1"  FontSize="16" Margin="5,0,0,0">
+                                </data:PACTListView>
+                            
 						</StackPanel>
 						<StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="1" Margin="2,0,6,0">
 							<Label Content="Purchase Account" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
@@ -395,7 +632,7 @@
 
 					</Grid>
 					<StackPanel Orientation="Horizontal">
-						<TextBlock TextWrapping="Wrap" Text="Custom Fields" Margin="7,6,0,-1" FontSize="18.667" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom" Visibility="Collapsed"/>
+						<TextBlock TextWrapping="Wrap" Text="Custom Fields" Margin="7,6,0,-1" FontSize="18.667" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
 					</StackPanel>
 					<Grid Margin="4,0,4,8">
 						<Grid.ColumnDefinitions>
