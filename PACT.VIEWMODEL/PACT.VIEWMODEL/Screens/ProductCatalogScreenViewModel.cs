@@ -21,7 +21,7 @@ namespace PACT.VIEWMODEL
     /// <summary>
     /// A UI-friendly wrapper for a Customer object.
     /// </summary>
-    public class AddAccountScreenViewModel : WorkspaceViewModel,IDataErrorInfo
+    public class ProductCatalogScreenViewModel : WorkspaceViewModel,IDataErrorInfo
     {
         private string ScreenName = "";
         string IDataErrorInfo.Error
@@ -56,7 +56,7 @@ namespace PACT.VIEWMODEL
         #endregion // Fields
 
         #region Constructor
-        public AddAccountScreenViewModel()
+        public ProductCatalogScreenViewModel()
         {
             Logger.InfoLog("AddAccountScreenViewModel::Entering AddAccountScreenViewModel");
             _AccountTypes = new ObservableCollection<ComboBoxItems>();
@@ -71,7 +71,7 @@ namespace PACT.VIEWMODEL
 
             _MessageVisibility = false;
             _DisplayMessage = "Account";
-            _UserID = "1";
+
             SaveAccount = new DelegateCommand<string>(OnSaveAccount, onCanSaveAccount);
 
             PactTextBlockData TB = new PactTextBlockData();
@@ -138,10 +138,12 @@ namespace PACT.VIEWMODEL
                 ParamValues.Add(_SelectedAccountStatus);
                 ParamValues.Add(_SelectedAccountGroup);
                 ParamValues.Add(false);
-                ParamValues.Add(_CreditDays);
                 ParamValues.Add(_CreditLimit);
-                ParamValues.Add(_SelectedPurchaseAccount[0]); //_SelectedPurchaseAccount
-                ParamValues.Add(_SelectedSalesAccount[0]); //_SelectedSalesAccount
+                ParamValues.Add(_CreditDays);
+                ParamValues.Add(_SelectedPurchaseAccount); //_SelectedPurchaseAccount
+
+
+                ParamValues.Add(_Selected); //_SelectedSalesAccount
                 if (_SelectedBillWise == "1")
                 {
                     ParamValues.Add(true);
@@ -150,18 +152,11 @@ namespace PACT.VIEWMODEL
                 {
                     ParamValues.Add(false);
                 }
-                ParamValues.Add("GUID");
+                ParamValues.Add("");
                 ParamValues.Add("asdfasdfasdf");
                 ParamValues.Add("Mukaram");
-                ParamValues.Add("asdfasfdasFD");
-
-                string contacts = @"<ContactsXML><Row AddressTypeID =""1"" ContactName =""name"" Address1=""addr1""  Address2 =""Address2"" ContactName =""name"" Address3=""Address3""  City =""City"" State =""State"" Zip=""Zip"" Country=""Country"" Phone1=""Phone1"" Phone2=""Phone2"" @Fax=""Fax""  Email1=""Email1"" Email2=""Email2"" />";
-
-                string attachments = @"<XML><Row FilePath=""FilePath"" ActualFileName=""ActualFileName"" RelativeFileName=""RelativeFileName"" FileExtension=""FileExtension"" IsProductImage=""IsProductImage"" /></XML>";
-
-                ParamValues.Add(contacts);
-                ParamValues.Add(attachments);
-                ParamValues.Add(1);
+                ParamValues.Add(0);
+                ParamValues.Add("");
                 long ret = objControlGenerator.AddAccountDetails(ParamValues, 1);
 
                 if (ret > 0)
@@ -491,25 +486,6 @@ namespace PACT.VIEWMODEL
             }
         }
 
-        private string _UserID;
-        public string UserID
-        {
-            get
-            {
-                return _UserID;
-            }
-            set
-            {
-                if (value == _UserID)
-                    return;
-
-                _UserID = value;
-
-                base.OnPropertyChanged("UserID");
-            }
-        }
-
-
         private string _SelectedAccountType;
         public string SelectedAccountType
         {
@@ -564,8 +540,8 @@ namespace PACT.VIEWMODEL
             }
         }
 
-        private DataRowView _SelectedSalesAccount;
-        public DataRowView SelectedSalesAccount
+        private string _SelectedSalesAccount;
+        public string SelectedSalesAccount
         {
             get
             {
@@ -582,8 +558,8 @@ namespace PACT.VIEWMODEL
             }
         }
 
-        private DataRowView _SelectedPurchaseAccount;
-        public DataRowView SelectedPurchaseAccount
+        private string _SelectedPurchaseAccount;
+        public string SelectedPurchaseAccount
         {
             get
             {
@@ -823,35 +799,6 @@ namespace PACT.VIEWMODEL
 
     }
 
-    public class ComboBoxItems
-    {
-        #region Properties
-
-        private string _name = string.Empty;
-        private string _value = string.Empty;
-
-        public string Name 
-        { 
-            get 
-            { 
-                return _name; 
-            } 
-        }
-        public string Value 
-        { 
-            get 
-            { 
-                return _value; 
-            } 
-        }
-
-        #endregion Properties
-
-        public ComboBoxItems(string name, string value)
-        {
-            this._name = name;
-            this._value = value;
-        }
-    }
+    
 
 }

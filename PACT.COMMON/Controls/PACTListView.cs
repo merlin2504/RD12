@@ -25,7 +25,7 @@ namespace PACT.COMMON
 {
     [DefaultProperty("Columns")]
     [ContentProperty("Columns")]
-    public class PACTListView : ComboBox
+    public class PACTLISTVIEW : ComboBox
     {
         string prevtext = "";
         const string partPopupDataGrid = "PART_PopupDataGrid";
@@ -48,7 +48,22 @@ namespace PACT.COMMON
         }
 
         public static readonly DependencyProperty UserIDProperty =
-            DependencyProperty.RegisterAttached("UserID", typeof(int), typeof(PACTListView), new UIPropertyMetadata(null));
+            DependencyProperty.RegisterAttached("UserID", typeof(int), typeof(PACTLISTVIEW), new UIPropertyMetadata(null));
+
+        public int TypeID
+        {
+            get
+            {
+                return (int)GetValue(TypeIDProperty);
+            }
+            set
+            {
+                SetValue(TypeIDProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty TypeIDProperty =
+            DependencyProperty.RegisterAttached("TypeID", typeof(int), typeof(PACTLISTVIEW), new UIPropertyMetadata(null));
 
 
         public int CostCenterID
@@ -64,7 +79,21 @@ namespace PACT.COMMON
         }
 
         public static readonly DependencyProperty CostCenterIDProperty =
-            DependencyProperty.RegisterAttached("CostCenterID", typeof(int), typeof(PACTListView), new UIPropertyMetadata(null));
+            DependencyProperty.RegisterAttached("CostCenterID", typeof(int), typeof(PACTLISTVIEW), new UIPropertyMetadata(null));
+        public int LanguageID
+        {
+            get
+            {
+                return (int)GetValue(LanguageIDProperty);
+            }
+            set
+            {
+                SetValue(LanguageIDProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty LanguageIDProperty =
+            DependencyProperty.RegisterAttached("LanguageID", typeof(int), typeof(PACTLISTVIEW), new UIPropertyMetadata(null));
 
         public int CompanyDBIndex
         {
@@ -79,7 +108,7 @@ namespace PACT.COMMON
         }
 
         public static readonly DependencyProperty CompanyDBIndexProperty =
-            DependencyProperty.RegisterAttached("CompanyDBIndex", typeof(int), typeof(PACTListView), new UIPropertyMetadata(null));
+            DependencyProperty.RegisterAttached("CompanyDBIndex", typeof(int), typeof(PACTLISTVIEW), new UIPropertyMetadata(null));
 
         public bool IsPartiralData
         {
@@ -94,7 +123,7 @@ namespace PACT.COMMON
         }
 
         public static readonly DependencyProperty IsPartiralDataProperty =
-            DependencyProperty.RegisterAttached("IsPartiralData", typeof(bool), typeof(PACTListView), new UIPropertyMetadata(null));
+            DependencyProperty.RegisterAttached("IsPartiralData", typeof(bool), typeof(PACTLISTVIEW), new UIPropertyMetadata(null));
 
 
 
@@ -116,12 +145,13 @@ namespace PACT.COMMON
         bool valueSelected = false;
         bool IsPopupOpenFromTextChanged = false;
 
-        static PACTListView()
+        static PACTLISTVIEW()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(PACTListView), new FrameworkPropertyMetadata(typeof(PACTListView)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(PACTLISTVIEW), new FrameworkPropertyMetadata(typeof(PACTLISTVIEW)));
         }
 
-        //The property is default and Content property for PACTListView
+
+        //The property is default and Content property for PACTLISTVIEW
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public ObservableCollection<Microsoft.Windows.Controls.DataGridTextColumn> Columns
         {
@@ -143,7 +173,9 @@ namespace PACT.COMMON
                 return;
             ArrayList Param = new ArrayList();
             Param.Add(CostCenterID);
+            Param.Add(TypeID);
             Param.Add(UserID);
+            Param.Add(LanguageID);
 
             DataSet ds = new PACT.DBHandler.DBHandler().GetCostCenterListView(CompanyDBIndex, Param);
             ListViewID = Convert.ToInt32(ds.Tables[0].Rows[0]["ListViewID"].ToString());
@@ -161,14 +193,14 @@ namespace PACT.COMMON
             for (int i = 0; i < ds.Tables[1].Rows.Count; i++)
             {
                 if (i == 0)
-                    strColumns = ds.Tables[1].Rows[i]["ColumnName"].ToString();
+                    strColumns = ds.Tables[1].Rows[i]["SysColumnName"].ToString();
                 else
-                    strColumns += "," + ds.Tables[1].Rows[i]["ColumnName"].ToString();
+                    strColumns += "," + ds.Tables[1].Rows[i]["SysColumnName"].ToString();
 
-                ColumnsList.Add(ds.Tables[1].Rows[i]["ColumnName"].ToString());
+                ColumnsList.Add(ds.Tables[1].Rows[i]["SysColumnName"].ToString());
 
                 dgCol = new Microsoft.Windows.Controls.DataGridTextColumn();
-                dgCol.Header = ds.Tables[1].Rows[i]["ColumnName"].ToString();
+                dgCol.Header = ds.Tables[1].Rows[i]["UserColumnName"].ToString();
 
                 if (ds.Tables[1].Rows.Count == 1)
                     dgCol.Width = this.Width;
@@ -177,7 +209,7 @@ namespace PACT.COMMON
 
                 dgCol.CanUserResize = false;
                 dgCol.CanUserSort = false;
-                dgCol.Binding = new Binding(ds.Tables[1].Rows[i]["ColumnName"].ToString());
+                dgCol.Binding = new Binding(ds.Tables[1].Rows[i]["SysColumnName"].ToString());
                 iWidth += Convert.ToInt32(ds.Tables[1].Rows[i]["ColumnWidth"].ToString());
                 this.Columns.Add(dgCol);
 
@@ -455,9 +487,10 @@ namespace PACT.COMMON
             Param.Add(false);
             Param.Add("");
             if (valueSelected)
-            {
                 Param.Add(this.SelectedValue.ToString());
-            }
+            else
+                Param.Add("");
+            Param.Add(LanguageID);
 
             DataTable Dt = new PACT.DBHandler.DBHandler().GetCostCenterListViewData(CompanyDBIndex, Param).Tables[0];
 
@@ -539,7 +572,9 @@ namespace PACT.COMMON
             Param.Add(Text);
             Param.Add(2);
             Param.Add(false);
-
+            Param.Add("");
+            Param.Add("");
+            Param.Add(LanguageID);
             DataTable Dt = new PACT.DBHandler.DBHandler().GetCostCenterListViewData(CompanyDBIndex, Param).Tables[0];
 
 
@@ -573,6 +608,9 @@ namespace PACT.COMMON
             Param.Add(Text);
             Param.Add(2);
             Param.Add(true);
+            Param.Add("");
+            Param.Add("");
+            Param.Add(LanguageID);
             DataTable Dt = new PACT.DBHandler.DBHandler().GetCostCenterListViewData(CompanyDBIndex, Param).Tables[0];
 
             if (Dt.Rows.Count > 0)
@@ -611,9 +649,9 @@ namespace PACT.COMMON
                 {
                     this.SelectedItem = dg.SelectedItem;
                     //this.Text = ((System.Data.DataRowView)(dg.SelectedItem)).Row.ItemArray[1].ToString();
-                    this.SelectedValue = dg.SelectedValue;
-                    this.SelectedIndex = dg.SelectedIndex;
-                    this.SelectedValuePath = dg.SelectedValuePath;
+                    //this.SelectedValue = dg.SelectedValue;
+                    //this.SelectedIndex = dg.SelectedIndex;
+                    //this.SelectedValuePath = dg.SelectedValuePath;
 
                 }
             }

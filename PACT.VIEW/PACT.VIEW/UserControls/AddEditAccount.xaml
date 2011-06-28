@@ -253,7 +253,7 @@
             </Style>
 
 
-            <ControlTemplate x:Key="ComboBoxEditableTemplatePaging" TargetType="{x:Type data:PACTListView}">
+            <ControlTemplate x:Key="ComboBoxEditableTemplatePaging" TargetType="{x:Type data:PACTLISTVIEW}">
                 <Grid x:Name="Placement" SnapsToDevicePixels="true">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -314,7 +314,7 @@
                 </ControlTemplate.Triggers>
             </ControlTemplate>
 
-            <Style TargetType="{x:Type data:PACTListView}">
+            <Style TargetType="{x:Type data:PACTLISTVIEW}">
                 <Setter Property="FocusVisualStyle" Value="{StaticResource ComboBoxFocusVisual}"/>
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
                 <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
@@ -325,7 +325,7 @@
                 <!--<Setter Property="Padding" Value="4,3"/>-->
                 <Setter Property="Template">
                     <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type data:PACTListView}">
+                        <ControlTemplate TargetType="{x:Type data:PACTLISTVIEW}">
                             <Grid x:Name="MainGrid" SnapsToDevicePixels="true">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -568,13 +568,13 @@
 									</LinearGradientBrush>
 								</ComboBox.Background>
 							</ComboBox>-->
-                            <data:PACTListView SelectedItem="{Binding Selected, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True" UserID="1" IsPartiralData="True" CostCenterID="1" CompanyDBIndex="1"  FontSize="16" Margin="5,0,0,0">
-                                </data:PACTListView>
+                            <data:PACTLISTVIEW SelectedItem="{Binding SelectedSalesAccount, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True" UserID="1" IsPartiralData="True" CostCenterID="2"  TypeID="2" CompanyDBIndex="1"  FontSize="16" Margin="5,0,0,0">
+                            </data:PACTLISTVIEW>
                             
 						</StackPanel>
 						<StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="1" Margin="2,0,6,0">
 							<Label Content="Purchase Account" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
-							<ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0" ItemsSource="{Binding PurchaseAccounts, Mode=TwoWay, UpdateSourceTrigger=Default}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding SelectedPurchaseAccount, Mode=TwoWay}">
+							<!--<ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0" ItemsSource="{Binding PurchaseAccounts, Mode=TwoWay, UpdateSourceTrigger=Default}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding SelectedPurchaseAccount, Mode=TwoWay}">
 								<ComboBox.Background>
 									<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
 										<GradientStop Color="#FFF3F3F3"/>
@@ -583,8 +583,11 @@
 										<GradientStop Color="#FFAAD4F5" Offset="1"/>
 									</LinearGradientBrush>
 								</ComboBox.Background>
-							</ComboBox>
-						</StackPanel>
+							</ComboBox>-->
+                            <data:PACTLISTVIEW SelectedItem="{Binding SelectedPurchaseAccount, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True" UserID="1" IsPartiralData="True" CostCenterID="2"  TypeID="3" CompanyDBIndex="1"  FontSize="16" Margin="5,0,0,0">
+                            </data:PACTLISTVIEW>
+
+                        </StackPanel>
 
 						<StackPanel Orientation="Vertical" Grid.Row="4" Margin="2,0,6,0">
 							<Label Content="Default Currency" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
