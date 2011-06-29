@@ -63,6 +63,12 @@
     <Compile Include="UserControls\AddEditAccount.xaml.cs">
       <DependentUpon>AddEditAccount.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\AddProduct.xaml.cs">
+      <DependentUpon>AddProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ChartOfAccounts.xaml.cs">
+      <DependentUpon>ChartOfAccounts.xaml</DependentUpon>
+    </Compile>
     <Page Include="BasicSearchResultCtrl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -109,6 +115,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\AddEditAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\AddProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ChartOfAccounts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

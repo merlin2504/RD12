@@ -159,8 +159,8 @@ namespace PACT.VIEWMODEL
 
                 string attachments = @"<XML><Row FilePath=""FilePath"" ActualFileName=""ActualFileName"" RelativeFileName=""RelativeFileName"" FileExtension=""FileExtension"" IsProductImage=""IsProductImage"" /></XML>";
 
-                ParamValues.Add(contacts);
-                ParamValues.Add(attachments);
+                ParamValues.Add("");
+                ParamValues.Add("");
                 ParamValues.Add(1);
                 long ret = objControlGenerator.AddAccountDetails(ParamValues, 1);
 

@@ -7,6 +7,7 @@ using System.Text;
 using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Controls;
 using Microsoft.Practices.Prism.Commands;
 using PACT.MODEL;
@@ -70,6 +71,32 @@ namespace PACT.VIEWMODEL
                 AddAccountWorkspace.PactScreenID = "1";
                 objMainWindowViewModel.Workspaces.Add(AddAccountWorkspace);
                 objMainWindowViewModel.SetActiveWorkspace(AddAccountWorkspace);
+            }
+
+            if (obj == "2")
+            {
+                
+                ChartOfAccountsScreenViewModel ChartofAccountsWorkspace = new ChartOfAccountsScreenViewModel(1, 1, 1);
+                ChartofAccountsWorkspace.altColor1 = Colors.Aqua;
+                ChartofAccountsWorkspace.SelectedItemColor = Colors.Lime;
+                ChartofAccountsWorkspace.altColor2 = Colors.Aquamarine;
+
+
+                ChartofAccountsWorkspace.MovingItemColor = Colors.Red;
+                ChartofAccountsWorkspace.GroupItemColor = Colors.Black;
+                ChartofAccountsWorkspace.ItemColor = Colors.Gray;
+                ChartofAccountsWorkspace.RowHeight = 20;
+                ChartofAccountsWorkspace.VerticalLine = true;
+                ChartofAccountsWorkspace.HorizontalLine = true;
+                ChartofAccountsWorkspace.PactScreenID = "2";
+                objMainWindowViewModel.Workspaces.Add(ChartofAccountsWorkspace);
+                objMainWindowViewModel.SetActiveWorkspace(ChartofAccountsWorkspace);
+
+                //AddProductViewModel AddAccountWorkspace = new AddProductViewModel();
+                //AddAccountWorkspace.PactScreenID = "2";
+                //objMainWindowViewModel.Workspaces.Add(AddAccountWorkspace);
+                //objMainWindowViewModel.SetActiveWorkspace(AddAccountWorkspace);
+
             }
 
 

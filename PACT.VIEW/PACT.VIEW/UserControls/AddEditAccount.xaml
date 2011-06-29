@@ -11,13 +11,13 @@
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<!-- Animation for expanding the DetailsDepreciation section ExpandDetailsAddAccount-->
-			<Storyboard x:Key="ExpandAddContact" Completed="ExpandDetailsEdit_StoryboardCompleted">
+			<Storyboard x:Key="ExpandAddContact">
 				<ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="DetailsAddContact" Storyboard.TargetProperty="(UIElement.Visibility)">
 					<DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
 				</ObjectAnimationUsingKeyFrames>
 				<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsInfo" Storyboard.TargetProperty="(FrameworkElement.Height)">
 					<SplineDoubleKeyFrame KeyTime="00:00:00" Value="575"/>
-					<SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0"/>
+					<SplineDoubleKeyFrame KeyTime="00:00:02.2000000" Value="0"/>
 				</DoubleAnimationUsingKeyFrames>
 			</Storyboard>
 
@@ -568,7 +568,7 @@
 									</LinearGradientBrush>
 								</ComboBox.Background>
 							</ComboBox>-->
-                            <data:PACTLISTVIEW SelectedItem="{Binding SelectedSalesAccount, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True" UserID="1" IsPartiralData="True" CostCenterID="2"  TypeID="2" CompanyDBIndex="1"  FontSize="16" Margin="5,0,0,0">
+                            <data:PACTLISTVIEW SelectedItem="{Binding SelectedSalesAccount, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True" UserID="1" IsPartiralData="False" CostCenterID="2"  TypeID="2" CompanyDBIndex="1"  FontSize="16" Margin="5,0,0,0">
                             </data:PACTLISTVIEW>
                             
 						</StackPanel>
@@ -584,7 +584,7 @@
 									</LinearGradientBrush>
 								</ComboBox.Background>
 							</ComboBox>-->
-                            <data:PACTLISTVIEW SelectedItem="{Binding SelectedPurchaseAccount, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True" UserID="1" IsPartiralData="True" CostCenterID="2"  TypeID="3" CompanyDBIndex="1"  FontSize="16" Margin="5,0,0,0">
+                            <data:PACTLISTVIEW SelectedItem="{Binding SelectedPurchaseAccount, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True" UserID="1" IsPartiralData="False" CostCenterID="2"  TypeID="3" CompanyDBIndex="1"  FontSize="16" Margin="5,0,0,0">
                             </data:PACTLISTVIEW>
 
                         </StackPanel>

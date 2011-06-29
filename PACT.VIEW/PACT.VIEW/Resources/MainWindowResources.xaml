@@ -12,6 +12,25 @@ This resource dictionary is used by the MainWindow.
   <DataTemplate DataType="{x:Type vm:AddAccountScreenViewModel}">
         <vw:AddEditAccount />
   </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AddProductViewModel}">
+        <vw:AddProduct />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:ChartOfAccountsScreenViewModel}">
+        <vw:ChartOfAccounts
+                      DataSource="{Binding Path=Data,Mode=TwoWay,  NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" 
+                      TempDataSource="{Binding Path=TempData,Mode=TwoWay,  NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"  
+                    GridViewID="{Binding Path=GridViewID,Mode=TwoWay,  NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"  
+                    strCols="{Binding Path=strCols,Mode=TwoWay,  NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"  
+                      SelectedNode="{Binding Path=SelectedNode,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
+                      TreeNodeToMove="{Binding Path=TreeNodetoMove,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                           
+                      CMenu="{Binding Path=CMenu}" Command="{Binding Path=DynamicCommand}"
+                    Dataset="{Binding Path=Dataset}"
+                      MovingItemColor="{Binding Path=MovingItemColor}"   SelectedItemColor="{Binding Path=SelectedItemColor}"    ItemColor="{Binding Path=ItemColor}"  GroupItemColor="{Binding Path=GroupItemColor}"
+                      RowHeight="{Binding Path=RowHeight}"     AlternateBackground1="{Binding Path=altColor1}" AlternateBackground2="{Binding Path=altColor2}"   
+                      HorizontalLines="{Binding HorizontalLine}" VerticalLines="{Binding VerticalLine}"  >
+        </vw:ChartOfAccounts>
+    </DataTemplate>
     <!--<DataTemplate DataType="{x:Type vm:ProductCatalogScreenViewModel}">
         <vw:ProductCatalog />
     </DataTemplate>-->

@@ -133,7 +133,7 @@ namespace PACT.MODEL
                     ToolTipDescription = "ToolTip Description",
                     ToolTipImage = smallImage,
                     //Command = RibbonViewModel.cmdLoadPage,
-                    Tag = "4"
+                    Tag = "2"
                 });
                 td.GroupDataCollection.Add(GrpData);
 
