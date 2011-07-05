@@ -63,8 +63,8 @@
     <Compile Include="UserControls\AddEditAccount.xaml.cs">
       <DependentUpon>AddEditAccount.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\AddProduct.xaml.cs">
-      <DependentUpon>AddProduct.xaml</DependentUpon>
+    <Compile Include="UserControls\AddEditProduct.xaml.cs">
+      <DependentUpon>AddEditProduct.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ChartOfAccounts.xaml.cs">
       <DependentUpon>ChartOfAccounts.xaml</DependentUpon>
@@ -118,7 +118,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\AddProduct.xaml">
+    <Page Include="UserControls\AddEditProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

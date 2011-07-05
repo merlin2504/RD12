@@ -99,6 +99,22 @@ namespace PACT.VIEWMODEL
 
             }
 
+            if (obj == "2001")
+            {
+
+                AddProductViewModel AddProductWorkspace = new AddProductViewModel();
+                AddProductWorkspace.PactScreenID = "2";
+                objMainWindowViewModel.Workspaces.Add(AddProductWorkspace);
+                objMainWindowViewModel.SetActiveWorkspace(AddProductWorkspace);
+
+                //AddProductViewModel AddAccountWorkspace = new AddProductViewModel();
+                //AddAccountWorkspace.PactScreenID = "2";
+                //objMainWindowViewModel.Workspaces.Add(AddAccountWorkspace);
+                //objMainWindowViewModel.SetActiveWorkspace(AddAccountWorkspace);
+
+            }
+
+
 
         }
         //void OnLoadPage(string obj)

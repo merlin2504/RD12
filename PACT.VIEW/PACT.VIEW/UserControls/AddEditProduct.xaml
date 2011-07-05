@@ -1,0 +1,652 @@
+﻿<UserControl x:Class="PACT.VIEW.AddEditProduct"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+             xmlns:data="clr-namespace:PACT.COMMON;assembly=PACT.COMMON"
+             xmlns:toolKit="http://schemas.microsoft.com/wpf/2008/toolkit"
+			 mc:Ignorable="d" 
+			 d:DesignHeight="300" d:DesignWidth="300">
+    <Grid x:Name="TabLayout" Margin="0" Background="{DynamicResource DiagramGradientBrush}" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+        <Border BorderThickness="1,1,0,1" CornerRadius="4" BorderBrush="Black" Margin="0,0,-3,0" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" MinHeight="560">
+            <ScrollViewer MinHeight="560" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" >
+                <StackPanel Orientation="Vertical" CanVerticallyScroll="True">
+                    <DockPanel Height="35">
+                        <TextBlock HorizontalAlignment="Left" Height="33" Margin="5,0,0,0" TextWrapping="Wrap" Text="Add Product" Width="176" FontSize="29.333" VerticalAlignment="Center" FontFamily="Segoe UI Semibold"/>
+                        <ToolBarTray Background="#FFE4F0FF" HorizontalAlignment="Right">
+                            <ToolBar Width="255.803" Height="35" Background="#FFE4F0FF" Band="1" BandIndex="1" HorizontalContentAlignment="Right">
+                                <Button Command="{Binding SaveAccount, Mode=TwoWay, UpdateSourceTrigger=Default}">
+                                    <Image Source="../Images/Save.png" ToolTip="New" />
+                                </Button>
+                                <Button>
+                                    <Image Source="../Images/attach.png" ToolTip="Attache" />
+                                </Button>
+                                <Button>
+                                    <Image Source="../Images/group.png" ToolTip="New Group" />
+                                </Button>
+                                <Separator/>
+                                <Button>
+                                    <Image Source="../Images/doc.png" />
+                                </Button>
+                                <Button>
+                                    <Image Source="../Images/other.png" />
+                                </Button>
+                                <Separator/>
+                                <Button>
+                                    <Image Source="../Images/office.png" />
+                                </Button>
+                                <Button>
+                                    <Image Source="../Images/package.png" />
+                                </Button>
+                                <Separator/>
+                                <Button>
+                                    <Image Source="../Images/presentation.png" />
+                                </Button>
+                                <Separator/>
+                                <Button >
+                                    <Image Source="start.png" />
+                                </Button>
+                                <Button>
+                                    <Image Source="colors.png" />
+                                </Button>
+                                <Separator/>
+                                <Button >
+                                    <Image Source="paste.png" />
+                                </Button>
+                                <Button  >
+                                    <Image Source="s.png" />
+                                </Button>
+                                <Button ToolBar.OverflowMode="Always">
+                                    <Image Source="paste.png" />
+                                </Button>
+                            </ToolBar>
+                        </ToolBarTray>
+                    </DockPanel>
+                    <Grid Margin="4,15,4,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.239*"/>
+                            <ColumnDefinition Width="0.267*"/>
+                            <ColumnDefinition Width="0.217*"/>
+                            <ColumnDefinition Width="0.276*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" MinHeight="56.81"/>
+                            <!--Add other row definitions here-->
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Vertical" Grid.ColumnSpan="2" Margin="2,5,5.901,0">
+                            <Label Content="Product Name" Foreground="{DynamicResource InputFontColor}" FontSize="16" FontWeight="Bold" />
+                            <TextBox TextWrapping="Wrap" FontSize="16" Margin="5,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical"  Grid.Column="2" Margin="2.099,5,5.919,0">
+                            <Label Content="Product Code" Foreground="{DynamicResource InputFontColor}" FontSize="16"  />
+                            <TextBox FontSize="16" Margin="5,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Column="3" Margin="2.081,5,6,0">
+                            <Label Content="Alias Name" Foreground="{DynamicResource InputFontColor}" FontSize="16"  />
+                            <TextBox FontSize="16" Margin="5,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="1" Margin="2,5,5.937,0">
+                            <Label Content="Product Type" Foreground="{DynamicResource InputFontColor}" FontSize="16" FontWeight="Bold" />
+                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0">
+                                <ComboBox.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FFF3F3F3"/>
+                                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                        <GradientStop Color="#FFAAD4F5" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </ComboBox.Background>
+                                <ComboBoxItem x:Name="cbi1" Content="Finished Goods"/>
+                                <ComboBoxItem x:Name="cbi2" Content="Raw Materials"/>
+                                <ComboBoxItem x:Name="cbi3" Content="Service"/>
+                                <ComboBoxItem x:Name="cbi4" Content="Assets"/>
+                                <ComboBoxItem x:Name="cbi7" Content="Assembled Product"/>
+                                <ComboBoxItem x:Name="cbi5" Content="Non Inventory Items"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Column="3" Margin="2.081,5,6,0" Grid.Row="1">
+                            <Label Content="Valuation" Foreground="{DynamicResource InputFontColor}" FontSize="16" FontWeight="Bold" />
+                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0">
+                                <ComboBox.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FFF3F3F3"/>
+                                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                        <GradientStop Color="#FFAAD4F5" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </ComboBox.Background>
+                                <ComboBoxItem Content="Weighted Average"/>
+                                <ComboBoxItem Content="LIFO"/>
+                                <ComboBoxItem Content="FIFO"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical"  Grid.Column="1" Margin="2.063,5,5.901,0" Grid.Row="1">
+                            <Label Content="Status" Foreground="{DynamicResource InputFontColor}" FontSize="16" FontWeight="Bold" />
+                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0">
+                                <ComboBox.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FFF3F3F3"/>
+                                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                        <GradientStop Color="#FFAAD4F5" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </ComboBox.Background>
+                                <ComboBoxItem Content="Active"/>
+                                <ComboBoxItem Content="Deleted"/>
+                                <ComboBoxItem Content="Hold"/>
+                                <ComboBoxItem Content="Inactive"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Column="2" Margin="2.099,5,5.919,0" Grid.Row="1">
+                            <Label Content="Group" Foreground="{DynamicResource InputFontColor}" FontSize="16" FontWeight="Bold" />
+                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0">
+                                <ComboBox.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FFF3F3F3"/>
+                                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                        <GradientStop Color="#FFAAD4F5" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </ComboBox.Background>
+                                <ComboBoxItem Content="Production"/>
+                                <ComboBoxItem Content="Inventory"/>
+                                <ComboBoxItem Content="RawMaterials"/>
+                                <ComboBoxItem Content="Assets"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Margin="2,5,5.937,0">
+                            <Label Content="Unit of Measure" Foreground="{DynamicResource InputFontColor}" FontSize="16"  />
+                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0">
+                                <ComboBox.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FFF3F3F3"/>
+                                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                        <GradientStop Color="#FFAAD4F5" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </ComboBox.Background>
+                                <ComboBoxItem Content="Nos"/>
+                                <ComboBoxItem Content="gms"/>
+                                <ComboBoxItem Content="ProdWise"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="2.063,5,5.901,0">
+                            <Label Content="COGs Account" Foreground="{DynamicResource InputFontColor}" FontSize="16"  />
+                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0">
+                                <ComboBox.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FFF3F3F3"/>
+                                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                        <GradientStop Color="#FFAAD4F5" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </ComboBox.Background>
+                                <ComboBoxItem Content="Income1"/>
+                                <ComboBoxItem Content="Income2"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="2" Margin="2.099,5,6,0" Grid.ColumnSpan="2">
+                            <Label Content="Closing Stock Account" Foreground="{DynamicResource InputFontColor}" FontSize="16"  />
+                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0">
+                                <ComboBox.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FFF3F3F3"/>
+                                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                        <GradientStop Color="#FFAAD4F5" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </ComboBox.Background>
+                                <ComboBoxItem Content="Income1"/>
+                                <ComboBoxItem Content="Income2"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Grid.Row="3" Margin="2,5,5.937,0">
+                            <Label Content="Sales Account" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0">
+                                <ComboBox.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FFF3F3F3"/>
+                                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                        <GradientStop Color="#FFAAD4F5" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </ComboBox.Background>
+                                <ComboBoxItem Content="Sales Account"/>
+                                <ComboBoxItem Content="Deleted"/>
+                                <ComboBoxItem Content="Hold"/>
+                                <ComboBoxItem Content="Inactive"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="1" Margin="2.063,5,5.901,0">
+                            <Label Content="Purchase Account" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0">
+                                <ComboBox.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FFF3F3F3"/>
+                                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                        <GradientStop Color="#FFAAD4F5" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </ComboBox.Background>
+                                <ComboBoxItem Content="Purchase Account"/>
+                                <ComboBoxItem Content="Creditors"/>
+                                <ComboBoxItem Content="Hyderabad"/>
+                                <ComboBoxItem Content="Assets"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="3" Margin="2.081,5,6,0">
+                            <Label Content="Reorder Quantity" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                            <TextBox FontSize="16" Margin="5,0,0,0" Text="0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="2" Margin="2.099,5,5.919,0">
+                            <Label Content="Reorder Level" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                            <TextBox FontSize="16" Margin="5,0,0,0" Text="0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="4" Margin="2,5,5.937,0">
+                            <Label Content="LotWise" Foreground="{DynamicResource InputFontColor}" FontSize="16" FontWeight="Bold" />
+                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0">
+                                <ComboBox.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FFF3F3F3"/>
+                                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                        <GradientStop Color="#FFAAD4F5" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </ComboBox.Background>
+                                <ComboBoxItem Content="False"/>
+                                <ComboBoxItem Content="True"/>
+                                <ComboBoxItem Content="Hyderabad"/>
+                                <ComboBoxItem Content="Assets"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="1" Margin="2.063,5,5.901,0">
+                            <Label Content="BarCode" Foreground="{DynamicResource InputFontColor}" FontSize="16" FontWeight="Bold" />
+                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0">
+                                <ComboBox.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FFF3F3F3"/>
+                                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                        <GradientStop Color="#FFAAD4F5" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </ComboBox.Background>
+                                <ComboBoxItem Content="Manufacturer"/>
+                                <ComboBoxItem Content="Link"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="4" Margin="2.099,5,5.919,0" Grid.Column="2">
+                            <Label Content="Currency" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0">
+                                <ComboBox.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FFF3F3F3"/>
+                                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                        <GradientStop Color="#FFAAD4F5" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </ComboBox.Background>
+                                <ComboBoxItem Content="Rupees"/>
+                                <ComboBoxItem Content="Deleted"/>
+                                <ComboBoxItem Content="Hold"/>
+                                <ComboBoxItem Content="Inactive"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="5" Margin="2,5,5.901,0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                            <Label Content="Product Description" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                            <TextBox TextWrapping="Wrap" FontSize="16" Margin="5,0,0,0" Height="91.42"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="5" Margin="2.099,5,5.919,0" Grid.RowSpan="2" Grid.Column="2">
+                            <Label Content="Image" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                            <TextBox TextWrapping="Wrap" FontSize="16" Margin="5,0,0,0" Height="91.42" HorizontalAlignment="Left" Width="91.63"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="5" Grid.Column="3" Margin="2.081,5,6,0">
+                            <Label Content="Packing" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                            <TextBox FontSize="16" Margin="5,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="6" Grid.Column="3" Margin="2.081,5,6,0">
+                            <Label Content="Shelf Life" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                            <TextBox FontSize="16" Margin="5,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="7" Margin="2,5,5.937,0">
+                            <Label Content="Category" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0">
+                                <ComboBox.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FFF3F3F3"/>
+                                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                        <GradientStop Color="#FFAAD4F5" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </ComboBox.Background>
+                                <ComboBoxItem Content="Factory"/>
+                                <ComboBoxItem Content="True"/>
+                                <ComboBoxItem Content="Hyderabad"/>
+                                <ComboBoxItem Content="Assets"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="7" Grid.Column="1" Margin="2.063,5,5.901,0">
+                            <Label Content="Department" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0">
+                                <ComboBox.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FFF3F3F3"/>
+                                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                        <GradientStop Color="#FFAAD4F5" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </ComboBox.Background>
+                                <ComboBoxItem Content="Marketing"/>
+                                <ComboBoxItem Content="Link"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="7" Grid.Column="2" Margin="2.099,5,5.919,0">
+                            <Label x:Name="___Label___Attributes_" Content="Attributes" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0">
+                                <ComboBox.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FFF3F3F3"/>
+                                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                        <GradientStop Color="#FFAAD4F5" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </ComboBox.Background>
+                                <ComboBoxItem Content="Size"/>
+                                <ComboBoxItem Content="Link"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="8" Margin="2,5,6,0" Grid.ColumnSpan="4">
+                            <Label x:Name="___Label___Attributes_1" Content="Selling Rate" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                            <StackPanel HorizontalAlignment="Left" Margin="5,0,0,0" Orientation="Horizontal">
+                                <TextBox TextWrapping="Wrap" FontSize="16" Width="116" Margin="0,0,16,0" />
+                                <TextBox TextWrapping="Wrap" FontSize="16" Width="116" Margin="0,0,16,0"/>
+                                <TextBox TextWrapping="Wrap" FontSize="16" Width="116" Margin="0,0,16,0"/>
+                                <TextBox TextWrapping="Wrap" FontSize="16" Width="116" Margin="0,0,16,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="9" Margin="2,5,6,0" Grid.ColumnSpan="4">
+                            <Label x:Name="___Label___Attributes_2" Content="Purchase Rate" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                            <StackPanel HorizontalAlignment="Left" Margin="5,0,0,0" Orientation="Horizontal">
+                                <TextBox TextWrapping="Wrap" FontSize="16" Width="116" Margin="0,0,16,0" />
+                                <TextBox TextWrapping="Wrap" FontSize="16" Width="116" Margin="0,0,16,0"/>
+                                <TextBox TextWrapping="Wrap" FontSize="16" Width="116" Margin="0,0,16,0"/>
+                                <TextBox TextWrapping="Wrap" FontSize="16" Width="116" Margin="0,0,16,0"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                    </Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock TextWrapping="Wrap" Text="Custom Fields" Margin="7,6,0,-1" FontSize="18.667" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                    </StackPanel>
+                    <Grid Margin="4,0,4,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.25*"/>
+                            <ColumnDefinition Width="0.25*"/>
+                            <ColumnDefinition Width="0.25*"/>
+                            <ColumnDefinition Width="0.25*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <!--Add other row definitions here-->
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Vertical" Margin="2,0,6,0">
+                            <Label Content="Location" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                            <TextBox TextWrapping="Wrap" FontSize="16" Margin="5,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical"  Grid.Column="2" Margin="2,0,6,0">
+                            <Label Content="Items" Foreground="{DynamicResource InputFontColor}" FontSize="16"  />
+                            <TextBox FontSize="16" Margin="5,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Column="3" Margin="2,0,6,0">
+                            <Label Content="Local Name" Foreground="{DynamicResource InputFontColor}" FontSize="16"  />
+                            <TextBox FontSize="16" Margin="5,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="2,0,6,0" Grid.Column="1">
+                            <Label Content="Links" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                            <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0">
+                                <ComboBox.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FFF3F3F3"/>
+                                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                        <GradientStop Color="#FFAAD4F5" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </ComboBox.Background>
+                                <ComboBoxItem x:Name="cbi8" Content="Assets"/>
+                                <ComboBoxItem x:Name="cbi9" Content="Income"/>
+                                <ComboBoxItem x:Name="cbi10" Content="Sales Account"/>
+                                <ComboBoxItem x:Name="cbi11" Content="Bank Account"/>
+                                <ComboBoxItem x:Name="cbi12" Content="Purchase Account"/>
+                                <ComboBoxItem x:Name="cbi13" Content="Hyderabad Account"/>
+                                <ComboBoxItem x:Name="cbi14" Content="Chennai Account"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                    </Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock TextWrapping="Wrap" Text="Contacts" Margin="7,6,0,-1" FontSize="18.667" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                        <TextBlock TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="9,0,0,2" Cursor="Hand"><Run Text="("/><Run Foreground="#FF172547" Text="New" TextDecorations="Underline"/><Run Text=")"/></TextBlock>
+                    </StackPanel>
+                    <WrapPanel Margin="4,0" Orientation="Horizontal" >
+                        <ListView ItemsSource="{Binding Collection}" FontSize="14.667" Height="150" VerticalAlignment="Top" AlternationCount="2" Style="{DynamicResource FamilyListView}" Width="123">
+
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="" DisplayMemberBinding="{Binding Name}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Border BorderThickness="1" CornerRadius="5" BorderBrush="Black" Margin="5,0" Width="368.15">
+
+                            <Grid x:Name="ContactGrid" Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*"/>
+                                    <ColumnDefinition Width="0.5*"/>
+
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <!--Add other row definitions here-->
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto" MinHeight="28"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Orientation="Vertical"  Grid.Column="0" Margin="0">
+                                    <Label Content="Name" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                                    <TextBox FontSize="16" Margin="5,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Grid.Column="1">
+                                    <Label Content="Type" Foreground="{DynamicResource InputFontColor}" FontSize="16"  />
+                                    <ComboBox FontSize="16" SelectedIndex="0" Foreground="#FF3A485C" Margin="5,0,0,0">
+                                        <ComboBox.Background>
+                                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                <GradientStop Color="#FFF3F3F3"/>
+                                                <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                                <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                                <GradientStop Color="#FFAAD4F5" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </ComboBox.Background>
+                                        <ComboBoxItem Content="Sales"/>
+                                        <ComboBoxItem x:Name="cbi16" Content="Income"/>
+                                        <ComboBoxItem x:Name="cbi17" Content="Bank"/>
+                                    </ComboBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical"  Grid.Column="0" Grid.ColumnSpan="2"  Grid.Row="1">
+                                    <Label Content="Address1" Foreground="{DynamicResource InputFontColor}" FontSize="16" Grid.ColumnSpan="2"  />
+                                    <TextBox FontSize="16" Margin="5,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Margin="0" Grid.ColumnSpan="2" Grid.Row="2" d:LayoutOverrides="GridBox">
+                                    <Label Content="Address2/City" Foreground="{DynamicResource InputFontColor}" FontSize="16" Grid.ColumnSpan="2"  />
+                                    <TextBox FontSize="16" Margin="5,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical"  Grid.Column="0" Grid.Row="3">
+                                    <Label Content="State" Foreground="{DynamicResource InputFontColor}" FontSize="16"/>
+                                    <TextBox FontSize="16" Margin="5,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical"  Grid.Column="1" Grid.Row="3">
+                                    <Label Content="Pin/Zip Code" Foreground="{DynamicResource InputFontColor}" FontSize="16" Grid.ColumnSpan="2"  />
+                                    <TextBox FontSize="16" Margin="5,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical"  Grid.Column="0" Margin="0" Grid.Row="4">
+                                    <Label Content="Phone1" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                                    <TextBox FontSize="16" Margin="5,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical"  Grid.Column="1" Margin="0" Grid.Row="4">
+                                    <Label Content="Phone2" Foreground="{DynamicResource InputFontColor}" FontSize="16"/>
+                                    <TextBox FontSize="16" Margin="5,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical"  Grid.Column="0" Margin="0" Grid.Row="5">
+                                    <Label Content="Email1" Foreground="{DynamicResource InputFontColor}" FontSize="16"  />
+                                    <TextBox FontSize="16" Margin="5,0,0,0" HorizontalAlignment="Left" Width="120"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical"  Grid.Column="1" Margin="0" Grid.Row="5">
+                                    <Label Content="Email2" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                                    <TextBox FontSize="16" Margin="5,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical"  Grid.Column="0" Margin="0" Grid.Row="6">
+                                    <Label Content="Fax" Foreground="{DynamicResource InputFontColor}" FontSize="16"/>
+                                    <TextBox FontSize="16" Margin="5,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical"  Grid.Column="1" Margin="0" Grid.Row="6">
+                                    <Label Content="URL" Foreground="{DynamicResource InputFontColor}" FontSize="16"/>
+                                    <TextBox FontSize="16" Margin="5,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal"  Grid.Column="0" Margin="0" Grid.Row="7" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                                    <Button Content="Add" Width="60" Margin="0,0,17,0" FontSize="13.333" Height="24"/>
+                                    <Button Content="Clear" Width="60" FontSize="13.333" Height="24"/>
+                                </StackPanel>
+
+
+                            </Grid>
+                        </Border>
+                    </WrapPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock TextWrapping="Wrap" Text="Notes" Margin="7,6,0,-1" FontSize="18.667" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                        <TextBlock TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="9,0,0,2" Cursor="Hand"><Run Text="("/><Run Foreground="#FF172547" Text="New" TextDecorations="Underline"/><Run Text=")"/></TextBlock>
+                    </StackPanel>
+                    <DockPanel Margin="4,0,0,0" HorizontalAlignment="Left">
+                        <ListView ItemsSource="{Binding Collection}" FontSize="14.667" Height="150" Width="175" VerticalAlignment="Top">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="175" Header="" DisplayMemberBinding="{Binding Date}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Border BorderThickness="1" CornerRadius="5" BorderBrush="Black" Width="392">
+
+                            <Grid x:Name="ContactGrid1" Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+
+
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <!--Add other row definitions here-->
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto" MinHeight="28"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Vertical"  Grid.Column="1" Margin="0" >
+                                    <RichTextBox HorizontalAlignment="Left">
+                                        <FlowDocument>
+                                            <Paragraph>
+                                                <Run FontWeight="Bold" Text="November 5 2010, AdminUser"/>
+                                                <Run Text=" : Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pharetra, tortor sit amet semper porta, neque mi condimentum leo, eu lobortis ipsum risus faucibus dui. Vivamus nisi tortor, tempus sed convallis ac, volutpat quis nisi. Curabitur lacus leo, sodales sed lacinia et, dignissim ut magna. Praesent sodales sodales lacus. Nulla purus mi, pharetra a lacinia ut, rhoncus non felis. Integer sed libero in quam lobortis fringilla sit amet ac tellus."/>
+                                            </Paragraph>
+                                        </FlowDocument>
+                                    </RichTextBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal"  Grid.Column="0" Margin="0" Grid.Row="1" HorizontalAlignment="Center">
+                                    <Button Content="Add" Width="60" Margin="0,0,17,0" FontSize="13.333" Height="24"/>
+                                    <Button Content="Clear" Width="60" FontSize="13.333" Height="24"/>
+                                </StackPanel>
+
+
+                            </Grid>
+                        </Border>
+                    </DockPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Attachments" Margin="7,6,0,-1" FontSize="18.667" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                        <TextBlock TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="9,0,0,2" Cursor="Hand"><Run Text="("/><Run Foreground="#FF172547" Text="New" TextDecorations="Underline"/><Run Text=")"/></TextBlock>
+                    </StackPanel>
+                    <DockPanel Margin="4,0,0,0" HorizontalAlignment="Left">
+                        <ListView ItemsSource="{Binding Collection}" FontSize="14.667" Height="150" Width="175" VerticalAlignment="Top">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="175" Header="" DisplayMemberBinding="{Binding File}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Border BorderThickness="1" CornerRadius="5" BorderBrush="Black" Width="392">
+
+                            <Grid x:Name="ContactGrid2" Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.50*"/>
+                                    <ColumnDefinition Width="0.50*"/>
+
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <!--Add other row definitions here-->
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto" MinHeight="28"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Vertical"  Grid.Column="0" Margin="0" >
+                                    <StackPanel Orientation="Vertical" Margin="0" HorizontalAlignment="Left" Height="56.81" Width="190">
+                                        <Label Content="Uploaded Time" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                                        <TextBox FontSize="16" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical"  Grid.Column="1" Margin="0" >
+                                    <StackPanel Orientation="Vertical" Margin="0" HorizontalAlignment="Left" Height="56.81" Width="190">
+                                        <Label Content="Type" Foreground="{DynamicResource InputFontColor}" FontSize="16" />
+                                        <TextBox FontSize="16" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal"  Grid.Column="0" Margin="0,11,0,0" Grid.Row="1" HorizontalAlignment="Center" Grid.ColumnSpan="2">
+                                    <Button Content="Download" Width="70" Margin="0,0,17,0" FontSize="13.333" Height="24"/>
+                                    <Button Content="Delete" Width="70" FontSize="13.333" Height="24"/>
+                                </StackPanel>
+
+
+                            </Grid>
+                        </Border>
+                    </DockPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="4" Background="#FFCDDDF1" Grid.Column="1" Margin="3,0,0,0" d:LayoutOverrides="GridBox">
+            <Border.Effect>
+                <DropShadowEffect Direction="-183" BlurRadius="44" Color="#FFB2B2B2" Opacity="0.8" ShadowDepth="15"/>
+            </Border.Effect>
+            <DockPanel VerticalAlignment="Top" Margin="5">
+                <TextBlock x:Name="___TextBlock___Summary" HorizontalAlignment="Left" Height="36.04" TextWrapping="Wrap" FontSize="26.667" VerticalAlignment="Top" FontFamily="Segoe UI Semibold" DockPanel.Dock="Top"><Run Text="Details"/></TextBlock>
+                <TextBlock TextWrapping="Wrap"><Run Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pharetra, tortor sit amet semper porta, neque mi condimentum leo, eu lobortis ipsum risus faucibus dui. Vivamus nisi tortor, tempus sed convallis ac, volutpat quis nisi. Curabitur lacus leo, sodales sed lacinia et, dignissim ut magna. Praesent sodales sodales lacus. Nulla purus mi, pharetra a lacinia ut, rhoncus non felis. Integer sed libero in quam lobortis fringilla sit amet ac tellus. Suspendisse potenti. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc non tempus lorem. Aenean tempus consectetur tortor a pretium. Maecenas massa risus, placerat at ullamcorper id, pretium a ipsum. Fusce est nunc, mattis eget congue quis, iaculis vel purus. Vivamus fringilla odio id odio convallis eget sollicitudin mi ullamcorper. Nullam dictum hendrerit ligula, eu aliquet lacus posuere quis. Suspendisse tincidunt, nibh eget scelerisque semper"/></TextBlock>
+            </DockPanel>
+        </Border>
+    </Grid>
+
+</UserControl>

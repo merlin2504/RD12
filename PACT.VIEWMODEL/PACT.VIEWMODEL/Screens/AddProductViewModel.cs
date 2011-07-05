@@ -22,8 +22,7 @@ namespace PACT.VIEWMODEL
     {
         public AddProductViewModel()
         {
-            Logger.InfoLog("AddProductViewModel::Entering AddProductViewModel");
-
+                                                       
         }
     }
 }

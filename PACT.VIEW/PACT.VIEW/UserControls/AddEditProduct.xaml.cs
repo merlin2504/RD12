@@ -12,16 +12,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PACT.VIEW.UserControls
+namespace PACT.VIEW
 {
     /// <summary>
     /// Interaction logic for AddProduct.xaml
     /// </summary>
-    public partial class AddProduct : UserControl
+    public partial class AddEditProduct : UserControl
     {
-        public AddProduct()
+        public AddEditProduct()
         {
-            
+            InitializeComponent();
         }
     }
 }

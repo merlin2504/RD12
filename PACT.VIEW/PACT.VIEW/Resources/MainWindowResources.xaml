@@ -13,7 +13,7 @@ This resource dictionary is used by the MainWindow.
         <vw:AddEditAccount />
   </DataTemplate>
     <DataTemplate DataType="{x:Type vm:AddProductViewModel}">
-        <vw:AddProduct />
+        <vw:AddEditProduct />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type vm:ChartOfAccountsScreenViewModel}">
