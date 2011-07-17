@@ -258,9 +258,9 @@
                      AlternationCount="2" ItemsSource="{Binding DataSource}"></dg:DataGrid>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type data:PactTextBlockData}">
+            <!--<DataTemplate DataType="{x:Type data:PactTextBlockData}">
                 <TextBlock Margin="10,10,10,10" Width="100" Text="{Binding Path=Text}"/>
-            </DataTemplate>
+            </DataTemplate>-->
 
 
             <DataTemplate DataType="{x:Type data:PactTextBoxData}">

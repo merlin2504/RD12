@@ -69,6 +69,9 @@
     <Compile Include="UserControls\ChartOfAccounts.xaml.cs">
       <DependentUpon>ChartOfAccounts.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\TextBoxUnit.xaml.cs">
+      <DependentUpon>TextBoxUnit.xaml</DependentUpon>
+    </Compile>
     <Page Include="BasicSearchResultCtrl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -123,6 +126,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\ChartOfAccounts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\TextBoxUnit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -25,5 +25,23 @@ namespace PACT.COMMON
             }
         }
         private string _text;
+
+        public string Heading
+        {
+            get
+            {
+                return _Heading;
+            }
+
+            set
+            {
+                if (_Heading != value)
+                {
+                    _Heading = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("Heading"));
+                }
+            }
+        }
+        private string _Heading;
     }
 }

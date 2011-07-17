@@ -66,6 +66,7 @@ namespace PACT.VIEWMODEL
             _PurchaseAccounts = new ObservableCollection<ComboBoxItems>();
             _AccountCurrency = new ObservableCollection<ComboBoxItems>();
             _BillWise = new ObservableCollection<ComboBoxItems>();
+            _PACTControlData = new ObservableCollection<PactControlData>();
 
             _SelectedAccountType = "1";
 
@@ -75,7 +76,7 @@ namespace PACT.VIEWMODEL
             SaveAccount = new DelegateCommand<string>(OnSaveAccount, onCanSaveAccount);
 
             PactTextBlockData TB = new PactTextBlockData();
-
+            
             BackgroundWorker worker = new BackgroundWorker();
             _ScreenID = "1";           
             switch (_ScreenID)
@@ -133,6 +134,7 @@ namespace PACT.VIEWMODEL
                 ParamValues.Add(0);
                 ParamValues.Add(_AccountCode);
                 ParamValues.Add(_AccountName);
+                //ParamValues.Add(_PACTControlData.Count);
                 ParamValues.Add(_AliasName);
                 ParamValues.Add(_SelectedAccountType);
                 ParamValues.Add(_SelectedAccountStatus);
@@ -233,6 +235,42 @@ namespace PACT.VIEWMODEL
 
             _BillWise.Add(new ComboBoxItems("No", "0"));
             _BillWise.Add(new ComboBoxItems("Yes", "1"));
+
+
+            foreach (DataRow dr in _ScreenData.Tables[6].Rows)
+            {
+                _PACTControlData.Add(new PactTextBlockData()
+                {
+                    Heading = dr[1].ToString(),
+                    Text = "MUkaramAziz",
+                    Left = "20",
+                    Top = "30",
+                    Width = "100",
+                    Align = "Left"
+                });
+            }
+
+            //_PACTControlData.Add(new PactTextBlockData()
+            //        {
+            //            Heading = "SomeContent",
+            //            Text = "MUkaramAziz",
+            //            Left = "20",
+            //            Top = "30",
+            //            Width = "100",
+            //            Align = "Left"
+            //        });
+
+            //_PACTControlData.Add(new PactTextBlockData()
+            //{
+            //    Heading = "sdfasdfa ",
+            //    Text = "fffff",
+            //    Left = "20",
+            //    Top = "30",
+            //    Width = "100",
+            //    Align = "Left"
+            //});
+
+
             Logger.InfoLog("AddAccountScreenViewModel::Exiting worker_DoWork");
 
         }
